@@ -1,0 +1,12 @@
+<div *ngIf="userQuery.isLoading()">
+  Loading...
+</div>
+
+<div *ngIf="userQuery.data() as user">
+  <h2>User</h2>
+  <p>{{ user.url }}</p>
+</div>
+
+<button (click)="userQuery.refetch()">
+  Refetch
+</button>

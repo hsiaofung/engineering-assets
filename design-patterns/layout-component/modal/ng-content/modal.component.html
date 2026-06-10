@@ -1,0 +1,25 @@
+<button (click)="open()">
+  Show Modal
+</button>
+
+@if (shouldShow) {
+
+  <div
+    class="modal-backdrop"
+    (click)="close()">
+
+    <div
+      class="modal-body"
+      (click)="$event.stopPropagation()">
+
+      <button (click)="close()">
+        X
+      </button>
+
+      <ng-content></ng-content>
+
+    </div>
+
+  </div>
+
+}

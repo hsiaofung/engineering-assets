@@ -1,0 +1,14 @@
+/* recursive-node.component.css */
+.node {
+  margin-left: 20px;
+  padding: 4px 0;
+}
+
+.node-label {
+  font-weight: bold;
+}
+
+.node-children {
+  border-left: 2px solid #ccc;
+  padding-left: 15px;
+}

@@ -1,0 +1,43 @@
+<!-- Small Item Template -->
+<ng-template #smallPersonTemplate let-person>
+
+  <div style="border:1px solid gray; margin:8px; padding:8px;">
+    <h3>{{ person.name }}</h3>
+    <p>Age: {{ person.age }}</p>
+  </div>
+
+</ng-template>
+
+<!-- Large Item Template -->
+<ng-template #largePersonTemplate let-person>
+
+  <div style="border:2px solid blue; margin:8px; padding:8px;">
+
+    <h2>{{ person.name }}</h2>
+
+    <p>Age: {{ person.age }}</p>
+
+    <p>Hair Color: {{ person.hairColor }}</p>
+
+    <p>
+      Hobbies:
+      {{ person.hobbies.join(', ') }}
+    </p>
+
+  </div>
+
+</ng-template>
+
+<!-- Small List -->
+<app-regular-list
+  [items]="people"
+  [itemTemplate]="smallPersonTemplate">
+</app-regular-list>
+
+<hr>
+
+<!-- Large List -->
+<app-regular-list
+  [items]="people"
+  [itemTemplate]="largePersonTemplate">
+</app-regular-list>

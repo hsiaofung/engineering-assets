@@ -1,0 +1,4 @@
+<app-data-loader [getFn]="fetchUserWithCache" #loader="dataLoader">
+  @if (loader.isLoading()) { <p>載入中...</p> }
+  @else { <app-user-info [user]="loader.data()"></app-user-info> }
+</app-data-loader>

@@ -1,0 +1,9 @@
+<ng-container *ngFor="let item of items">
+
+  <ng-container
+    *ngTemplateOutlet="
+      itemTemplate; //👉 動態渲染外部傳進來的 template
+      context: { $implicit: item }" //👉 把目前 item 傳給 template
+   > 
+  </ng-container>
+</ng-container>

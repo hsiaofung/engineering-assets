@@ -1,0 +1,18 @@
+<li class="node">
+  <!-- 如果有 key，顯示 key: -->
+  <span *ngIf="key" class="key">{{ key }}: </span>
+
+  <!-- 如果是基本型別（非物件），直接顯示值 -->
+  <span *ngIf="!isObject(data)" class="value">
+    {{ data }}
+  </span>
+
+  <!-- 如果是物件，遞迴顯示子項目 -->
+  <ul *ngIf="isObject(data)" class="nested-list">
+    <app-recursive-node 
+      *ngFor="let item of getEntries(data)" 
+      [data]="item.value" 
+      [key]="item.key">
+    </app-recursive-node>
+  </ul>
+</li>

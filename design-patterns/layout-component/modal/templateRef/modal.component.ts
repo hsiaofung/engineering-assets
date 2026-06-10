@@ -1,0 +1,2 @@
+@Input()
+contentTemplate!: TemplateRef<any>;

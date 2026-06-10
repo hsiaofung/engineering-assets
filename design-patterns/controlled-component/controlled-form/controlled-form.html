@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <input formControlName="name" />
+  <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+    Name must be at least 2 characters
+  </div>
+  
+  <input formControlName="age" />
+  <input formControlName="hairColor" />
+
+  <button type="submit">Submit</button>
+</form>

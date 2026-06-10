@@ -1,0 +1,16 @@
+<div class="node">
+  <!-- 顯示當前節點名稱 -->
+  <div class="node-label">
+    {{ node[labelKey] }}
+  </div>
+
+  <!-- 如果有子節點，遞迴呼叫自己 -->
+  <div *ngIf="node[childrenKey]?.length" class="node-children">
+    <app-recursive-node 
+      *ngFor="let child of node[childrenKey]" 
+      [node]="child"
+      [labelKey]="labelKey"
+      [childrenKey]="childrenKey">
+    </app-recursive-node>
+  </div>
+</div>

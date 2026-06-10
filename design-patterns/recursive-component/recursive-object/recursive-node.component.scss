@@ -1,0 +1,20 @@
+.node {
+  margin: 4px 0;
+}
+
+.key {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.value {
+  color: #166534;
+  font-style: italic;
+}
+
+.nested-list {
+  margin-left: 24px;
+  padding-left: 0;
+  border-left: 2px solid #e5e7eb;
+  list-style: none;
+}

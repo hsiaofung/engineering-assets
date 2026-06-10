@@ -1,0 +1,13 @@
+<!-- user-info.component.html -->
+
+<div *ngIf="loading$ | async; else loaded">
+  Loading...
+</div>
+
+<ng-template #loaded>
+  <div *ngIf="user$ | async as user">
+    <h2>User Info</h2>
+    <p>Name: {{ user.name }}</p>
+    <p>ID: {{ user.id }}</p>
+  </div>
+</ng-template>

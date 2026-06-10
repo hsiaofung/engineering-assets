@@ -1,0 +1,11 @@
+<!-- user-info.component.html -->
+
+<div *ngIf="isLoading()">
+  Loading...
+</div>
+
+<div *ngIf="!isLoading() && user() as u">
+  <h2>User Info</h2>
+  <p>Name: {{ u.name }}</p>
+  <p>ID: {{ u.id }}</p>
+</div>

@@ -1,0 +1,32 @@
+<h2>Angular 組件組合範例</h2>
+
+<!-- 第一張卡片：完整組合 -->
+<app-card>
+  <app-card-header title="Card 1 - 完整版本"></app-card-header>
+  <app-card-body>
+    <p>這是卡片的主要內容區域。你可以放任何東西。</p>
+    <p>支援多行文字、圖片、表單等。</p>
+  </app-card-body>
+  <app-card-footer>
+    頁尾資訊 - 2026
+  </app-card-footer>
+</app-card>
+
+<!-- 第二張卡片：只有 Body -->
+<app-card>
+  <app-card-body>
+    <p>這張卡片沒有標題和頁尾，只有內容。</p>
+    <strong>非常靈活！</strong>
+  </app-card-body>
+</app-card>
+
+<!-- 第三張卡片：不同順序 -->
+<app-card>
+  <app-card-body>
+    <p>這張卡片把頁尾放在中間。</p>
+  </app-card-body>
+  <app-card-footer>
+    這是中間的頁尾
+  </app-card-footer>
+  <app-card-header title="標題在最下面"></app-card-header>
+</app-card>

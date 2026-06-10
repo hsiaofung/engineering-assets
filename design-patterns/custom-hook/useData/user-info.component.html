@@ -1,0 +1,11 @@
+@if (query.isLoading()) {
+  <p>Loading...</p>
+}
+
+@if (query.error()) {
+  <p>{{ query.error() }}</p>
+}
+
+@if (query.data(); as user) {
+  <h2>{{ user.name }}</h2>
+}
