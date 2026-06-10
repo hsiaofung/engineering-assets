@@ -1,0 +1,22 @@
+<h1>Dashboard</h1>
+
+@defer {
+  <heavy-chart />
+} @placeholder {
+  <p>Loading chart...</p>
+}
+
+<!-- idle 時載入, 瀏覽器閒置才下載。 -->
+@defer (on idle){
+    <heavy-chart />
+}
+
+<!-- 滑到畫面才載。 -->
+ @defer (on viewport){
+  <heavy-chart />
+}
+
+<!-- 按按鈕才下載。 -->
+@defer (on interaction){
+  <heavy-chart />
+}
