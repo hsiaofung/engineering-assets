@@ -85,6 +85,7 @@ async function generateCommitMessage() {
                3. Body 的每一行**不能超過 100 個字元**，如果太長請自動換行
                4. 使用 "- " 作為 bullet point
                5. 內容清晰、專業、簡潔
+               6. 語言: 英文
 
              Git diff:
              ${gitSummary}`,
