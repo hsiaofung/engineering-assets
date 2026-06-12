@@ -48,34 +48,30 @@ const { text } = await generateText({
   model: xai('grok-4.3'),
 
   prompt: `
-  你是一位專業的前端工程師，請根據以下 Git commit 記錄， 產生符合marp格式的weekly report。
-  要求：
-  1. 語言: 英文
-  2. Main Tasks and Work Items
-     佔80%，
-     大量詳細列：
-        - 做了什麼
-        - 哪些模組
-        - 哪些系統
-        - 哪些功能
-        - 哪些 bug
-        - 哪些 refactor
-        這是主體。
-  3. Impact
-     佔20%，
-     例如：
-       - 改善 maintainability
-       - 提升 UX
-       - 降低 technical debt
-       - 提高開發效率 
-       不用很長。
-   4. 內容清晰、專業、簡潔
-   5. 不要讓內容被切掉，如果內容太多請自動換頁。   
-   6. 全局背景設定
-      - backgroundColor: #f8f9fa
-      - backgroundImage: "linear-gradient(to bottom, #f8f9fa, #e9ecef)"
-   7. 最後加入Thank you for reading! 的結尾
-   8. 第一頁要加入作者名稱。
+  你是一位專業的前端工程師，請根據以下 Git commit 記錄，產生符合 Marp 格式的 Weekly Report Markdown。
+  **嚴格要求：**
+1. 全部使用英文
+2. 第一頁必須是標題頁，包含：
+   - # Weekly Report
+   - **Author: Tim Chou**
+   - **Period: June 11–12, 2026**（或當週日期）
+3. 內容結構：
+   - Main Tasks and Work Items（佔約 75-80%）
+   - Impact（佔約 20%）
+4. **分頁規則（非常重要）：**
+   - 每張投影片最多 5-6 個 bullet points
+   - 每個主要功能或模組請獨立成一張 slide
+   - 如果內容太多，**必須**使用 --- 進行分頁
+   - 不要讓任何一張 slide 內容過長導致被切掉
+5. 內容要清晰、專業、簡潔，使用 bullet points 詳細描述做了什麼、哪些模組、哪些功能、bug fix、refactor 等
+6. 全局樣式：
+   ---
+   marp: true
+   backgroundColor: #f8f9fa
+   backgroundImage: "linear-gradient(to bottom, #f8f9fa, #e9ecef)"
+   ---
+7. 最後一頁加上 **Thank you for reading!**
+8. 產生的內容**不要**包含 \`\`\`markdown 標記，直接輸出純 Marp Markdown
 Git commit 記錄: 
 ${gitSummary}
 `,
