@@ -39,6 +39,7 @@ javascript-features/
 
 - 先看 TC39 proposal README 了解動機
 - 閱讀 MDN 文件與範例
+- 詢問AI: 2026 JavaScript 有哪些新特性 ?
 - 在瀏覽器 console / Node.js 實際測試
 - 記錄相容性、edge cases 與心得
 - 定期檢查 TC39 meeting notes
