@@ -68,7 +68,7 @@ javascript-features/
 | 2026 | Temporal              | 4     | 現代日期時間 API  | 中     |
 | 2026 | Array.fromAsync       | 4     | Async iterable    | 中     |
 
-（建議把完整表格維護在 `index.md`）
+
 
 ## 貢獻 / 維護提示
 
