@@ -12,15 +12,15 @@
 **最後更新**：2026-06-29
 
 ## 目錄結構
-javascript-features/
-├── README.md                  ← 本文件（總覽）
-├── 2025/                      ← 已正式納入 ES2025 的特性
-├── 2026/                      ← ES2026 相關
-├── upcoming/                  ← Stage 3+ 但尚未正式發佈的提案
-├── templates/                 ← Markdown 模板
-├── examples/                  ← 共用程式碼範例
-├── resources/                 ← 重要連結與文件
-└── index.md                   ← 可選：特性總覽表格
+javascript-features/       
+├── README.md                  ← 本文件（總覽）     
+├── 2025/                      ← 已正式納入 ES2025 的特性     
+├── 2026/                      ← ES2026 相關    
+├── upcoming/                  ← Stage 3+ 但尚未正式發佈的提案    
+├── templates/                 ← Markdown 模板   
+├── examples/                  ← 共用程式碼範例   
+├── resources/                 ← 重要連結與文件   
+└── index.md                   ← 可選：特性總覽表格   
 
 
 ## 如何使用本知識庫
