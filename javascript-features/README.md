@@ -32,6 +32,8 @@ javascript-features/
    - 個人實驗筆記
 3. **更新支援度**：定期檢查瀏覽器與 runtime 更新
 4. **搜尋**：使用 Obsidian / VS Code 搜尋，或 GitHub search
+5. **不要只研究 API**: 真正 Frontend R&D 的研究方式應該是：
+   新功能 -> 解決什麼痛點 -> 以前怎麼做 -> 現在怎麼做 -> Browser Support -> Performance -> 是否值得團隊使用 
 
 ## 推薦研究流程
 
@@ -78,4 +80,6 @@ javascript-features/
 - 可搭配 Obsidian 插件（Dataview、Kanban）做更進階管理
 
 ---
+
+
 
