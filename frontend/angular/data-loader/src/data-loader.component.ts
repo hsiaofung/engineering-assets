@@ -89,4 +89,11 @@ export class DataLoaderComponent<T> implements OnChanges {
       this.isLoading.set(false)
     }
   }
+
+  /**
+   *
+   */
+  public refresh(): void {
+    this.executeFetch()
+  }
 }
