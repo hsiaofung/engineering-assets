@@ -1,50 +1,43 @@
+# 原則
+- Engineering Assets is my personal knowledge base of reusable frontend engineering decisions, review findings, and implementation patterns.
 
---------------------------------------------------------------------------
+- 最重要的原則是快且容易的找到。
 
-# 開始
+- 不是分類正確，而是能不能在 3–10 秒內找到
 
-1. Engineering Assets is my personal collection of reusable engineering solutions, patterns, and architectural decisions.
-2. 每個 asset 必須是「解一個問題」，不能是「收集 code」
-3. 我在整理 code” -> 我在累積工程解法模型
-3. engineering-assets 的檔案角色
+- Each asset must represent a single engineering problem and its decision or solution, not a collection of code.
 
-    | 檔案             | 作用        |
-    | --------------- | ---------   |
-    | core.ts         | 怎麼做 -> Implementation       |
-    | README.md       | 我要不要用這個 -> decision  |
-    | usage.md        | 我要怎麼用 (copy-pasts) -> execution     |
-    | design-notes.md | 為什麼這樣設計 -> reasioning    |
+- I am not organizing code; I am accumulating reusable engineering solution models.
 
----------------------------------------------------------------------------
-# design-notes.md 的目的不是記 code，是避免你未來推翻你自己。
-   - Code 只能告訴你「怎麼做」，但不能告訴你「為什麼這樣做」    
-   - 你未來會「忘記當初的 tradeoff」。今天你覺得合理的設計，三個月後你會開始懷疑。如果沒有 design notes，你會重複踩同樣的坑。
-   - 它是「防止你自己重構自己」的文件，很多工程問題不是 bug，是人一直推翻自己以前的設計。
-   - design-notes.md 的作用是: 幫你保留「當初為什麼這樣設計是合理的證據」。   
+---
 
-----------------------------------------------------------------------------   
+# 架構
 
-# 🧪 usage.md = 操作手冊
-   - 回答：
-     我要怎麼用？
+| Layer | Purpose |
+|------|--------|
+| survey | Define UX problem & feasibility |
+| review-ui-and-api | Capture engineering decisions & constraints (Q log) |
+| implementation-patterns | Reusable how-to engineering solutions |
+| software-architecture | System design reasoning & structure thinking |
+| basic-research | learning / exploration  |
+| design-patterns | programming principles   |
+| ai | AI related notes   |
 
-   - 內容：
-     - 最短可用 code
-     - copy-paste example
-     - real scenario   
-     - ❌不解釋 why   
+---
 
---------------------------------------------------------------------------   
+# 所有設計都要回到這三個問題
 
-# 🧠 design-notes.md = 思考歷史
+每一個 folder / naming / Q / review 都問：    
 
-- 回答：
-  為什麼這樣設計？
+1. 我會用什麼詞搜尋它？   
 
-- 內容：
-  - tradeoff
-  - rejected solutions
-  - architecture thinking
+（UX term / task / compute / notification）   
 
+2. 我會在哪個 context 想起它？   
 
----------------------------------------------------------------------------
+（做 task flow？compute API？notification？）   
+
+3. 我能不能在 10 秒內定位？   
+
+（不用思考分類）   
+
