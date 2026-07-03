@@ -2,6 +2,7 @@
 # 核心設計原則
 
 - Survey 的目的是建立 UX 問題的技術可行性（Technical Feasibility）知識庫，用於未來快速查詢與重用。
+- Survey = 判斷（Can we do it?）
 - 不要 optimize for structure
 - 要 optimize for recall speed
 
