@@ -1,0 +1,7 @@
+/* Focus */
+input:focus, textarea:focus {
+	outline: solid 2px #04bae9;	
+	box-shadow:0 0 5px #04bae9;
+	background-color: #cbf1fb;
+}
+
