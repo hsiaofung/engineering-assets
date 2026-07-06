@@ -40,13 +40,12 @@ Response:
 }
 ```
 
-## Question
+# Current Status
+Discussed in FE Weekly Sync.
 
-Could you confirm how frontend should obtain the location hierarchy information in SCC 4.X?
-
-* Will Compute Service provide equivalent information?
-* If yes, which endpoint should be used?
-* If not, what is the recommended navigation approach?
+- Frontend routing is also under discussion.
+- Owner: @CloverH
+- Action: Align frontend navigation approach with @VincentLin
 
 ## Impact
 
@@ -54,7 +53,7 @@ Frontend cannot implement location navigation from Compute List to Physical Asse
 
 ## Status
 
-Open Question - pending backend confirmation
+Blocked - Pending architecture decision (Clover ↔️ Vincent)
 
 ## Reference
 
