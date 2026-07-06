@@ -15,8 +15,11 @@
 
 ✅ Technically feasible.
 
-Frontend can support this navigation.    
+Frontend can support navigation to the corresponding Task Execution History page.
 
-Implementation depends on:   
-- Backend providing `taskId` in the notification payload.
-- Availability of the Task Execution History route.
+The implementation depends on the following prerequisites:
+
+- Backend provides the `taskId` in the Task Notification payload.
+- A routable Task Execution History page is available in SCC 4.0.
+
+No frontend technical blocker has been identified.
