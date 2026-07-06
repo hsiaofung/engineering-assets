@@ -1,0 +1,34 @@
+/* Custom Checkboxes */
+/* at mobile we want checkbox label to appear to the right of checkbox. This is an exception to the other labels on the page */
+.checks label {
+	display: inline-block;
+}
+
+
+/* need to make custom style for checkbox too */
+.checks span:before {
+	display: inline-block;
+	box-sizing: border-box;
+	font-family: "Font Awesome 5 Free";
+	content: "\f0c8";
+	color: #3ca3ca;
+	font-size: 1.3em;
+	vertical-align: middle;
+	margin-top: -3px;
+}
+
+/* hide the default checkbox */
+input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;      
+	width: 20px;
+	height: 20px;
+	margin-top: 1px;
+	margin-left: -1px;
+}
+
+/* create the checked state, we will use font awesome checked icon */
+input[type="checkbox"]:checked ~ span:before {            
+	content: "\f14a"; /*unicode for checked box */
+}
+
