@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling for select boxes</title>
+    
+     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900&display=swap" rel="stylesheet">
+     
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+     
+     <link rel="stylesheet" href="styling-select-part2.css">
+
+     <link rel="stylesheet" href="fancy-select.css">
+</head>
+<body>
+    <section>
+        
+        <form action="" method="post" id="contact">
+            
+<!-- SELECT, full customization with CSS and JS -->
+       <fieldset>
+                <legend>Fancy Select</legend>
+                
+               <select class="fancySelect">
+                    <option>Preferred shipping method:</option>
+                    <option value="mail">Mail</option>
+                    <option value="ups">UPS Delivery</option>
+                    <option value="plane">Overnight Air</option>
+                    <option value="person">Hand Carry</option>
+                  </select>
+                
+                <input type="submit" id="submit" value="Select it">
+            </fieldset>
+        </form>
+        
+    </section>
+    
+<!-- add jQuery -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+<!-- add custom js -->
+ <script src="fancy-select.js"></script>
+
+</body>
+</html>
