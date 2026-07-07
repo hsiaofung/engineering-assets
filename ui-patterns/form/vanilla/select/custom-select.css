@@ -1,0 +1,58 @@
+/* CUSTOM SELECT */
+
+/* -------- CSS Code --------- */
+/* needed for mobile  */
+select {
+    padding: .5em;
+    border: solid 1px #999;
+}
+
+
+/* ------ Option 2: Custom CSS styles ---------  */
+.customSelect {
+    position: relative;
+}
+
+/* style the select element */
+.select-css {
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #4aa4ab;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(183,237,241,1) 100%); 
+}
+
+/* add the downward pointing arrow. */
+.customSelect:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f063";
+    position: absolute;
+    right: 10px;
+    top: 20%;
+    color: #069;
+    pointer-events: none; /* without this the select icon is not 'clickable'. When we add this it enables you to "click through" the pseudo element as if it was not there. This is a fix for chrome and IE */
+    display: inline-block;/* Also need this as a fix for IE, can use display: block; or display: inline-block;*/
+}
+
+.select-css::-ms-expand {
+	display: none;
+}
+
+.select-css:focus {
+	border-color: #38b5be;;
+    box-shadow: 0 0 3px 1px #169ca6;
+	color: #0f5156;
+	outline: none;
+}
+

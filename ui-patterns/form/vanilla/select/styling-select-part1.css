@@ -1,0 +1,59 @@
+ *  {
+    margin:0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+fieldset {
+    margin: 2em auto;
+    padding: 1em 2em;
+    border: solid 1px #ccc;
+    border-radius: 6px;
+}
+
+legend {
+    font-size: 1.25em;
+    padding: 0 .25em;
+    color: #999;
+}
+
+label{
+    display: block;
+    margin-top: 1em;
+}
+
+input[type="submit"] {
+    padding: .5em 1em;
+    border-radius: 6px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: .8em;
+    margin: 1em 0;
+}
+
+/* Select drop down */
+        
+        
+@media screen and (min-width: 430px) {
+        
+        legend {
+            font-size: 1.75em;
+        }
+    
+        fieldset {
+            width: 40%;
+            min-width: 320px;
+        }
+    
+        .checks label {
+            display: inline-block; 
+            padding-top: .5em;
+            margin-top: 0;
+            margin-right: .5em;
+        }
+
+    }
+
+
