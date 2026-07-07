@@ -1,5 +1,4 @@
 
-
 @tyl @VincentLin 
 
 # Q-006
@@ -13,8 +12,9 @@ Local Storage page requires backend API, but no corresponding endpoint is found 
 ## Impact:
 UI cannot proceed without backend API support.
 
-## Status: 
-Open Question - pending backend confirmation
+## Next step: 
+- BE confirmed that the local storage API is drive API.
+- @TimChou will check the drive API.
 
 ## Reference:   
 - UI: Local Storage page

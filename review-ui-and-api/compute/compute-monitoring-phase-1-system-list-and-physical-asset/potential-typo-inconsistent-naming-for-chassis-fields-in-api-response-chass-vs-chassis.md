@@ -2,6 +2,9 @@
 
 # Q-007
 
+## Status
+Pending backend commit / API update 
+
 ## Summary
 Potential typo / inconsistent naming for chassis fields in API response (chass* vs chassis*)
 
@@ -23,13 +26,8 @@ Expected convention (based on domain naming):
 - Increased risk of incorrect field usage / mapping errors
 - Inconsistent API naming convention within system
 
-## Status
-Open - requires backend confirmation
-
-## Suggestion
-Please confirm whether `chass*` is intentional abbreviation.
-
-If not intentional, recommend renaming to `chassis*` for consistency across API contract.
+## Review result
+BE confirmed that the field names will be updated to chassis*.
 
 ## Reference:   
 - UI: FRU page

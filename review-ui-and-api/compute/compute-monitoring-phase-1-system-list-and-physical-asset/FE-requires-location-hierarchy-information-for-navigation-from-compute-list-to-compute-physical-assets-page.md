@@ -1,6 +1,10 @@
-@tyl @VincentLin 
+@tyl @VincentLin @CloverH 
 
 # Q-003
+
+## Status
+
+Blocked - Pending architecture decision (Clover ↔ Vincent)
 
 ## Summary
 
@@ -40,20 +44,17 @@ Response:
 }
 ```
 
-# Current Status
+## Current Status
+
 Discussed in FE Weekly Sync.
 
 - Frontend routing is also under discussion.
-- Owner: @CloverH
+- Owner: @CloverH 
 - Action: Align frontend navigation approach with @VincentLin
 
 ## Impact
 
 Frontend cannot implement location navigation from Compute List to Physical Assets page until the location hierarchy source is defined.
-
-## Status
-
-Blocked - Pending architecture decision (Clover ↔️ Vincent)
 
 ## Reference
 
