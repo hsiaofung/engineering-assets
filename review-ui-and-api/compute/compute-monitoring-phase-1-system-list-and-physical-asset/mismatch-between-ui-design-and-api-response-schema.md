@@ -4,6 +4,10 @@
 
 # Q-001
 
+## Status
+
+Review completed. Pending backend implementation.
+
 ## Summary
 Mismatch between UI design and API response schema
 
@@ -19,24 +23,17 @@ Compute System list Pod Level UI requires:
 
 ## Review result
 
-Confirmed with BE:
+Confirmed with UX and BE:
 
-- motherboard type: pending confirmation (@RayYang)
-- serial number: pending confirmation (@RayYang)
-- update time: BE will provide (@tyl)
-- domain name: BE will not provide, pending confirmation (@RayYang)
-- node name: BE will not provide, pending confirmation (@RayYang)
+- motherboard type → use `boardModel`
+- serial number → currently available in `/systems/{id}`; BE will add it to the `/systems` list API
+- update time → BE will provide
+- domain name → BE will implement
+- node name → BE will implement
 
 ## Impact:
-UI cannot be fully implemented as per design until data contract is clarified.
-
-## Next step
-
-Need confirmation from requirement/UI side on how to handle missing fields:
-
-remove fields from UI
-use alternative data source
-adjust UI design
+No UI change is required.
+Backend API update is required to support the current UI design.
 
 ## Reference:   
 - API: /compute-service/v1/systems
@@ -62,3 +59,22 @@ Could you please help confirm the expected UI behavior and data source for these
 * Adjust UI design if needed
 
 Thanks.
+
+---
+
+@Ethan         
+
+1. Mother board type : 使用boardModel欄位
+2. Serial Number在Systems/{id}中有  不過我們可以把它做進Systems list裡面
+3. 後端另外實作
+4. 後端另外實作
+
+---
+
+@RayYang    
+
+Thanks Ethan for checking and confirming. Below is the record for reference.
+
+![image](/uploads/513ff24dab12097e96fabf6b1f8e980e/image.png){width=339 height=600}
+
+---
