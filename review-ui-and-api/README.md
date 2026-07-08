@@ -14,3 +14,38 @@
  
 
 
+# Review 的產出是「已確認的規格」，不是「未來會有的規格」。
+
+UX                 
+ ↓                   
+UI Spec + Figma                 
+ ↓                         
+FE Review                   
+ ↓                           
+API / Behavior clarification                      
+ ↓                          
+Specification confirmed                            
+ ↓                                  
+Development                           
+
+有3個問題
+1. 所以應該在review 前要提供UI spec ?
+2. 所以review 的狀態要一直等到swagger 更新?
+3. 這個flow 是否要成為團隊的共識?
+   - 我整理了一份 UI/API Review flow，想確認 FE 團隊內是否先採用一致方式，避免每個人遇到問題時處理方式不同。
+   - 首先FE 必須有一致的做法，才好去對外說明。不然方法每個人都不同，是否要外界對FE的每一個人都有不同的對應做法?
+
+# 成為團隊共識的流程
+- Step 1             
+FE 內部整理 Review Flow                           
+        ↓                             
+Step 2                              
+FE TL / Team 確認哪些是 FE standard                          
+        ↓                              
+Step 3                               
+與 UX / BE sync                             
+確認跨團隊協作部分                              
+        ↓                           
+Step 4                                 
+形成 UI/API Review Guideline                                 
+
