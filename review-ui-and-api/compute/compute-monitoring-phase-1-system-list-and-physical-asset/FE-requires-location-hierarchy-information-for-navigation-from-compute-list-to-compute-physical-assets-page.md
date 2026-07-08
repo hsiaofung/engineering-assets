@@ -60,3 +60,7 @@ Frontend cannot implement location navigation from Compute List to Physical Asse
 
 * Existing SCC 3.X redirection API
 * Compute List → Location link navigation
+
+## Follow up
+Clover，想確認一下 Q-003 目前跟 Vincent 討論後，location hierarchy 的取得方式是否已有初步方向？
+https://gitlab.supermicro.com/scc/Web-Management-Platform/-/work_items/22518#note_2375411
