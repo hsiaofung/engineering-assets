@@ -64,3 +64,5 @@ Frontend cannot implement location navigation from Compute List to Physical Asse
 ## Follow up
 Clover，想確認一下 Q-003 目前跟 Vincent 討論後，location hierarchy 的取得方式是否已有初步方向？
 https://gitlab.supermicro.com/scc/Web-Management-Platform/-/work_items/22518#note_2375411
+
+Q-003 目前已跟 Clover 確認，location hierarchy 取得方式尚未定案。因 BE 目前優先處理 In-Rack CDU 250KW for 3.13，預計後續再確認方案。FE 這邊先持續追蹤，Compute Physical Assets 導頁會依賴此資訊。
