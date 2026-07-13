@@ -1,0 +1,59 @@
+div#pwdWrap {
+    position: relative; 
+}
+
+#cityWrap {
+    position: relative;
+    display: flex;
+}
+
+i.fas.fa-question-circle {
+    position: absolute;
+    right: 9px;
+    top: -18px;
+    font-size: .9em;
+    color: rgba(221,113,6,.8);
+}
+
+/* helper tip box */
+.show {
+    display: block;
+    padding: 5px 8px;
+    background: rgb(221,113,6);
+    color: #fff;
+    z-index: 9;
+    font-size: 0.75em;
+    line-height: 18px;
+	top: -91px;
+    left: -163px;
+    width: 1355%;
+    border: solid 1px #fff;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    position: absolute;
+}
+
+.show#cty {
+	top: -110px;
+}
+
+.hide {
+    display: none;
+}
+/* close icon (x) */
+i.fas.fa-times-circle {
+    position: absolute;
+    top: -11px;
+    right: -10px;
+    z-index: 160;
+    color: rgb(221,113,6);
+    font-size: 1rem;
+}
+/* downward pointing arrow */
+i.fas.fa-caret-down {
+    position: absolute;
+    bottom: -10px;
+    left: 85%;
+    font-size: 1.5em;
+    color: rgb(221,113,6);
+}
