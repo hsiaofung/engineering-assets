@@ -17,7 +17,7 @@
 
 * Close：Backend 確認後，更新狀態為 Resolved、Needs backend fix、或 Invalid，並補上結論。
 
-* UI / API review 流程的結束條件? 
+* UI / API review 流程的結束條件? BE要補的欄位，要確認swagger API 要更新。
 
 
 ### Issue 分類

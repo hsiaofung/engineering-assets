@@ -13,9 +13,10 @@
 4-2. 點擊reply to comment，通知UX釐清問題。   
 
 # 子流程-3(若BE口頭承諾所需要的欄位)-Decision by Jeffrey   
-4-3.  ?
+4-3. BE要補的欄位，要確認swagger API 要更新。 -> 這就是review 結束的條件。
 
- 
+# 子流程-4 還沒有開始實作或決定方案(Pending issue)-Decision by Jeffrey   
+4-3. 必須等這些方案決定並確認之後才算結束 -> 這就是review 結束的條件。 
 
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
