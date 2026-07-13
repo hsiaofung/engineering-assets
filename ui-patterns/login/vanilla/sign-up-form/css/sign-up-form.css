@@ -1,0 +1,56 @@
+/* CSS CODE */   
+
+#sign article {
+    border-radius: 0; /* need to overwrite from base file. This will eliminate the rounded corners. */
+}
+
+#sign article#signupForm { /* we want to round the bottom corners of the 2nd article only and overwrite alignment from our base.css file. */
+    text-align: left;
+    border-radius: 0 0 10px 10px;
+}
+
+#sign #welcome { /* add the teal bg to the first article */
+    background-color: rgba(187, 247, 253, .9);
+    align-items: flex-start;
+}
+/* style the p tag */
+#sign p {
+    font-weight: 200;
+    font-size: .9375rem;
+	color: #555555;
+    text-align: left;
+    margin-bottom: .75em;
+}
+/*set the bg to white for overall form (this shows up on bottom article */
+#signupForm {
+    background-color: rgba(255,255,255,.9);
+}
+/* password wrapper */
+#signupLanding div#pwdWrap {
+    margin-bottom: 1em; 
+}
+
+/* style the 'optional' text */
+signupLanding label span {
+    font-size: .8em;
+    color: #999;
+}
+
+#signupLanding #signupBtn {
+    background-color: rgb(26,96,105);
+    border: solid 2px rgb(26,96,105);
+    margin-bottom: 25px;
+}
+
+@media screen and (min-width: 550px) {
+/* Large screen 2 column layout */
+     #signupLanding #sign {
+        display: grid;
+        grid-template-columns: 40% 60%; /* 2 columns  */
+        max-width: 850px;
+      }
+/*	adjust the border radius of the articles for the 2 column layout. */
+    #sign #welcome { border-radius: 0 0 0 10px; }
+    #sign article#signupForm { border-radius: 0 0 10px 0; }
+}
+
