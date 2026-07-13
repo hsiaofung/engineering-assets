@@ -2,6 +2,7 @@
 
 - 適用情境：Frontend 依據 UI 設計與 Swagger/API 文件進行開發前檢查，發現欄位、命名、資料來源或 API 支援上的疑問。
 - 這份流程的重點是：先確認是否真的是 API gap，再用固定的 follow-up 與 escalation 節奏處理。
+- 不要用口頭承諾關閉 Review，要用可驗證結果關閉 Review。
 
 ### 流程總覽
 
