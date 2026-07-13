@@ -1,3 +1,6 @@
+# Review UI/API
+- 透過流程，流程管理讓不負責的人現形，讓不負責的人去負責。
+
 # 主流程   
 1. UX 發訊息要求review。
 2. FE check Figma and Swagger，並將task 狀態變為review。 
@@ -52,5 +55,6 @@ Step 3
 確認跨團隊協作部分                              
         ↓                           
 Step 4                                 
-形成 UI/API Review Guideline                                 
+形成 UI/API Review Guideline              
+
 
