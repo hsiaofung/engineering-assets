@@ -1,8 +1,7 @@
-可以，我會把你目前的做法整理成一份 UI / API Review 與跨團隊釐清流程。這份流程的重點是：先確認是否真的是 API gap，再用固定的 follow-up 與 escalation 節奏處理。
-
 ### UI / API Review 與釐清流程
 
-適用情境：Frontend 依據 UI 設計與 Swagger/API 文件進行開發前檢查，發現欄位、命名、資料來源或 API 支援上的疑問。
+- 適用情境：Frontend 依據 UI 設計與 Swagger/API 文件進行開發前檢查，發現欄位、命名、資料來源或 API 支援上的疑問。
+- 這份流程的重點是：先確認是否真的是 API gap，再用固定的 follow-up 與 escalation 節奏處理。
 
 ### 流程總覽
 
@@ -17,6 +16,9 @@
 * Follow up：依時間節點追蹤，若超過合理時間未回覆，進入 escalation。
 
 * Close：Backend 確認後，更新狀態為 Resolved、Needs backend fix、或 Invalid，並補上結論。
+
+* UI / API review 流程的結束條件? 
+
 
 ### Issue 分類
 
