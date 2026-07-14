@@ -24,6 +24,16 @@
 
 # 子流程-5 正式的 Swagger（arch review 後）還沒完成，但先提供一份可供 FE 開發的 API Spec。
 4-3. API review 完成 ?
+- Temporary API Spec ≠ API Review Completed
+- API Review completion 中的 Swagger/API contract update，是否需要是已完成 review / merge 的正式 contract？還是 temporary spec 也算？
+- API Review completion 應以團隊共同使用的 API contract 為準，而非 temporary spec。
+- 原因：
+  如果 temporary spec 也算完成，可能發生：
+    - FE 驗證 temporary spec。
+    - Arch review 後 API 修改。
+    - FE 又需要重新調整。
+    - Review record 已經顯示完成。
+  這會降低 review 的價值。 
 
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
