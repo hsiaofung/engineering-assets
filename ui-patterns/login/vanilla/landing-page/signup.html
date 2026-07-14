@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Garden | Making small changes to save our seas | Signup</title>
+
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="css/04_base.css">
+    <link rel="stylesheet" href="css/04_form.css">
+
+</head>
+
+<body id="signupLanding">
+   <main class="wrapper">
+        <header id="logo">
+           <h1>Sea Garden</h1>
+       </header>
+        <section id="sign">
+            <header>
+                <h1>Create a Sea Garden account</h1>
+            </header>
+
+            <article id="welcome">
+                <p><strong>Hello there!</strong> By creating an account you will receive monthly news updates and get valuable tips on how your contribution is impacting our seas. Members are eligible for early registration on events and sales. By making small contributions you can start a wave of change. Make a difference, save our seas.</p>
+                <p>Join now and create your personalized profile.</p>
+            </article>
+
+            <article id="signupForm">
+                <form action="welcome.html" method="post">
+
+                  <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                  <input type="text" id="name" name="name" required>
+
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password"><i class="fas fa-lock"></i> Password
+                    <!--password strength indicator, notice we are using aria-label to provide a label for this element since there is not a visible label on the screen -->
+                    <progress max="100" value="0" id="strength" aria-label="password strength progress bar"></progress>
+                    </label>
+
+
+                    <div id="pwdWrap">
+                        <!-- help-tip for password input field -->
+                        <i class="fas fa-question-circle tooltip">
+                        <!-- The span tag holds our help-tip message. -->
+                             <span class="helperText" id="tt">Make sure your password contains at least 10 characters, 1 upper and 1 lower case letter, 1 number and 1 symbol
+                                <i class="fas fa-caret-down"></i>
+                                <i class="fas fa-times-circle close"></i>
+                            </span>
+                        </i>
+                        <input type="password" id="password" name="password" required>
+                        <i class="fas fa-eye eyeIcon"></i>
+                    </div>
+
+                    <label for="city"><i class="fas fa-map-marker-alt"></i> City <span>(Optional)</span></label>
+                    
+                     <div id="cityWrap">             
+                        <!-- help-tip for city input field -->
+                         <i class="fas fa-question-circle tooltip city">
+                             <span class="helperText" id="cty">Why do we collect this information? To personalize our offerings based on your location. You can always change or edit this under your account settings. 
+                                <i class="fas fa-caret-down"></i>
+                                <i class="fas fa-times-circle close"></i>
+                            </span>
+                         </i>
+                        <input type="text" id="city" name="city">
+                      </div>
+
+                    <div>
+                        <button id="signupBtn">Join now <i class="fas fa-angle-right"></i></button>
+                    </div>
+
+                    <aside>
+                        <p>By signing up, you agree to our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a></p>
+                    </aside>
+                </form>
+            </article>
+        </section>
+   </main>
+    
+    <script>
+        // show/hide password
+        const visToggle = document.querySelector('.eyeIcon');
+
+        const input = document.querySelector('#pwdWrap input');
+        
+        var password = true; // bullets are showing
+        
+        visToggle.addEventListener('click', function(){
+            if (password) { 
+               input.setAttribute('type','text'); 
+                visToggle.classList.remove('fa-eye'); 
+                visToggle.classList.add('fa-eye-slash');
+            } else { 
+                input.setAttribute('type','password');
+                visToggle.classList.remove('fa-eye-slash');
+                visToggle.classList.add('fa-eye');
+            }
+            password = !password; // when password is false the text is showing
+        });
+        
+        // help-tip
+        
+        // password help-tip
+        // hide the password helper text div
+        document.querySelector('#tt').classList.add('hide');
+        // make the tooltip able to close on click
+        const tooltip = document.querySelector('.tooltip');
+        tooltip.addEventListener('click', function(){
+            document.querySelector('#tt').classList.toggle('show'); // togle the tooltip to show or hide
+            document.querySelector('#tt').classList.toggle('hide');
+        })
+
+        //city help-tip
+         // hide the helper text div
+        document.querySelector('#cty').classList.add('hide'); // hide the tooltip on page load
+        const cityTooltip = document.querySelector('.tooltip.city');
+        cityTooltip.addEventListener('click', function(){
+            document.querySelector('#cty').classList.toggle('show'); // togle the tooltip to show or hide
+            document.querySelector('#cty').classList.toggle('hide');
+        })
+        
+        
+        // password strength
+        var pass = document.getElementById('password'); 
+        pass.addEventListener('keyup', function(){ 
+            checkPassword(pass.value);
+        })
+        function checkPassword(password) {
+            var strengthBar = document.getElementById('strength'); 
+            var strength = 0; // set default strength to 0
+            if (password.match(/(?=.*\d)+/)){ // checks to see if password matches regular expression and increases strength by 1. Here we check for a number from 0-9
+                strength += 1
+            }
+            if (password.match(/(?=.*[a-z])(?=.*[A-Z])+/)) { //We are seeing if password as a lower case from a-z, upper case from A-Z
+                strength += 1
+            }
+            if (password.match(/(?=.*[!@#$%^&*()~<>?])+/)) { // check for funky character
+                strength += 1
+            }
+            if (password.length > 10) { // check for at least 10 characters  
+                strength += 1
+            }
+            switch(strength){ // run switch statement on strength
+                case 0:
+                    strengthBar.value = 20;
+                    strengthBar.className = ''; 
+                    strengthBar.classList.add('pb20');
+                    break;
+                case 1: 
+                    strengthBar.value = 40;
+                    strengthBar.className = '';
+                    strengthBar.classList.add('pb40');
+                    break;
+                case 2:
+                    strengthBar.value = 60;
+                    strengthBar.className = '';
+                    strengthBar.classList.add('pb60');
+                    break;
+                case 3:
+                    strengthBar.value = 80;
+                    strengthBar.className = '';
+                    strengthBar.classList.add('pb80');
+                    break;
+                case 4:
+                    strengthBar.value = 100;
+                    strengthBar.className = '';
+                    strengthBar.classList.add('pb100');
+                    break;
+            }
+        }
+
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
