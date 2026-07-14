@@ -22,6 +22,9 @@
 # 子流程-4 還沒有開始實作或決定方案(Pending issue)-Decision by Jeffrey   
 4-3. API review 完成 = 有解決方案 + Swagger/API contract 更新 + FE 驗證。
 
+# 子流程-5 正式的 Swagger（arch review 後）還沒完成，但先提供一份可供 FE 開發的 API Spec。
+4-3. API review 完成 ?
+
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
