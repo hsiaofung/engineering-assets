@@ -1,0 +1,67 @@
+progress#strength {
+	width: 60%; 
+	height: 8px;
+	border: solid 1px #ccc;
+	border-radius: 6px;
+	background-color: #fff;
+	margin: .2em .2em .2em 0;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(-45deg, 
+							   transparent 33%, rgba(0, 0, 0, .1) 33%, 
+							   rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top, 
+							   rgba(255, 255, 255, .25), 
+							   rgba(0, 0, 0, .25));
+	border-radius: 2px; 
+	background-size: 35px 20px, 100% 100%, 100% 100%; 
+}
+
+/* add a new color at specified classes are added to bar (via the JS). */
+progress.pb20[value]::-webkit-progress-value {
+	 background-color: rgba(185,4,4,.8); /* red */
+}
+progress.pb40[value]::-webkit-progress-value {
+	background-color: rgba(222,113,4,.8); /* orange */
+}
+progress.pb60[value]::-webkit-progress-value {
+	background-color: rgba(242,205,5,.8); /* yellow */
+}
+progress.pb80[value]::-webkit-progress-value {
+	background-color: rgba(5,206,242,.8); /* blue */
+}
+progress.pb100[value]::-webkit-progress-value {
+	background-color: rgba(82,213,172,.8); /* green */
+}
+
+/* fixes for FF  */
+ progress[value]::-moz-progress-bar {
+  background-image:
+	   -moz-linear-gradient(-45deg, 
+							   transparent 33%, rgba(0, 0, 0, .1) 33%, 
+							   rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -moz-linear-gradient(top, 
+							   rgba(255, 255, 255, .25), 
+							   rgba(0, 0, 0, .25));
+
+	border-radius: 2px; 
+	background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+/* set colors for FF based on how full progress bar is */
+progress.pb20[value]::-moz-progress-bar {
+	 background-color: rgba(185,4,4,.8); /* red */
+}
+progress.pb40[value]::-moz-progress-bar {
+	background-color: rgba(222,113,4,.8); /* orange */
+}
+progress.pb60[value]::-moz-progress-bar {
+	background-color: rgba(242,205,5,.8); /* yellow */
+}
+progress.pb80[value]::-moz-progress-bar {
+	background-color: rgba(5,206,242,.8); /* blue */
+}
+progress.pb100[value]::-moz-progress-bar {
+	background-color: rgba(82,213,172,.8); /* green */
+}
