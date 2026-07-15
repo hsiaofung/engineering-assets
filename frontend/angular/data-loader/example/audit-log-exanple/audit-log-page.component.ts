@@ -94,24 +94,25 @@ export class AuditLogPageComponent {
   severityStatusMap = SEVERITY_STATUS_MAP
   severityStatusOptions = SEVERITY_OPTIONS
   categoryOptions = CATEGORY_OPTIONS
-  tableParams: TableParams = { ...DEFAULT_AUDIT_LOG_PARAMS }
+  queryParams: TableParams = { ...DEFAULT_AUDIT_LOG_PARAMS }
+
   @ViewChild('loader') loader!: DataLoaderComponent<AuditLogResponse>
   getDataFn = () =>
     this.http
       .get<AuditLogResponse>('/log-service/v1/audit_log', {
-        params: { ...this.tableParams },
+        params: { ...this.queryParams },
       })
       .pipe(toUI())
 
   // ==================== Event Handlers ====================
   onReload = (): void => {
-    this.tableParams = { ...DEFAULT_AUDIT_LOG_PARAMS }
+    this.queryParams = { ...DEFAULT_AUDIT_LOG_PARAMS }
     this.loader?.refresh()
   }
 
   onSortChange = ({ column, direction }: SortChangeEvent): void => {
-    this.tableParams = {
-      ...this.tableParams,
+    this.queryParams = {
+      ...this.queryParams,
       page: 1,
       sort: column || 'eventTime',
       direction: direction || 'desc',
@@ -121,8 +122,8 @@ export class AuditLogPageComponent {
   }
 
   onPageChange = ({ currentPage, pageSize }: PageChangeEvent): void => {
-    this.tableParams = {
-      ...this.tableParams,
+    this.queryParams = {
+      ...this.queryParams,
       page: currentPage,
       perPage: pageSize,
     }
@@ -131,12 +132,12 @@ export class AuditLogPageComponent {
 
   onFilterChange = ({ filters }: FilterParams): void => {
     const nextParams: TableParams = {
-      ...this.tableParams,
+      ...this.queryParams,
       page: 1, // reset to first page on filter change
       ...filters, // merge new filters into table params
     }
     const cleanParams: TableParams = mapEventTimeToDateRange(skipNull(nextParams)) //呼叫 adapter to map eventTime to startTime and endTime
-    this.tableParams = cleanParams // update table params
+    this.queryParams = cleanParams // update table params
     this.loader?.refresh() // refresh table with new filters
   }
 }
