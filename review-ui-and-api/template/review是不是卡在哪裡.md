@@ -9,13 +9,13 @@ Review 是不是卡在哪裡？
 
 ## 套用：   
 
-目前還在 review。主要有幾個 API clarification 尚未完成，部分等待 BE 更新 Swagger，完成後 FE 會再驗證。
+- 第一層(會議當下): 還在 review，目前還不能算完成。   
+  
+- 第二層(如果對方追問): 主要是有幾個 API clarification 還在確認。這部分需等待 BE 更新 Swagger，完成後 FE 才能驗證。另外Q-003再等solution confirmation.   
 
+- (若要一次講完，可包括: 狀態、原因、下一步): 目前還在 review，不算完成。主要有幾個 API clarification 尚未完成，部分等待 BE 更新 Swagger，完成後 FE 會再驗證。    
 
-
-## 甚至更短：
-
-還在 review，目前有幾個 API dependency 尚未確認，等 BE contract update 後 FE 會驗證。
+- (更短的一次性講完): 還在 review，目前有幾個 API dependency 尚未確認，等 BE contract update 後 FE 會驗證。
 
 --- 
 
