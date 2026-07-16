@@ -1,0 +1,91 @@
+button.plus, button.minus { 
+    border: solid 2px #dfe5e9;
+    background-color: #fff;
+    padding: .5em;
+    cursor: pointer;
+    height: 32px;
+}
+
+button.minus { 
+    border-right-style: none;
+    border-radius: 6px 0 0 6px;
+}
+
+button.plus {
+    border-left-style: none;
+    border-radius: 0 6px 6px 0;
+}
+
+button.plus i, button.minus i { 
+    font-size: 1.5em;
+    color: #4fa3e3;
+}
+
+button:focus {
+    outline: none;
+}
+
+input.stepper-control { 
+    border: solid 2px #dfe5e9;
+    height: 32px;
+    width: 50px;
+    padding: .5em;
+    text-align: center;
+    vertical-align: top; /* fix for Chrome, otherwise stepper component is not on the same line */
+    font-size: 1em;
+}
+
+label.stepper-label { 
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 24px;
+    height: 24px;
+    font-size: 12px;
+    color: #98c9ee;
+}
+
+/* remove the default up/down arrows from webkit */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+        
+/* remove the default up/down arrows from FF  */
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+.stepper {
+    width: 120px;
+}
+
+#details  {
+    display: block;
+}
+
+.form-group.selectNum {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.travelClass {
+    width: 48.5%;
+}
+
+@media screen and (min-width: 600px) {
+
+    #booking {
+        max-width: 850px;
+    }
+
+    #details {
+        display: grid;
+        grid-template-columns: 24.25% 24.25% 48.5%;
+        grid-column-gap: 3%;
+    }
+
+    .travelClass {
+        width: 95%;
+    }
+}
