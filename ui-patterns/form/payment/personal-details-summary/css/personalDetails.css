@@ -1,0 +1,384 @@
+/* -------------- checkout stepper ------------------  */
+.checkoutStepper ul {
+    list-style: none;
+    color: #aaa;
+    width: 90%;
+    position: relative; 
+    margin: 0 auto 1em;
+    display: flex;
+    justify-content: space-around; 
+    counter-reset: step; 
+}
+.checkoutStepper li {
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+.checkoutStepper li:before {
+    content: "1"; 
+/*
+    content: counter(step); 
+    counter-increment: step; 
+*/
+    color: #fff;
+    border-radius: 50%;
+    background-color: #aaa;
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px; 
+    margin: auto;
+}
+
+.checkoutStepper ul:after { 
+    content: "";
+    width: 78%;
+    height: 2px;
+    background-color: #aaa;
+    position: absolute;
+    top: 17px; 
+    z-index: -1; 
+}
+
+.checkoutStepper li.active:before {
+    background-color: #E59B0F
+}
+
+.checkoutStepper a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: .9em;
+    padding-top: 37px; 
+}
+
+.checkoutStepper .active a {
+    color: #606060;
+}
+
+
+@media screen and (min-width: 600px) {
+    section#orderSum {
+        margin-top: 4px;
+    }
+}
+/* end checkout stepper */
+
+/* +++++ custm checkbox ++++++++++  */
+.checkbox-group {
+    position: relative;
+}
+
+.checkbox-group .custom-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+}
+
+.custom-checkbox ~ .custom-checkbox-span {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #585858;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked ~ .custom-checkbox-span:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c"; /* unicode for check icon */
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    left: 4px;
+    top: 0px;
+    color: #fff;
+}
+
+/* +++++ end custm checkbox ++++++++++  */
+
+/* ORDER SUMMARY  */
+
+.contentWrapper2 > section {
+    padding: 0; 
+}
+
+.contentWrapper2 {
+    padding: .5em 2em;
+    background-color: #F8F8F8;
+    margin-top: 2em;
+}
+
+section.showHideOrdSum {
+    text-align: center;
+    padding-bottom: .5em;
+}
+
+.showHideOrdSum a {
+    text-decoration: none;
+}
+
+i.fas.fa-sort-up {
+    position: relative;
+    top: 4px;
+}
+
+i.fas.fa-sort-down  {
+    position: relative;
+    top: -2px;
+}
+
+#orderSummary {
+    border-top: solid 1px #fff;
+    display: none;
+}
+
+#orderSummary h1 {
+    margin-top: 0;
+}
+
+ul.details {
+    display: grid;
+    grid-template-rows: auto auto auto 2fr auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-template-areas: 
+        "i pd"
+        "i pi"
+        "i ps"
+        "i e"
+        "st st"
+        "sh sh"
+        "to to";   
+    max-width: 380px;
+    font-size: .875em;
+}
+
+.pic { grid-area: i;}
+.prodName { grid-area: pd;}
+.prodItem { grid-area: pi;}
+.prodStyle { grid-area: ps;}
+.edit { grid-area: e;}
+
+.details li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details li.pic { display: inherit;} /* fix so image scales proportionally, having display be flex causes issues. */
+
+li.sub { 
+    grid-area: st;
+    border-top: solid 1px #ccc;
+    padding: .5em 0 0 0;
+    display: flex;
+}
+
+li.shipping { 
+    grid-area: sh;
+    border-bottom: solid 1px #ccc;
+    padding: 0 0 .5em 0;
+}
+
+li.total { 
+    grid-area: to;
+    padding: .5em 0;
+    font-weight: 700;
+}
+/* END ORDER SUMMARY */
+
+/* FORM - SHIPPING INFORMATION  */
+form {
+    margin: 2em 0;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 0; 
+}
+
+legend {
+    font-size: 1.25rem;
+}
+
+legend.siLabel {
+    padding-top: 1em;
+}
+
+.field.check {
+    text-align: left;
+    flex-flow: nowrap;
+    justify-content: left;
+    margin: -.5em 0 0 .25em;
+}
+
+input#signup {
+    width: 10px;
+    height: 10px;
+    font-size: .8em;
+    margin-right: .25em;
+}
+
+label[for=signup] {
+    display: inline;
+    padding-top: .3em;
+    font-size: .7rem;
+}
+
+/**
+* Make the field a flex-container, reverse the order so label is on top.
+*/
+.field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+    width: 85vw; 
+}
+
+label, input {
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+input {
+    font-size: 1.0em;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    border-radius: 3px;
+    padding: .8em;
+    cursor: text;
+    color: #707070;
+}
+
+input:focus {
+    outline: 0;
+    border-bottom: 1px solid #26a3a8;;
+}
+
+label {
+    color: #bfbfbf;
+    letter-spacing: 0.05em;
+    font-size: .8em; 
+}
+
+input:placeholder-shown + label {
+    cursor: text;
+     max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    transform-origin: left bottom;
+    transform-origin: .25em -1em;
+    transform: translate(0, 2.125rem) scale(1.25);
+    padding: 0 .5em 0;
+}
+
+::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+ }
+
+input:focus::-webkit-input-placeholder {
+     opacity: 1;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+}   
+
+/* END FORM SHIPPING INFORMATION */
+
+
+
+@media screen and (min-width: 457px) {
+    .field.half { 
+        width: 48%;
+        float: left;
+        margin-right: 2%;
+    }
+    .field.third { 
+        width: 27vw;
+        float: left;
+        margin-right: 1vw;
+    }
+}
+
+@media screen and (min-width:660px) {
+    #orderSummary {
+        height: 100%;
+    }
+
+    main {
+        display: grid;
+        grid-template-areas:
+            "ph ph ph ph"
+            "cs cs cs cs"
+            "cart cart pd pd"
+            "f f f f";
+        grid-template-columns: auto 50% 30% auto;
+        grid-auto-rows: 3% 10% auto 5%;
+        }
+    
+    #information header#pgHeader {
+        grid-area: ph;
+    }
+    
+    nav.checkoutStepper {
+        grid-area: cs;
+        border-bottom: solid 1px #ccc;
+        padding: 2em 0 2em;
+    }
+    
+    .contentWrapper2 { 
+        grid-area: pd;
+        display: grid;
+        grid-template-areas: 
+            "sh sh"
+            "sb os";
+        grid-template-columns: none;
+        grid-auto-rows: 7% auto;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    section.showHideOrdSum {
+        display: none;
+    }
+    
+    #orderSummary {
+        display: block!important;
+        border-top: none;
+    }
+    
+    #info { grid-area: cart}
+    .field { width: 98%;}
+    .field.half { width: 48%; }
+    .field.third { width: 31%;}
+    footer { grid-area: f;}
+}
+
+@media screen and (min-width:1200px) {
+    main {
+        grid-template-areas:
+            "ph ph ph ph ph ph"
+            "cs cs cs cs cs cs"
+            ". . cart pd . . "
+            "f f f f f f";
+        grid-template-columns: 10% auto 45% 25% auto 10%;
+        }
+    
+    .checkoutStepper ul {
+        width: 1150px;
+    }
+    
+    .contentWrapper2 {
+        padding: .5em;
+    }
+}
