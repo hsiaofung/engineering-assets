@@ -1,68 +1,91 @@
-@tyl @VincentLin @CloverH 
+@tyl @VincentLin @CloverH
 
 # Q-003
 
 ## Status
 
-Blocked - Pending architecture decision (Clover ↔ Vincent)
+Resolved - API requirement clarified.    
+Pending - SCC 4.0 routing migration and UX alignment.   
 
 ## Summary
 
-Frontend requires location hierarchy information for navigation from Compute List to Compute Physical Assets page.
+Frontend needs to navigate from Compute List Location link
+to Compute Physical Assets page.
 
-## Frontend Finding
+The navigation approach changes from hierarchy-based routing
+to resource-based routing in SCC 4.0.
 
-According to the existing design, when a user clicks the Location link in Compute List, the UI should navigate to:
+## Previous Design
 
-```text
+According to the existing design, when a user clicks the Location link in Compute List, the UI navigates to:
+
 /compute/${pod_name}/${group_uiid}/${rack_uiid}/${drawer_uiid}/${system_uiid}/physical-assets
-```
 
-The following fields are required:
+Frontend required:
 
-* pod_name
-* group_uiid
-* rack_uiid
-* drawer_uiid
-* system_uiid
+- pod_name
+- group_uiid
+- rack_uiid
+- drawer_uiid
+- system_uiid
 
-In SCC 3.X, frontend retrieves these values via:
+In SCC 3.X, this information was retrieved through:
 
-```http
 GET /web/cloud-monitoring-detail/overview/system/redirection?uuid={uuid}
-```
+
+## SCC 4.0 Routing Design
+
+According to SCC 4.0 Compute Routing Spec, frontend navigation uses resource-based routing:
+
+/compute/pod/{resourceId}
+
+Frontend only passes the resource ID.
+
+The Compute routing resolver will consume the ancestor API
+to resolve the resource context and generate the canonical route.
+
+Example:
+
+GET
+/rackconfig-service/v1/device-info/systems/{id}/redirection
 
 Response:
 
-```json
-{
-  "system_uiid": "...",
-  "drawer_uiid": "...",
-  "rack_uiid": "...",
-  "group_uiid": "...",
-  "pod_name": "..."
-}
-```
+- unassigned
+- rowId
+- rackId
+- drawerId
 
-## Current Status
+The routing resolver determines the correct virtual/physical context.
 
-Discussed in FE Weekly Sync.
+## API Confirmation
 
-- Frontend routing is also under discussion.
-- Owner: @CloverH 
-- Action: Align frontend navigation approach with @VincentLin
+BE provides the required ancestor API for SCC 4.0 resource-based routing:
 
-## Impact
+GET
+/rackconfig-service/v1/device-info/systems/{id}/redirection
 
-Frontend cannot implement location navigation from Compute List to Physical Assets page until the location hierarchy source is defined.
+## Decision
+
+Frontend does not need to:
+
+- call the ancestor API directly during Compute List navigation
+- maintain pod/group/rack/drawer relationship
+- construct hierarchy-based URLs
+
+The Compute routing resolver consume the ancestor API
+to resolve the resource context and generate the canonical route.
+
+## Dependency / Open Item
+
+The following items are required before implementation:
+
+- SCC 4.0 Compute routing migration
+- Update Compute Tree View / UX mock-up to align with resource-based routing
+- Alignment between UX, FE, and BE API contracts
 
 ## Reference
 
-* Existing SCC 3.X redirection API
-* Compute List → Location link navigation
-
-## Follow up
-Clover，想確認一下 Q-003 目前跟 Vincent 討論後，location hierarchy 的取得方式是否已有初步方向？
-https://gitlab.supermicro.com/scc/Web-Management-Platform/-/work_items/22518#note_2375411
-
-Q-003 目前已跟 Clover 確認，location hierarchy 取得方式尚未定案。因 BE 目前優先處理 In-Rack CDU 250KW for 3.13，預計後續再確認方案。FE 這邊先持續追蹤，Compute Physical Assets 導頁會依賴此資訊。
+- Existing SCC 3.X redirection API
+- SCC 4.0 Compute Routing Spec
+- Compute List → Location link navigation
