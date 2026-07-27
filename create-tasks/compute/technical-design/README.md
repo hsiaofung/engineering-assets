@@ -10,6 +10,7 @@
 - Trade-off
 
 ## 原則
+- 為什麼這樣設計?
 - Technical Design 不應該按照頁面數量寫，而應該按照**系統變化的邊界（design boundary）**寫。
 - Compute 其實不是 20 個頁面的問題，而是幾個核心能力：
 

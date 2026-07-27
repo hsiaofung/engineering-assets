@@ -22,20 +22,13 @@
 - Decision 6: Routing Resolver 負責 Scope 判斷
 - Decision 7: Route Migration Strategy
 
-## Compute Routing Design Decisions
+## Compute Routing Design Decisions (整體架構怎麼設計?)
 
-1. Resource-based routing replaces hierarchy-based routing
-
-2. Ancestor resolution moves from component layer to routing layer
-
-3. URL stores resource identity, not physical hierarchy
-
-4. Resolver generates canonical URL
-
-5. All navigation entry points use neutral resource URL
-
-6. Scope determination is handled by resolver using ancestor API
-
+- 採用 Resource-based Routing
+- 使用 computeResourceResolveGuard
+- Component 不直接呼叫 Ancestor API
+- API 透過 ComputeAncestorService 抽象
+- Canonical URL 統一由 Route Builder 產生
 
 ---
 
