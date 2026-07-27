@@ -13,6 +13,9 @@
 - 為什麼這樣設計?
 - Technical Design 不應該按照頁面數量寫，而應該按照**系統變化的邊界（design boundary）**寫。
 - Compute 其實不是 20 個頁面的問題，而是幾個核心能力：
+- Technical Design 記錄的是「設計決策（Decision）」；Task 記錄的是「工程工作（Work Item）」；至於用 data-table-v1、data-loader、Observable 或 Signal 等實作細節，通常留在程式碼即可，除非它們本身就是這次專案的重要設計決策。
+- 是不是一個需要團隊共同遵守的工程決策? 
+    - 如果團隊決定統一 Pattern，則Technical Design 和 Task 都需寫入（建立/導入 Pattern）
 
 ```json  
 Compute Feature
