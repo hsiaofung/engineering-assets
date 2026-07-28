@@ -1,15 +1,16 @@
 # 處理：如何找到resource? (URL怎麼產生?)
-  - Pod level
-  - Group level
-  - Rack level
-  - Drawer level
-  - Appliance level
+  ## Router 如何找到正確頁面。
+    - Pod level
+    - Group level
+    - Rack level
+    - Drawer level
+    - Appliance level
 
 ---
 
 # 目標是：
 
-把 Compute 從 hierarchy-based routing 改成 resource-based routing。
+- 把 Compute 從 hierarchy-based routing 改成 resource-based routing。
 
 ---
 

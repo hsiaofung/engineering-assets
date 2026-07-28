@@ -13,7 +13,9 @@
 - 為什麼這樣設計?
 - Technical Design 不應該按照頁面數量寫，而應該按照**系統變化的邊界（design boundary）**寫。
 - Compute 其實不是 20 個頁面的問題，而是幾個核心能力：
-- Technical Design 記錄的是「設計決策（Decision）」；Task 記錄的是「工程工作（Work Item）」；至於用 data-table-v1、data-loader、Observable 或 Signal 等實作細節，通常留在程式碼即可，除非它們本身就是這次專案的重要設計決策。
+- Technical Design 記錄的是「設計決策（Decision）」
+- Task 記錄的是「工程工作（Work Item）」
+- 至於用 data-table-v1、data-loader、Observable 或 Signal 等實作細節，通常留在程式碼即可，除非它們本身就是這次專案的重要設計決策。
 - 是不是一個需要團隊共同遵守的工程決策? 
     - 如果團隊決定統一 Pattern，則Technical Design 和 Task 都需寫入（建立/導入 Pattern）
 
@@ -47,4 +49,35 @@ Compute Feature
 
 這些都是幾個月後甚至一年後仍然有價值的資訊；相反地，switchMap、UrlTree、class 名稱等實作細節，通常應該留在程式碼本身或 code review 中，而不是 Technical Design。
 
+## Technical Design 分成三種層級
+```json
+Architecture Design
+│
+├── Routing Design
+├── Navigation Design
+└── State Management Design
 
+Feature Design
+│
+├── System Detail
+├── Compute List
+└── Physical Assets
+
+Reusable Pattern Design
+│
+├── List Page Pattern
+├── Detail Page Pattern
+├── Form Pattern
+└── Wizard Pattern
+```
+這樣分類有幾個好處：   
+- Architecture Design：描述跨功能的架構決策（例如 Routing、Navigation）。
+- Feature Design：描述某個功能模組（例如 System Detail）的組成與責任，再拆成 Processor、Memory 等開發工作。
+- Reusable Pattern Design：描述跨功能共用的 UI 或資料處理模式（例如 List Page Pattern）。
+
+以你的 Compute 專案來說：
+- TD-001：Routing Design（架構）   
+- TD-002：Navigation Design（架構）
+- TD-003：System Detail Feature Design（功能）
+
+這樣每一份 Technical Design 都有明確的層次，也比較容易一路拆解到 GitLab 的 Epic 與 Task。

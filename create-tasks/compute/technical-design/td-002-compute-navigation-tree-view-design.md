@@ -1,12 +1,12 @@
 # 處理: Tree 如何mapping route (Tree 點擊後怎麼進入URL?)
-
-- Pod
-- Group
-- Rack
-- Drawer
-- System
-- Physical Pool
-- Virtual Pool
+## Tree 如何與 Router 整合
+    - Pod
+    - Group
+    - Rack
+    - Drawer
+    - System
+    - Physical Pool
+    - Virtual Pool
 
 ---
 
