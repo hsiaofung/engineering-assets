@@ -81,3 +81,32 @@ Reusable Pattern Design
 - TD-003：System Detail Feature Design（功能）
 
 這樣每一份 Technical Design 都有明確的層次，也比較容易一路拆解到 GitLab 的 Epic 與 Task。
+
+# 情況二：你要建立整個 SCC4 的共用 Pattern（值得 TD-005）
+
+例如你決定：
+
+SCC4 所有 Table 頁面都必須遵循同一套 Pattern。
+
+包括：
+
+Compute
+Task
+Log
+Admin
+PDU Console
+
+全部都要使用：
+
+data-loader
+data-table-v1
+統一 Loading
+統一 Empty State
+統一 Error Handling
+統一 Search
+統一 Reload
+統一 Display Setting
+
+這就是一個架構決策，值得獨立成：
+
+TD-005 Common Page Pattern Design
