@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>BotTee | Your computer's best friend and personal handyman</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/personalDetails.css">
+    
+</head>
+<body id="information">
+    <main>
+        <header id="pgHeader">
+            <figure class="logo"><img src="images/botTee_logo.svg" alt="BotTee"></figure>
+            <h3><strong>BotTee</strong> - a handyman for your computer</h3>
+        </header>
+           
+        <nav class="checkoutStepper">
+            <ul>
+                <li><a href="orderSummary.html">Cart</a></li>
+                <li class="active"><a href="#">Information</a></li>
+                <li><a href="shipping.html">Shipping</a></li>
+                <li><a href="payment.html">Payment</a></li>
+            </ul>
+        </nav>
+           
+<!--            <section id="mainContent">-->
+            <div class="contentWrapper2">
+                
+            <section class="showHideOrdSum">            
+                <a href="#" class="showhide" id="show"><i class="fas fa-shopping-cart"></i> Show order summary <i class="fas fa-sort-down"></i></a>
+            </section>
+
+            <section id="orderSummary">
+                <article class="item">
+                    
+                    <ul class="details">
+                        <li class="pic"><img src="images/botWrench.jpg" alt="wrench Bot"></li>
+                        <li class="prodName"><h1>FixIt Bot</h1></li>
+                        <li class="prodItem">Item: #88423</li>
+                        <li class="prodStyle">Style: Wrench</li>
+                        <li class="edit"><a href="#">Edit</a></li>
+                        <li class="sub"><span>Subtotal</span> <span>$788.00</span></li>
+                        <li class="shipping"><span>Shipping</span> <span>Calculated at next step</span></li>
+                        <li class="total"><span>Total</span> <span>$788.00</span></li>
+                    </ul>
+                </article>
+            </section>
+            
+        </div> <!-- end contentWrapper -->
+        
+        <section id="info">
+            <form action="#" id="personalInfo">
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    
+<!--                     email tooltip example -->
+                    
+                    <div class="field">
+                        <input type="email" name="email" id="email" placeholder=" ">
+                        <label for="email">Email</label>
+                     </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="custom-checkbox" class="custom-checkbox" checked>
+                        <span class="custom-checkbox-span" tabindex="0"></span>
+                        <label for="custom-checkbox" class="custom-checkbox-label"> Keep me up to date on news and exclusive offers </label>
+                    </div>
+                    
+                </fieldset>
+                
+                 <fieldset>
+                    <legend>Shipping Information</legend>
+                    
+                     <div class="field half">
+                        <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                        <label for="firstName">First Name</label>
+                     </div>
+                     
+                     <div class="field half">
+                        <input type="text" id="lastName" name="lastName" placeholder=" " required>
+                        <label for="lastName">Last Name</label>
+                     </div>
+                     
+                     <div class="field">
+                        <input type="text" id="address" name="address" placeholder=" " required>
+                        <label for="address">Address</label>
+                     </div>
+                         
+                     <div class="field">
+                         <input type="text" id="suite" name="suite" placeholder=" ">
+                         <label for="suite">(optional) Apartment, suite, etc)</label>
+                     </div>
+                     
+                     <div class="field third">
+                        <input type="text" id="zip" name="zip" placeholder=" " pattern="[0-9]*" maxlength="5" required>
+                        <label for="zip">Zip Code <span class="zip-error">(Not a real zip code)</span></label>
+                     </div>
+                 
+                     <div class="field third">
+                         <input type="text" id="city" name="city" placeholder=" " required>
+                         <label for="city">City</label>
+                     </div>
+                     
+                     <div class="field third">
+                         <input type="text" id="state" name="state" placeholder=" " required>
+                         <label for="state">State</label>
+                     </div>
+                     
+                     <div class="field half">
+                         <input type="tel" id="phone" name="phone" placeholder=" " required>
+                         <label for="phone">Phone (123) 456-7890</label>
+                     </div>
+                    
+                </fieldset>
+                
+                <a href="shipping.html" class="formBtn">Continue to shipping</a>
+            </form>
+<!--        </section>-->
+        
+        </section>
+        
+        <footer>
+            <p><strong>BotTee</strong> | Our bots are there when you need them, they take care of those little details you just don’t want to</p>
+            <p class="copy">&copy; BotTee, all rights reserved</p>
+        </footer>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+            
+// toggle the order summary on personal detail page to show/hide
+$(document).ready(function() {
+    $(".showHideOrdSum").click(function(){
+      $("#orderSummary").toggle();
+
+        var $this = $(this).toggleClass('showhide');
+           if($(this).hasClass('showhide'))
+                {
+                $(this).html('<i class="fas fa-shopping-cart"></i> Hide order summary <i class="fas fa-sort-up"></i>');
+
+               } else {
+                $(this).html('<i class="fas fa-shopping-cart"></i> Show order summary <i class="fas fa-sort-down"></i>');
+                   }
+    });
+    
+// ZIP CODE 
+
+    function is_int(value) {
+  if ((parseFloat(value) == parseInt(value)) && !isNaN(value)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+$("#zip").keyup(function() { 
+  var el = $(this);
+
+  // Did they type five integers?
+  if ((el.val().length == 5) && (is_int(el.val()))) {
+
+    // Call Ziptastic for information
+    $.ajax({
+      url: "https://zip.getziptastic.com/v2/US/" + el.val(),
+      cache: false,
+      dataType: "json",
+      type: "GET",
+      success: function(result, success) {
+
+        // Fill in the city / state data  
+        $("#city").val(result.city);
+        $("#state").val(result.state);
+
+        $("#zip").blur();
+        $("#address-line-1").show().focus(); 
+
+      },
+
+      error: function(result, success) {
+
+        $(".zip-error").fadeIn(300);
+
+      }
+
+    });
+  } else if (el.val().length < 5) {
+
+    $(".zip-error").fadeOut(200);
+
+  };
+
+});
+    
+});
+        
+// Input mask for phone number 
+document.getElementById('phone').addEventListener('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+    e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+});
+    
+        
+    </script>
+</body>
+</html>

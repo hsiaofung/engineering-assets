@@ -1,0 +1,247 @@
+/* FORM - SHIPPING INFORMATION  */
+#pay main {
+    display: grid;
+    grid-template-rows: 10% 10% auto 1fr auto;
+    height: 100%;
+}
+
+#pay section {
+    padding: .5em .5em .5em 1.5em;
+}
+
+ul.details {
+    display: grid;
+    grid-template-rows: auto auto auto 2fr auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-template-areas:
+        "i pd"
+        "i pi"
+        "i ps"
+        "i e"
+        "st st"
+        "sh sh"
+        "tax tax"
+        "to to";
+    max-width: 380px;
+    font-size: .875em;
+}
+
+li.shipping {
+    border-bottom: none;
+    padding: 0;
+}
+
+li.tax {
+    grid-area: tax;
+    border-bottom: solid 1px #ccc;
+    padding: 0 0 .5em 0;
+}
+
+.personalInfo {
+    margin-top: 1em;
+}
+
+.personalInfo li:nth-child(-n + 2) { /* add an additional line to the summary box */
+    border-bottom: solid 1px #ccc;
+}
+
+section.paymentDetails {
+    padding-top: 1.5em;
+}
+
+.small {
+    font-size: .7em; /* reduce size of secure transaction text */
+}
+
+fieldset p:first-of-type {
+    margin-bottom: 1.5em; /* create some spacing between secure message and cc radio button */
+}
+
+#ccDetails {
+    max-width: 505px;
+}
+#payment label[for="cc"] { 
+    display: block;
+    border-bottom: solid 1px #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+#payment label[for="cc"] img { /* adjust position of cc icons */
+    vertical-align: middle;
+}
+
+i[class*="fa-cc"] { /* style the cc icons */
+    font-size: 1.3em;
+    margin: 0 .15em;
+}
+/* color classes for CC */
+.visa { color: #1a4ba7;}
+.mc { color: #cc590c;}
+
+#payment .field { /* need this so we can position icon within input field */
+    position: relative;
+}
+
+.fieldIcon { /* position the field icon */
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    color: #aaa;
+}
+
+.billingAddress.customRadioBtn label.radioLabel {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* legal links */
+.extra ul {
+    font-size: .75em;
+    border-top: solid 1px #d8d8d8;
+    display: inline-block;
+    padding: .5em 0;
+}
+.extra li {
+    display: inline-block;
+    padding-right: 1em;
+}
+.extra li:last-of-type {
+    padding-right: 0;
+}
+.extra a {
+    color: #d8d8d8;
+    text-decoration: none;
+}
+
+/* ADD Helptip CSS rules */
+/* helper text */
+.fieldAndHelper {
+    position: relative;
+}
+
+.helperText {
+    background-color: #e2fcfd;
+    border: solid 1px #26a3a8;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.2;
+    color: #333;
+    padding: 1em .75em .5em;
+    font-size: .8em;
+    position: absolute;
+    top: -162px;
+    right: -17px;
+    width: 815%;
+}
+
+.helperText i.fas.fa-caret-down {
+    position: absolute;
+    right: 20px;
+    bottom: -9px;
+    color: #26a3a8;
+}
+
+.helperText i.fas.fa-times-circle.close {
+    position: absolute;
+    right: -9px;
+    top: -7px;
+    color: #26a3a8;
+}
+
+ .hide { display: none;}
+.show {display: block;}
+/* end helper text */
+
+
+/* ADD paypal CSS */
+.paypal {
+    display: none;
+}
+
+.paypal {
+    text-align: center;
+}
+
+.paypal p {
+  font-size: .9em;
+}
+
+.far.fa-window-maximize {
+  font-size: 7em;
+  position: relative;
+  display:inline-block;
+}
+
+.far.fa-window-maximize:after {
+    content: "\f30b"; 
+    display: inline-block;
+    font-weight: 900;
+    color: #ccc;
+    position: absolute;
+    top: 30px;
+    right: -32px;
+    font-size: 70px;
+}
+
+.browser { 
+  position: relative;
+  display: inline-block;
+}
+
+.browser:after {
+    content: "\f141";
+    display: inline-block;
+    font-weight: 900;
+    color: #ccc;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 30px;
+    font-family: "Font Awesome 5 Free";
+}
+
+#diffAddress {
+    display: none;
+}
+
+
+@media screen and (min-width:660px) {
+    #pay main {
+        display: grid;
+        grid-template-areas:
+            "ph ph ph ph"
+            "cs cs cs cs"
+            "pay pay pd pd"
+            "f f f f";
+        grid-template-columns: auto 60% 20% auto;
+        grid-template-rows: none;
+        grid-auto-rows: 6% 18% auto 8%;
+    }
+    
+    #pay header#pgHeader {
+        grid-area: ph;
+    }
+    
+    .paymentDetails {
+        grid-area: pay;
+    }
+}
+
+@media screen and (min-width: 660px) and (max-width: 1099px){
+    #pay main {
+        grid-template-columns: auto 60% 40% auto;
+    }
+}
+
+@media screen and (min-width:1100px) {
+        #pay main {
+            grid-template-areas:
+                "ph ph ph ph ph ph"
+                "cs cs cs cs cs cs"
+                ". . pay pd . . "
+                "f f f f f f";
+            grid-template-columns: 10% auto 45% 25% auto 10%;
+        }
+}

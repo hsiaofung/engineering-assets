@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotTee | Your computer's best friend and personal handyman</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/main.css">
+    
+    
+</head>
+<body id="cart">
+    <main>
+        <header id="pgHeader">
+            <figure class="logo"><img src="images/botTee_logo.svg" alt="BotTee"></figure>
+            <h3><strong>BotTee</strong> - a handyman for your computer</h3>
+        </header>
+            
+            <div class="contentWrapper">
+                <header class="sectionHeader">
+                    <h3>Shopping Bag</h3>
+                    <div class="sep"></div>
+                </header>
+                
+               <section class="main">            
+                <article class="item">
+                    <header>
+                        <h1>FixIt Bot</h1>
+                    </header>
+                    <img src="images/botWrench.jpg" alt="wrench Bot">
+                    <ul class="details">
+                        <li>Item: #88423</li>
+                        <li>Style: Wrench</li>
+                        <li><a href="#">Edit</a></li>
+                        <li class="price">$788.00</li>
+                        <li class="itemAmt">
+                            <button><i class="fas fa-minus-circle btn subtract"></i></button>
+                            <input type="number" id="amt"><button><i class="fas fa-plus-circle btn add"></i></button>
+                        </li>
+                        <li><a href="#">Save for later</a></li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="orderSum">
+                <header>
+                    <h3>Order Summary</h3>
+                </header>
+
+                <article class="order">
+                    <ul>
+                        <li><span>Subtotal</span> <span>$788.00</span></li>
+                        <li><span>Shipping</span> <span>TBD</span></li>
+                        <li><span>Estimated Tax</span> <span>$0.00</span></li>
+                        <li><span>Total</span> <span>$788.00</span></li>
+                    </ul>
+                </article>
+<!--                <button class="checkout">Proceed to checkout</button>-->
+                <a href="personalDetails.html" class="formBtn">Proceed to checkout</a>
+                <p class="note">Shipping & taxes calculated at checkout</p>
+            </section>
+        </div>
+        
+        <footer>
+            <p><strong>BotTee</strong> | Our bots are there when you need them, they take care of those little details you just don’t want to</p>
+            <p class="copy">&copy; BotTee, all rights reserved</p>
+        </footer>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            
+        var $input = $("#amt");
+
+        $input.val(1);
+
+        $(".btn").click(function(){
+            if ($(this).hasClass('add'))
+                $input.val(parseInt($input.val())+1);
+            else if ($input.val()>=1)
+                $input.val(parseInt($input.val())-1);
+        });
+    });
+    </script>
+</body>
+</html>

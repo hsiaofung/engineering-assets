@@ -1,0 +1,135 @@
+/* FORM - SHIPPING INFORMATION  */
+#ship main {
+    display: grid;
+    grid-template-rows: 10% 10% auto 1fr auto;
+    height: 100%;
+}
+section.shipping {
+    padding-top: 1.5em;
+}
+.personalInfo {
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    padding: .1em .5em;
+    margin-right: 1em;
+}
+.personalInfo ul {
+    list-style: none;
+}
+.personalInfo li {
+    padding: .35em 0;
+}
+.personalInfo li:first-child {
+    border-bottom: solid 1px #ccc;
+}
+.personalInfo li span:first-child {
+    color: #ccc;
+    display: inline-block;
+    width: 20%;
+    padding-right: .5em;
+    min-width: 65px;
+}
+/* END FORM SHIPPING INFORMATION */
+
+/* CUSTOM RADIO BUTTONS */
+.customRadioBtn {
+    max-width: 505px;
+}
+.customRadioBtn input[type="radio"] { /* hide the default radio buttons, this will allow us to make our own */
+	position: absolute !important;
+	margin-left: -9999px !important;
+	visibility: hidden !important;
+}
+
+.customRadioBtn label.radioLabel { /* style the radio buttons labels */ 
+	display: flex; /* so we can position shipping price to far right */
+    margin-bottom: .5em;
+    position: relative;
+	padding-top: 4px;
+	padding-left: 30px;
+    letter-spacing: normal;
+    color: #585858;
+    font-size: .875em;
+    border-bottom: solid 1px #e5e5e5;
+    padding-bottom: .5em;
+}
+
+.customRadioBtn input+span { /* create the outer circles for the radio buttons */
+	position: absolute;
+	left: 2px;
+	top: 4px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border: 2px solid #dfe5e9;
+	border-radius: 50%;
+}
+
+.customRadioBtn input+span:after { /* style the inner circles for the radio buttons (selected state) */
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0px;
+	height: 0px;
+	border-radius: 50%;
+	background-color: #585858;
+	transform: translate(-50%, -50%);
+	transition: 0.2s all;
+}
+.customRadioBtn strong { 
+    text-align: right;
+    margin-left: auto;
+}
+
+.customRadioBtn input:not(:checked)+span:after {
+	opacity: 0;
+}
+
+.customRadioBtn input:checked+span:after {
+	opacity: 1;
+	width: 10px;
+	height: 10px;
+}
+/* END CUSTOM RADIO BUTTONS */
+
+@media screen and (min-width:660px) {
+
+    section {
+        padding: .5em 1em;
+    }
+
+    #ship main {
+        display: grid;
+        grid-template-areas:
+            "ph ph ph ph"
+            "cs cs cs cs"
+            "ship ship pd pd"
+            "f f f f";
+        grid-template-columns: auto 60% 20% auto;
+        grid-template-rows: none;
+        grid-auto-rows: 6% 18% auto 8%;
+        }
+    #ship header#pgHeader {
+        grid-area: ph;
+    }
+
+    .shipping {
+        grid-area: ship;
+    }
+    .personalInfo {
+        max-width: 550px;
+    }
+
+}
+
+@media screen and (min-width:1100px) {
+    #ship main {
+        grid-template-areas:
+            "ph ph ph ph ph ph"
+            "cs cs cs cs cs cs"
+            ". . ship pd . . "
+            "f f f f f f";
+        grid-template-columns: 10% auto 45% 25% auto 10%;
+    }
+}

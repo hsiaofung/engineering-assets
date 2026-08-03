@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotTee | Your computer's best friend and personal handyman</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/personalDetails.css">
+    <link rel="stylesheet" href="css/shipping.css">
+    <link rel="stylesheet" href="css/payment.css">
+
+</head>
+
+<body id="pay">
+    <main>
+        <header id="pgHeader">
+            <figure class="logo"><img src="images/botTee_logo.svg" alt="BotTee"></figure>
+            <h3><strong>BotTee</strong> - a handyman for your computer</h3>
+        </header>
+           
+        <nav class="checkoutStepper">
+            <ul>
+                <li><a href="orderSummary.html">Cart</a></li>
+                <li><a href="personalDetails.html">Information</a></li>
+                <li><a href="shipping.html">Shipping</a></li>
+                <li class="active"><a href="#">Payment</a></li>
+            </ul>
+        </nav>
+           
+<!--            <section id="mainContent">-->
+            <div class="contentWrapper2">
+                
+            <section class="showHideOrdSum">            
+                <a href="#" class="showhide" id="show"><i class="fas fa-shopping-cart"></i> Show order summary <i class="fas fa-sort-down"></i></a>
+            </section>
+
+            <section id="orderSummary">
+                <article class="item">
+                    
+                    <ul class="details">
+                        <li class="pic"><img src="images/botWrench.jpg" alt="wrench Bot"></li>
+                        <li class="prodName"><h1>FixIt Bot</h1></li>
+                        <li class="prodItem">Item: #88423</li>
+                        <li class="prodStyle">Style: Wrench</li>
+                        <li class="edit"><a href="#">Edit</a></li>
+                        <li class="sub"><span>Subtotal</span> <span>$788.00</span></li>
+                        <li class="shipping"><span>Shipping</span> <span>Free</span></li>
+                        <li class="tax"><span>Taxes</span> <span>$63.04</span></li>
+                        <li class="total"><span>Total</span> <span>$851.04</span></li>
+                    </ul>
+                </article>
+            </section>
+            
+        </div> <!-- end contentWrapper -->
+        
+        <section class="paymentDetails">
+           
+           <section class="personalInfo">
+               <ul>
+                   <li><span>Contact</span><span>tessajames@gmail.com</span></li>
+                   <li><span>Ship to</span><span>123 Any Street, Calisto, CA 12345</span></li>
+                    <li><span>Method</span><span>Free ground shipping (3-7 days)</span></li>
+               </ul>
+           </section>
+            <form action="#" id="payment">
+                <fieldset>
+                    <legend>Payment</legend>
+                    <p class="small"><i class="fas fa-lock"></i> All transactions are secure and encrypted</p>
+                     
+                     <div id="ccDetails" class="customRadioBtn">
+                        <label for="cc" class="radioLabel">
+				            <input type="radio" id="cc" name="payOption" checked value="creditCard">
+							<span></span>Credit Card 
+                             <i class="fab fa-cc-visa cc"></i> 
+                             <i class="fab fa-cc-mastercard cc"></i>
+				        </label>
+				        
+				        <div class="paymentBox creditCard">
+				            <div class="field">
+                             <input type="text" id="ccNum" name="ccNum" placeholder=" " required> 
+                             <label for="ccNum">Card Number</label>
+                             <i class="fas fa-lock fieldIcon"></i><!-- icon must go after label or float label will not work  -->
+                         </div>
+                         
+                         <div class="field">
+                             <input type="text" id="ccName" name="ccName" placeholder=" " required>
+                             <label for="ccName">Name on card</label>
+                         </div>
+                         
+                         <div class="field half">
+                             <input type="text" id="exp" name="exp" placeholder=" " maxlength='5' required>
+                             <label for="exp">Exp. date (MM/YY)</label>
+                         </div>
+                         
+                          <div class="fieldAndHelper">
+                              <div class="field half">
+                                 <input type="text" id="cvv" name="cvv" placeholder=" " maxlength='3' required>
+                                 <label for="cvv">Security code</label>
+                                 <!-- CVV helptip  -->
+                                <i class="far fa-question-circle fieldIcon tooltip">
+                                <span class="helperText">The 3 digit security code on the back of your credit card. 
+                                <img src="images/cc-cvv.gif" alt="CVV code">
+                                <i class="fas fa-caret-down"></i>
+                                <i class="fas fa-times-circle close"></i>
+                                </span>
+                                </i><!-- icon must go after label or float label will not work  -->
+                             </div>
+                          </div>
+				        </div>
+				        
+						<label for="payPal" class="radioLabel">
+							<input type="radio" id="payPal" name="payOption" value="paypal">
+							<span></span>PayPal
+						</label>
+						
+						<div class="paymentBox paypal">
+						    <div class="paypal">
+                            <div class="browser">
+                                 <i class="far fa-window-maximize"></i>
+                            </div>
+                             <p>After clicking "Complete order", you will be redirected to PayPal to complete your purchase securely.</p>
+                         </div>
+						</div>
+                    </div><!-- end ccDetails -->
+                    </fieldset>
+                    
+                     <fieldset>
+                        <legend>Billing address</legend>
+                        <div class="billingAddress customRadioBtn">
+                            <label for="shippingSame" class="radioLabel">
+                                <input type="radio" id="shippingSame" name="billingAddress" checked>
+                                <span></span>Same as shipping address
+                            </label>
+
+                           <label for="shippingDiff" class="radioLabel">
+                                <input type="radio" id="shippingDiff" name="billingAddress">
+                                <span></span>Use a different billing address
+                            </label>
+                        </div>
+                        
+                    <div id="diffAddress">
+                    <!--This code is pulled right from the personalDetails page -->
+                    <div class="field half">
+                    <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                    <label for="firstName">First Name</label>
+                    </div>
+
+                    <div class="field half">
+                    <input type="text" id="lastName" name="lastName" placeholder=" " required>
+                    <label for="lastName">Last Name</label>
+                    </div>
+
+                    <div class="field">
+                    <input type="text" id="address" name="address" placeholder=" " required>
+                    <label for="address">Address</label>
+                    </div>
+
+                    <div class="field">
+                     <input type="text" id="suite" name="suite" placeholder=" ">
+                     <label for="suite">(optional) Apartment, suite, etc)</label>
+                    </div>
+
+                    <div class="field third">
+                    <input type="text" id="zip" name="zip" placeholder=" " required>
+                    <label for="zip">Zip Code</label>
+                    </div>
+
+                    <div class="field third">
+                     <input type="text" id="city" name="city" placeholder=" " required>
+                     <label for="city">City</label>
+                    </div>
+
+                    <div class="field third">
+                     <input type="text" id="state" name="state" placeholder=" " required>
+                     <label for="state">State</label>
+                    </div>
+
+                    <div class="field half">
+                     <input type="tel" id="phone" name="phone" placeholder=" " required>
+                     <label for="phone">Phone (123) 456-7890</label>
+                    </div>
+                    </div><!-- end diffAddress -->
+                   
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Remember me</legend>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="custom-checkbox" class="custom-checkbox" checked>
+                            <span class="custom-checkbox-span" tabindex="0"></span>
+                            <label for="custom-checkbox" class="custom-checkbox-label">Save my information for faster checkout </label>
+                        </div>
+                        
+                    </fieldset>
+                     
+                     <a href="thanks.html" class="formBtn">Complete Order</a>
+                
+            </form>
+<!--        </section>-->
+       
+       <nav class="extra">
+           <ul>
+               <li><a href="#">Refund policy</a></li>
+               <li><a href="#">Privacy policy</a></li>
+               <li><a href="#">Terms of service</a></li>
+           </ul>
+       </nav>
+        
+        </section>
+        
+        <footer>
+            <p><strong>BotTee</strong> | Our bots are there when you need them, they take care of those little details you just don’t want to</p>
+            <p class="copy">&copy; BotTee, all rights reserved</p>
+        </footer>
+    </main>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+<script>
+$(document).ready(function() { 
+    
+// toggle the order summary on personal detail page to show/hide
+    $(".showHideOrdSum").click(function(){
+      $("#orderSummary").toggle();
+
+        var $this = $(this).toggleClass('showhide');
+           if($(this).hasClass('showhide'))
+                {
+                $(this).html('<i class="fas fa-shopping-cart"></i> Hide order summary <i class="fas fa-sort-up"></i>');
+
+               } else {
+                $(this).html('<i class="fas fa-shopping-cart"></i> Show order summary <i class="fas fa-sort-down"></i>');
+                   }
+        });
+    
+// format the CC as user types number
+    $("#ccNum").on("keydown", function(e) {
+        var cursor = this.selectionStart;
+        if (this.selectionEnd != cursor) return;
+        if (e.which == 46) {
+            if (this.value[cursor] == " ") this.selectionStart++;
+        } else if (e.which == 8) {
+            if (cursor && this.value[cursor - 1] == " ") this.selectionEnd--;
+        }
+    }).on("input", function() {
+        var value = this.value;
+        var cursor = this.selectionStart;
+        var matches = value.substring(0, cursor).match(/[^0-9]/g);
+        if (matches) cursor -= matches.length;
+        value = value.replace(/[^0-9]/g, "").substring(0, 16);
+        var formatted = "";
+        for (var i=0, n=value.length; i<n; i++) {
+            if (i && i % 4 == 0) {
+                if (formatted.length <= cursor) cursor++;
+                formatted += " ";
+            }
+            formatted += value[i];
+        }
+        if (formatted == this.value) return;
+        this.value = formatted;
+        this.selectionEnd = cursor;
+    });
+
+    // change credit card icon color      
+       $('#ccNum').keyup(function(){
+        var value = $(this).val();
+           if (value.match(/^4/)) { // if the value starts with a 4 (visa)
+                $('i.fa-cc-visa').addClass('visa'); 
+            } else if(value.match(/^5/)) { // if the value starts with a 5 (mc)
+                 $('i.fa-cc-mastercard').addClass('mc'); 
+            } else { // if neither is true remove either of the classes
+                $('i.cc').removeClass('visa').removeClass('mc');;
+            }
+       })  
+    
+    // CVV tooltip
+    // hide the CVV helper text div
+    document.querySelector('.helperText').classList.add('hide');
+    // make the tooltip able to close on click
+    const tooltip = document.querySelector('.tooltip');
+    tooltip.addEventListener('click', function(){
+        document.querySelector('.helperText').classList.toggle('show'); // togle the tooltip to show or hide
+        document.querySelector('.helperText').classList.toggle('hide');
+    })
+    
+    // expiration date formatting, add a slash after 2 characters have been entered
+    var characterCount
+    $('#exp').on('input',function(e){
+        if($(this).val().length == 2 && characterCount < $(this).val().length) {
+            $(this).val($(this).val()+'/');
+        }
+        characterCount = $(this).val().length;
+    });
+    
+    // make the cc/paypal info boxes show and hide on radio check
+    $('input[name="payOption"]').click(function(){
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".paymentBox").not(targetBox).hide();
+        $(targetBox).show();
+    });
+    
+    // Show/hide different address when radio button is clicked 
+     $("input[name='billingAddress']").click(function() {
+         if ($("#shippingDiff").is(":checked")) {
+           $("#diffAddress").show();
+         } else {
+           $("#diffAddress").hide();
+         }
+       });  
+       
+                        
+}); // end doc ready 
+    </script>
+</body>
+</html>
