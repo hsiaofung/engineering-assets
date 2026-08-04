@@ -1,0 +1,212 @@
+body {
+    background: url(../images/bg.png);
+    background-size: cover;
+}
+
+* {
+    margin:0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+fieldset {
+    margin: 2em 0;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 6px;
+    background-color: #39a2b1;
+    margin: auto;
+    margin-bottom: 2em;
+    margin: 1em 2em;
+}
+
+legend {
+    font-size: 1.25em;
+    padding: 0;
+    color: rgb(236, 187, 6);
+    text-shadow: 1px 1px 3px #333;
+    position: relative;
+    top: 1em;
+    border-bottom: solid 1px #fff;
+
+}
+
+label{
+    display: block;
+    margin-top: 1em;
+}
+
+.checks label {
+        margin-top: 0;
+    }
+
+label:first-of-type {
+    margin-top: 2em;
+}
+input {
+    padding: .5em;
+    border: solid 1px #999;
+    border-radius: 4px;
+}
+input[type="email"], input[type="url"], input[type="text"] {
+    width: 15em;
+}
+
+.check {
+    margin-top: .5em;
+    font-size: .9em;
+}
+
+ #chkLabel {
+    display: inline-block;
+    margin-top: 0;
+    align-items: center;
+}
+
+input[type="submit"] {
+    display: block;
+    padding: .5em 1em;
+    margin-top: 2em;
+    border-radius: 6px;
+    background-color: rgb(236, 187, 6);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+    border: solid 1px #fff;
+}
+
+/* help-tip */
+.questWrap {position: relative;}
+
+i.fas {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    font-size: 1.1em;
+    font-style: normal;
+    display: inline-block;
+    color: rgb(236, 187, 7);
+}
+.helper {display: none;}
+   
+.helperText {
+    position: absolute;
+    background-color: #0e506f;
+    border-radius: 4px;
+    color: #fff;
+    padding: .5em 1.5em .5em .5em;
+    bottom: 30px;
+    left: 111px;
+    font-size: .9em;
+    display: none;
+}
+/* to style triangle */
+.helperText:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 36%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(13, 80, 110) transparent transparent transparent;
+}
+
+.helperText a { color: #fff; }
+
+/* close button */
+i.fas.fa-times-circle {
+    color: #fff;
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+}
+
+/* span tag slider */
+input[type="checkbox"] {  /* hide original */
+    visibility: hidden;
+    position: absolute;
+}
+
+label { cursor: pointer;}
+
+/* hide the "real" checkbox visually */
+.checkbox input {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* style the "fake" checkbox */
+.checkbox-value {
+    background-color: rgb(255, 255, 255);
+    border: 0.0625em solid #39a5b5;
+    border-radius: 0.75em;
+    box-shadow: inset 0 0.0625em 0 0.0625em rgba(0,0,0,0.075);
+    display: inline-block;
+    height: 1.5em;
+    position: relative;
+    transition: all 120ms;
+    vertical-align: -0.5em;
+    width: 2.5em;
+}
+
+.checkbox-value::before {
+    background-color: #fff;
+    border: 0.0625em solid;
+    border-color: inherit;
+    border-radius: 50%;
+    box-shadow: 0 0.0625em 0 0.0625em rgba(0,0,0,0.075);
+    content: '';
+    display: block;
+    height: 1.625em;
+    left: 25%;
+    margin-left: -0.9375em;
+    margin-top: -0.125em;
+    position: absolute;
+    top: 0;
+    transition: all 120ms ease-in;
+    width: 1.625em;
+}
+
+input:checked + .checkbox-value {
+    background-color: rgb(202, 238, 236);
+    border-color: #169a9a;
+}
+
+input:checked + .checkbox-value::before {
+    left: 75%;
+}
+
+/* ARIA Custom checkbox */
+[role="checkbox"] {
+    font-family: "Font Awesome 5 Free";
+    font-size: 1.3em;
+    font-style: normal;
+    color: #ecbb07;
+    padding-right: .25em;
+}
+
+[aria-checked="true"]::before {
+    content: "\f0c8";
+}
+
+[aria-checked="false"]::before {
+    content: "\f14a";
+}
+
+
+
+ @media screen and (min-width: 430px) {
+    legend {
+        font-size: 1.75em;
+    }
+    fieldset {
+        width: 40%;
+        min-width: 320px;
+    }
+}

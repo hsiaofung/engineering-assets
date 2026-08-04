@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling your form</title>
+     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900&display=swap" rel="stylesheet">
+     
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+       
+       <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <section>
+        <div role="form" aria-labelledby="addContact" id="contact">
+            <fieldset>
+                <legend id="addContact">Add Contact Information</legend>
+
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name">
+                
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" name="phone" id="phone">
+
+                <input type="submit" id="submitContact" value="Add Contact">
+            </fieldset>
+        </div>
+        
+         <div role="form" aria-labelledby="addOrganization" id="organization">
+            <fieldset>
+                <legend id="addOrganization">Add Organization</legend>
+
+                <label for="orgName">Organization Name:</label>
+                <input type="text" name="orgName" id="orgName">
+                
+                <label for="url">Web address:</label>
+                <input type="url" name="url" id="url">
+                
+                <input type="submit" id="submitOrg" value="Add Organization">
+            </fieldset>
+        </div>
+        
+        
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Login form</legend>
+        <div class="questWrap">
+          <label for="username">Your username</label>
+          <input type="text" id="username" required />
+          <i class="fas fa-info-circle tooltip"></i>
+          <div role="tooltip" id="username-tip" class="helperText">* Your username is your email address.
+          <i class="fas fa-times-circle closeBtn"></i>
+          </div>
+          
+        </div>
+        <div class="questWrap">
+          <label for="password">Your password</label>
+          <input type="text" id="password" required />
+          <i class="fas fa-info-circle tooltip"></i>
+          
+          <div role="tooltip" id="password-tip" class="helperText">* Your password was emailed to you when you signed up. Need us to <a href="#">resend</a> it?
+          <i class="fas fa-times-circle closeBtn"></i>
+          </div>
+        </div>
+        
+<!-- custom checkbox-->
+        <div class="check">
+            <span role="checkbox" id="chkPref" aria-checked="false" onclick="changeCheckbox()" onKeyPress="changeCheckbox()"
+        tabindex="0" aria-labelledby="chkLabel"></span> 
+        <label id="chkLabel" onclick="changeCheckbox()" onKeyPress="changeCheckbox()">Remember me</label>
+        </div>
+
+<!-- custom slider -->
+        <label>
+            <input type="checkbox">
+            <span class="checkbox-value" aria-hidden="true"></span>
+             Set phasers to stun
+        </label>
+
+        <input type="submit" id="signIn" value="Sign In">
+        
+      </fieldset>
+    </form>
+
+    </section>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function(){
+  // helper-tip
+            var btn = $(".fas.tooltip");            
+            $(btn).click(function () {
+                $(this).siblings(".helperText").toggle();
+            });
+            
+            $(".closeBtn").click(function(){
+                $(this).parent("div").toggle();
+            })
+            // close helper-tip on input focus
+            $("input").click(function(){
+                $(".questWrap div").hide();
+            }) 
+        });
+        
+        // custom checkbox
+        function changeCheckbox(event) {
+        let item = document.getElementById('chkPref');
+        switch(item.getAttribute('aria-checked')) {
+            case "true":
+                item.setAttribute('aria-checked', "false");
+                break;
+            case "false":
+                item.setAttribute('aria-checked', "true");
+                break;
+        }
+    }
+  
+    </script>
+
+</body>
+</html>
