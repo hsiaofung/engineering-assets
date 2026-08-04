@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Client-side Form Validation | CSS</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+	
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+
+	<div class="container">
+		<form class="registration" id="registration">
+			<h1>Registration Form</h1>
+
+			<label for="username">
+				Username
+
+				<input type="text" id="username" minlength="3" required>
+
+				<ul class="inputRequirements">
+					<li>At least 3 characters long</li>
+					<li>Must only contain letters and numbers (no special characters)</li>
+				</ul>
+			</label>
+
+			<label for="password">
+				Password
+                <!-- (To see this happening in browsers temporarily change this to type="text") -->
+                <input type="text" id="password" maxlength="100" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=]).*" required>
+
+				<ul class="inputRequirements">
+					<li>At least 8 characters long (and less than 100 characters)</li>
+					<li>Contains at least 1 number</li>
+					<li>Contains at least 1 lowercase letter</li>
+					<li>Contains at least 1 uppercase letter</li>
+					<li>Contains a special character (e.g. @ !)</li>
+				</ul>
+			</label>
+			
+
+			<input type="submit">
+
+		</form>
+	</div>
+
+</body>
+</html>
