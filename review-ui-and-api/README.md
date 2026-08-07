@@ -36,6 +36,14 @@
     - Review record 已經顯示完成。
   這會降低 review 的價值。 
 
+ # 子流程-6 若UI/UX Figma 缺 UI
+ - 可以先用Teams和UI/UX確認是否需要? 還是會後補UI spec?
+ - 例如: 確認一下 Tree Search，SCC 3.0有 dropdown menu（包含 Group），但目前這版 Figma 沒有看到 dropdown 設計。 請確認新版是否不需要 dropdown，還是後續會補充相關 UI Spec？
+ - 若是UI/UX說會有，那就回復: 等他更新，再行確認behavior
+ - 並同步在gitLab上comment，以利追蹤後續進度。
+ - 列Q-xxx，設計補充待完成。
+
+
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 

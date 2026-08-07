@@ -1,10 +1,10 @@
-@tyl @VincentLin 
+@ethanc @tyl @VincentLin 
 
 # Q-008
 
 ## Status
 
-Open - API hierarchy parameters need clarification.
+Open - Solution confirmed, pending verification
 
 ## Summary
 
@@ -35,13 +35,23 @@ still uses hierarchy parameters:
 
 The `group` concept does not appear in the SCC 4.0 Compute Tree View.
 
-## Open Questions
+## Resolution
 
-Please confirm:
+Confirmed mapping:
 
-1. Is `group` still a valid backend concept in SCC 4.0?
-2. If `group` is still required, what is the mapping between Row and Group?
-3. If the hierarchy model has changed, should the API parameters be updated to align with the new resource hierarchy?
+- Virtual Pool:
+  - Use `unassigned=true`  
+
+- Physical Pool:
+  - Use `unassigned=false`
+  - Physical Pool represents systems with location.
+
+- Row:
+  - Compute-service will provide `row` field for filtering.
+
+- Rack / Drawer:
+  - Continue using existing fields.
+
 
 ## Impact
 
