@@ -1,0 +1,7 @@
+- Search input behavior
+- Search type selection
+- Search result rendering
+- Search result → Tree node
+- Ancestor expansion
+- Node selection
+- API loading / empty / error states

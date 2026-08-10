@@ -1,0 +1,4 @@
+- Pass selected search result to TreeComponent
+- Locate the corresponding Tree node
+- Expand required ancestor nodes
+- Select / highlight the target node

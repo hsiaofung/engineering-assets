@@ -18,3 +18,31 @@
 # 架構
 - Tree 的架構
 - 路由的架構
+
+```text
+Compute Monitoring
+├─ Routing
+│  ├─ Migrate routes
+│  ├─ Resource resolve guard
+│  ├─ Ancestor API
+│  └─ Canonical route builder
+│
+├─ Tree
+│  ├─ Tree data loading
+│  ├─ Local tree update after user operations
+|  ├─ Tree search 
+│  └─ Tree navigation
+│
+├─ System List
+│  ├─ Virtual Pool filtering
+│  ├─ Physical Pool filtering
+│  ├─ Row filtering
+│  └─ API integration
+│
+└─ Physical Assets
+   ├─ Navigation
+   ├─ Assign Location
+   ├─ Unassign
+   ├─ BMC Website   
+   └─ Delete   
+```   

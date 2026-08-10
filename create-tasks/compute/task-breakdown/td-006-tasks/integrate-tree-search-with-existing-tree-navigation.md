@@ -1,0 +1,2 @@
+- Reuse existing Tree node navigation behavior
+- Ensure Search does not introduce a separate navigation flow

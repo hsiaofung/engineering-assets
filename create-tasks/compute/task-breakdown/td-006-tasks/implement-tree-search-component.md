@@ -1,0 +1,4 @@
+- Implement search input
+- Implement search type/menu selection
+- Implement search result display
+- Handle search result selection

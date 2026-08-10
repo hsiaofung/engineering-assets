@@ -1,0 +1,3 @@
+- Integrate Tree Search API
+- Map API response to TreeSearchResult
+- Handle loading / empty / error states
