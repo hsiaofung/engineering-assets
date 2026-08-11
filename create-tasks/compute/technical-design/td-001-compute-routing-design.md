@@ -1,7 +1,8 @@
 # 處理：如何找到resource? (URL怎麼產生?)
   ## Router 如何找到正確頁面。
     - Pod level
-    - Group level
+    - Pool level (Virtual, Physical)
+    - Row level
     - Rack level
     - Drawer level
     - Appliance level
