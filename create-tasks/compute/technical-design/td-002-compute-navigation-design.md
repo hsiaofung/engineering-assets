@@ -324,6 +324,116 @@ User B 的 Tree 可能暫時仍看到 System001。
 
 ---
 
+# Decision 11
+
+- API DTO 和 FE Domain Model 不應該硬要使用相同命名。
+- API DTO naming follows backend contract; ComputeTreeNode uses normalized domain naming.
+- 這樣未來 API 欄位改名，只需要修改 mapper，不需要修改整個 Tree UI。
+
+```text
+             API Layer
+                 │
+        API-specific DTO
+                 │
+                 ▼
+              Mapper
+                 │
+                 ▼
+       ComputeTreeNode
+                 │
+                 ▼
+             Tree UI
+```
+## Use case :
+
+不同 resource：
+
+```text
+Pod
+    name
+
+Physical Pool
+    name
+
+Row
+    location → name
+
+Rack
+    location → name
+
+Drawer
+    ?
+    
+System
+    ?
+```
+
+如果我們直接把 API 欄位帶進 Domain Model：
+
+```ts
+interface ComputeTreeNode {
+  id: string
+  location?: string
+  name?: string
+}
+```
+最後會變成：
+```ts
+if (node.kind === 'row') {
+  node.location
+} else if (node.kind === 'system') {
+  node.name
+}
+```
+這反而讓 Tree component 很難寫。
+
+所以我會定義一個明確 boundary
+
+```text
+             API Layer
+                 │
+        API-specific DTO
+                 │
+                 ▼
+              Mapper
+                 │
+                 ▼
+       ComputeTreeNode
+                 │
+                 ▼
+             Tree UI
+```
+例如:
+
+```ts
+// API DTO
+interface RowResponse {
+  id: string
+  location: string
+  isLeaf: boolean
+}
+```
+轉成:
+```ts
+// Domain Model
+interface ComputeTreeNode {
+  id: string
+  kind: 'row'
+  name: string
+  parentId?: string
+  isLeaf: boolean
+}
+```
+這樣 Tree UI 永遠只需要：
+```html
+{{ node.name }}
+```
+而不用知道：
+
+Row API 叫 location，Rack API 也許叫 location，System API 又可能叫其他東西。
+
+---
+
 # Compute Tree Structure
 
 ```text

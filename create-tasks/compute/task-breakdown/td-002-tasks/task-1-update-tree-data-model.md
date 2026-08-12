@@ -8,5 +8,6 @@
 - 支援 Virtual Pool
 - 支援 Row / Rack / Drawer / System
 # Acceptance Criteria
+- 定義一個可以支援 lazy-loaded hierarchy 的 Compute Tree Node Model。
 - Tree 可以表示所有 Compute Resource
 - Node Model 與 Routing Model 一致
