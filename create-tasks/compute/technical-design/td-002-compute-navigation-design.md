@@ -432,6 +432,11 @@ interface ComputeTreeNode {
 
 Row API 叫 location，Rack API 也許叫 location，System API 又可能叫其他東西。
 
+所以我會保留 name，然後在 mapper 裡做：
+```ts
+name: response.location
+```
+
 ---
 
 # Compute Tree Structure
