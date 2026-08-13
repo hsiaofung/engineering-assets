@@ -9,7 +9,7 @@ Implement computeResourceResolveGuard
 # Flow:
 ```json
 
-/compute/pod/SYS-001
+/compute/resource/SYS-001
 
         |
         v
@@ -38,7 +38,7 @@ Example:
 
 Input:
 ```json
-/compute/pod/SYS-001
+/compute/resource/SYS-001
 ```
 Output:
 ```json

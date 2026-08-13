@@ -20,7 +20,7 @@ navigate([
 After:
 ```ts
 navigate([
- '/compute/pod',
+ '/compute/resource',
  systemId
 ])
 ```
