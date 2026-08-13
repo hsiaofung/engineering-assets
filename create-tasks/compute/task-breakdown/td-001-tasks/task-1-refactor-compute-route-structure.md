@@ -12,7 +12,7 @@ Migrate cloudComputeV1Routes to SCC 4.0 resource-based routing
 
 改成 SCC 4.0 resource routing：
 ```json
-/compute/pod/{resourceId}
+/compute/resource/{resourceId}
 ```
 ---
 
@@ -26,7 +26,7 @@ Migrate cloudComputeV1Routes to SCC 4.0 resource-based routing
 ---
 
 # Acceptance Criteria
- - /compute/pod/{resourceId} can be matched
+ - /compute/resource/{resourceId} can be matched
  - Static routes do not conflict with resource routes
  - Physical and virtual routes are supported
  - Legacy hierarchy routes are removed
