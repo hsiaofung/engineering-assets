@@ -23,6 +23,20 @@
 | design-patterns | programming principles   |
 | ai | AI related notes   |
 
+```text
+engineering-assets/
+│
+├── review-ui-and-api/     # 發現問題
+│
+├── create-tasks/          # 把問題轉成可執行工作
+│
+├── implement/             # 實作與可重用 code
+│
+├── design-patterns/       # 抽象成 pattern
+│
+└── knowledge/             # 原理、研究、學習
+```
+
 ---
 
 # 所有設計都要回到這三個問題
@@ -40,4 +54,6 @@
 3. 我能不能在 10 秒內定位？   
 
 （不用思考分類）   
+
+
 
