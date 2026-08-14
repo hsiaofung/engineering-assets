@@ -110,3 +110,144 @@ data-table-v1
 這就是一個架構決策，值得獨立成：
 
 TD-005 Common Page Pattern Design
+
+# 兩層模型
+## Level 1：Technical Design
+
+回答：
+
+系統要有哪些東西？
+
+例如：
+```text
+Compute Tree
+│
+├── ComputeTreeNode Model
+├── ComputeTreeMapper
+├── ComputeTreeService
+└── ComputeTreeComponent
+```
+這是架構視角。
+
+## Level 2：GitLab Tasks
+
+回答：
+
+我要交付哪些東西？
+
+例如：
+
+```text
+Task 1 — Implement ComputeTreeMapper
+
+Task 2 — Implement ComputeTreeService
+
+Task 3 — Implement ComputeTreeComponent
+
+Task 4 — Implement ComputeTree Expand / Lazy Loading
+
+Task 5 — Implement ComputeTree Selection
+
+Task 6 — Integrate ComputeTree with Compute Page
+```
+
+這已經比 Technical Design 細一點，但還是保持可讀性。
+
+## Level 3：Implementation
+
+真正寫 code 時才出現：
+```text
+ComputeTreeComponent
+├── toTreeNode()
+├── updateChildren()
+├── addLoadingKey()
+├── removeLoadingKey()
+├── loadRoot()
+└── onNodeExpand()
+```
+這些是implementation details。
+
+不需要全部變成 GitLab Task。
+
+# 更重要的是：Technical Design 應該允許「回饋」
+你這次其實發現一個很好的工程循環：
+```text
+Technical Design
+       ↓
+   Implementation
+       ↓
+發現未知細節 / Design Gap
+       ↓
+Update Technical Design
+       ↓
+Implementation
+       ↓
+完成
+```
+
+而不是：
+
+```text
+Technical Design
+       ↓
+Implementation
+       ↓
+發現問題
+       ↓
+怪自己當初 Design 做不好
+```
+
+Technical Design 本來就不可能在 implementation 前知道所有細節。
+
+尤其像你這次：
+
+Drawer 沒有 API，Rack API 一次把 Drawer + System 回傳。
+
+這種資訊通常就是做到 API integration 才真正確定。
+
+# 所以你現在可以把這次經驗變成一個很好的工作方法
+
+以後做 Technical Design 時，不需要刻意把它做到「非常細」。
+
+做到：
+
+足以讓人理解系統結構、責任邊界、主要資料流。
+
+然後 Implementation 時：
+
+把未知的細節逐步發現出來。
+
+最後再把「真正影響架構的發現」回寫 Technical Design。
+
+例如這次真正值得回寫 Design 的可能是：
+
+```text
+Rack API
+  ↓
+Drawer
+  ↓
+System
+```
+以及：
+```text
+Drawer node
+  ├── isLeaf = false
+  └── systems are preloaded but not rendered
+```
+但：
+```text
+toTreeNode()
+updateChildren()
+addLoadingKey()
+```
+這些就不需要回寫 Technical Design。
+
+- 從 Technical Design 推 Task，最適合當正式的 GitLab 任務結構；從 Implementation 倒推 Task，則比較適合拿來檢查「Technical Design 是否漏掉了重要的工作」。這兩個不是互相取代，而是互相校正。
+- 實作最大的價值之一：把 implementation 中發現的事實，沉澱成新的設計資產。
+- 下一次遇到類似 Tree：
+```text
+Rack
+ └── Drawer
+      └── System
+```
+你就不需要重新探索一次，而可以直接從既有設計開始。      
