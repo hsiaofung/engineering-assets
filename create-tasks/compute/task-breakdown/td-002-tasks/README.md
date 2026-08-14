@@ -26,3 +26,26 @@ Next:
 Page Integration
 Routing Integration
 Selection → Resource Navigation
+
+# 順序
+```text
+1. ComputeTreeComponent
+   ├─ Load tree
+   ├─ Expand
+   └─ Selection                         ✅
+
+2. Compute Tree → Router Navigation     ← 下一步
+   ├─ Virtual Pool → System List
+   ├─ Physical Pool → System List
+   ├─ Row → System List
+   ├─ Rack → System List
+   ├─ Drawer → Drawer Page
+   └─ System → System Detail
+
+3. Routed Content
+   ├─ System List
+   ├─ Drawer Page
+   └─ System Detail
+
+4. Tree Search
+```

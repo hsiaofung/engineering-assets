@@ -28,3 +28,21 @@ Compute Systems API
 | Rack          | `GET /compute-service/v1/systems?rack={rackLocation}`     |
 | Drawer        | `GET /compute-service/v1/systems?drawer={drawerLocation}` |
 | System        | `GET /compute-service/v1/systems/{id}` |
+
+```text
+Tree
+ ↓
+Selection
+ ↓
+ComputeComponent
+ ↓
+ComputeNavigationService
+ ↓
+Router
+ ↓
+Routed Page
+ ↓
+API
+ ↓
+顯示資料
+```
