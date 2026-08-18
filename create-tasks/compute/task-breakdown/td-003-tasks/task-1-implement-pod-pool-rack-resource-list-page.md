@@ -1,8 +1,8 @@
-# Task 1：Implement Pod/Group/Rack Resource List Page
+# Task 1：Implement Pod/Pool/Rack Resource List Page
 - 建立 Physical Assets 頁面
 - 串接 API
 - 顯示資料
-- group ? (現在沒有group)
+- Pool: Physical pool, Virtual pool
 
 ## 共同特徵：
 
