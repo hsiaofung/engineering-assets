@@ -1,6 +1,7 @@
 # Review UI/API
 - 透過流程，流程管理讓不負責的人現形，讓不負責的人去負責。
 - 不要用口頭承諾關閉 Review，要用可驗證結果關閉 Review。
+- Review → Confirm → Fix → Contract Update → Verify → Close
 
 # 主流程   
 1. UX 發訊息要求review。
@@ -43,7 +44,11 @@
  - 並同步在gitLab上comment，以利追蹤後續進度。
  - 列Q-xxx，設計補充待完成。
 
-
+# 子流程-7 若開發中swagger API 某一個query parameter 之前可以。現在不行了，但是API spec Systems 是有規定的。該怎麼處理?
+- development feedback loop
+- 當成一個 API contract / implementation mismatch 問題處理
+- 典型的 API implementation 與 OpenAPI contract 不一致（API drift）
+- 先釐清 provider implementation，而不是讓 consumer 默默配合錯誤行為。
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
