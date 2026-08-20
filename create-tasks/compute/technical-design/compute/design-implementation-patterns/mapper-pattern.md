@@ -1,6 +1,6 @@
 1. Mapper
 
-這個最沒有問題。
+- Mapper = X → Y（Transformation）
 
 例如：
 ```text

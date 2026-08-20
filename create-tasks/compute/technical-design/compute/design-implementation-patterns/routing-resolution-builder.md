@@ -1,6 +1,7 @@
 # Resolve → Context → Build Pattern
 
 - Resource-based Routing uses a Resolve → Context → Build flow to generate canonical URLs from a resource ID.
+- Resolve → Context → Build = X → Y → (X + Y) → C（Resolution + Construction）
 
 我反而會把你的 Compute routing 設計整理成：
 
