@@ -49,6 +49,11 @@
 - 當成一個 API contract / implementation mismatch 問題處理
 - 典型的 API implementation 與 OpenAPI contract 不一致（API drift）
 - 先釐清 provider implementation，而不是讓 consumer 默默配合錯誤行為。
+- 確定是有Arch是有machnism，只是沒有落實到。 
+
+# 子流程-8 若開發中後端兩個模組不在同一個環境(兩個模組的資料不同步)
+- 因為就算review API 都沒問題。但環境錯了還是不能開發
+- 所以我們的流程，是確認所有的模組都配置在同一個環境(同一個Server: 例如: 10.147.123.99:8328)
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
