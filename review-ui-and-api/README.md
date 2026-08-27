@@ -55,6 +55,12 @@
 - 因為就算review API 都沒問題。但環境錯了還是不能開發
 - 所以我們的流程，是確認所有的模組都配置在同一個環境(同一個Server: 例如: 10.147.123.99:8328)
 
+# 子流程-9 若開發中前端元件整合發現問題
+- 先查User Guide
+- 透過Teams 和Owner 溝通，若Owner說有。則將User guide 丟入AI 檢查。確認是否有寫->若有結案。(Double confirm)
+- 若依照設定還有問題，確認是設定還是元件本身問題。
+- 若是元件本身問題->component owner定位->shared component 修正。
+
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
 UX                 
