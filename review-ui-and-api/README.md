@@ -36,6 +36,7 @@
     - FE 又需要重新調整。
     - Review record 已經顯示完成。
   這會降低 review 的價值。 
+- 指出日後可能會有rework 或integration issue 的風險(risk)
 
  # 子流程-6 若UI/UX Figma 缺 UI
  - 可以先用Teams和UI/UX確認是否需要? 還是會後補UI spec?
@@ -60,6 +61,15 @@
 - 透過Teams 和Owner 溝通，若Owner說有。則將User guide 丟入AI 檢查。確認是否有寫->若有結案。(Double confirm)
 - 若依照設定還有問題，確認是設定還是元件本身問題。
 - 若是元件本身問題->component owner定位->shared component 修正。
+
+# 子流程-10 發現performance risk
+- 發現 Performance Risk
+- 先確認 UX Behavior
+- 和 BE 確認 API/data contract 是否能支援 UX behavior。
+- FE 做 Prototype + Mock Data -> Performance Benchmark。
+- 在weekly sync 說明這會使用目前開發的資源。
+- 請老闆明確做了 decision。(是否要做評估)
+- decision 留下紀錄。
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 

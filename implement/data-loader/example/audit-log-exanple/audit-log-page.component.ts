@@ -105,8 +105,7 @@ export class AuditLogPageComponent {
       .pipe(toUI())
 
   // ==================== Event Handlers ====================
-  onReload = (): void => {
-    this.queryParams = { ...DEFAULT_AUDIT_LOG_PARAMS }
+  onReload = (): void => {    
     this.loader?.refresh()
   }
 
