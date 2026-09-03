@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
-import { Component, Input, OnChanges, inject, signal } from '@angular/core'
-import { Observable, from, isObservable } from 'rxjs'
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core'
+import { from, isObservable } from 'rxjs'
+import type { DataLoaderFetchFn } from './data-loader.interface'
 
 /**
  * A reusable data loader component that handles fetching data with built-in
@@ -12,19 +13,21 @@ import { Observable, from, isObservable } from 'rxjs'
  *
  * The component exposes `data`, `isLoading`, and `error` signals for use in templates
  * via content projection (`ng-content`).
+ * @template T
  */
 @Component({
   selector: 'app-data-loader',
   standalone: true,
   exportAs: 'dataLoader',
   template: `<ng-content></ng-content>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataLoaderComponent<T> implements OnChanges {
+export class DataLoaderComponent<T> {
   /** Input URL for automatic HTTP GET request */
-  @Input() url?: string
+  readonly url = input<string>('')
 
   /** Custom fetch function that can return Observable or Promise */
-  @Input() getFn?: () => Observable<T> | Promise<T>
+  readonly getFn = input<DataLoaderFetchFn<T> | null>(null)
 
   /** Signal holding the fetched data */
   readonly data = signal<T | null>(null)
@@ -35,46 +38,55 @@ export class DataLoaderComponent<T> implements OnChanges {
   /** Signal holding error message if fetching failed */
   readonly error = signal<string | null>(null)
 
-  private http = inject(HttpClient)
+  private readonly http = inject(HttpClient)
+  private readonly refreshCount = signal<number>(0)
+  private readonly fetchFn = computed<DataLoaderFetchFn<T> | null>(() => {
+    const getFn = this.getFn()
+    const url = this.url()
 
-  /**
-   * Lifecycle hook triggered when input properties change.
-   * Re-fetches data whenever `url` or `getFn` changes.
-   */
-  ngOnChanges(): void {
-    // Re-fetch data whenever url or getFn changes
-    this.executeFetch()
-  }
+    if (getFn) {
+      return getFn
+    }
+
+    if (url) {
+      return () => this.http.get<T>(url)
+    }
+
+    return null
+  })
+
+  private readonly loadEffect = effect((onCleanup) => {
+    this.refreshCount()
+    const fetchFn = this.fetchFn()
+
+    if (!fetchFn) {
+      this.data.set(null)
+      this.error.set('No valid url or getFn provided')
+      this.isLoading.set(false)
+      return
+    }
+
+    this.executeFetch(fetchFn, onCleanup)
+  })
 
   /**
    * Executes the data fetching logic based on provided `url` or `getFn`.
    *
    * Automatically converts Promise results to Observables and handles
    * loading/error states via signals.
+   * @param {DataLoaderFetchFn<T>} fetchFn Data fetch function to execute.
+   * @param {(cleanupFn: () => void) => void} onCleanup Effect cleanup registration callback.
    * @private
    */
-  private executeFetch(): void {
-    let finalTargetFn: (() => Observable<T> | Promise<T>) | undefined = this.getFn
-
-    // If only url is provided, automatically create a getFn using HttpClient
-    if (this.url && !finalTargetFn) {
-      finalTargetFn = () => this.http.get<T>(this.url!)
-    }
-
-    if (!finalTargetFn) {
-      this.error.set('No valid url or getFn provided')
-      this.isLoading.set(false)
-      return
-    }
-
+  private executeFetch(fetchFn: DataLoaderFetchFn<T>, onCleanup: (cleanupFn: () => void) => void): void {
     this.isLoading.set(true)
     this.error.set(null)
 
     try {
-      const result = finalTargetFn()
+      const result = fetchFn()
       const observable$ = isObservable(result) ? result : from(result)
 
-      observable$.subscribe({
+      const subscription = observable$.subscribe({
         next: (res: T) => {
           this.data.set(res)
           this.isLoading.set(false)
@@ -84,6 +96,8 @@ export class DataLoaderComponent<T> implements OnChanges {
           this.isLoading.set(false)
         },
       })
+
+      onCleanup(() => subscription.unsubscribe())
     } catch (_err) {
       this.error.set('Execution error')
       this.isLoading.set(false)
@@ -91,9 +105,9 @@ export class DataLoaderComponent<T> implements OnChanges {
   }
 
   /**
-   *
+   * Public method to manually trigger a data refresh.
    */
   public refresh(): void {
-    this.executeFetch()
+    this.refreshCount.update((value) => value + 1)
   }
 }
