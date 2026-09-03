@@ -1,3 +1,11 @@
+# Resource-based routing
+
+- 從 hierarchy-based routing 改成 resource-based routing
+- resolveGuard → ancestor API → canonical route
+- URL 不依賴 ancestor information
+
+--- 
+
 可以。這份是四個核心架構裡比較底層的一個，我會把它和 `tree-selection-navigation`、`url-selection-restoration` 清楚切開：**前兩個描述 navigation flow，這份描述 URL 如何由 resource identity 建立與解析。**
 
 # Resource-Based Routing

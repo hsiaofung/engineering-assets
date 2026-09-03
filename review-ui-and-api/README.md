@@ -2,6 +2,7 @@
 - 透過流程，流程管理讓不負責的人現形，讓不負責的人去負責。
 - 不要用口頭承諾關閉 Review，要用可驗證結果關閉 Review。
 - Review → Confirm → Fix → Contract Update → Verify → Close
+- 你負責發現問題、描述現象、確認 impact；不要因為目前沒有 component owner，就自己替大家決定誰負責。
 
 # 主流程   
 1. UX 發訊息要求review。
