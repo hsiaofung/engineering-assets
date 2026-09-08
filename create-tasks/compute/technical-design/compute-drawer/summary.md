@@ -1,123 +1,108 @@
-可以。這次以你剛確認的架構為準，整理成一份**可以直接拿去實作的 Technical Design**。
+可以。既然現在已經把 **Responsibility、Data Flow、API、Model、Mapper、Page boundary** 都釐清了，我會把下面這版當作最終 Technical Design。
 
-# Compute Drawer Technical Design
+# Compute Drawer Page — Technical Design
 
-## 1. Goal
+## 1. Objective
 
-新增 `ComputeDrawerPage`，呈現單一 Drawer 及其包含的 Systems。
+新增 **Compute Drawer Page**，提供：
 
-頁面分成上下兩個區域：
+1. Drawer 底下的 Systems List
+2. Drawer Detail
+3. 保留既有 Systems List 的 pagination、reload、sort、filter、selection 與 actions
+4. 與既有 Compute resource routing / selection 架構整合
+
+Drawer hierarchy：
 
 ```text
-┌──────────────────────────────────────────────────┐
-│                  System List                     │
-│ Pagination / Reload / Sort / Display / Filter    │
-├──────────────────────┬───────────────────────────┤
-│                      │                           │
-│   Drawer Front View  │      Drawer Information   │
-│                      │                           │
-│   Drawer Rear View   │      ...                  │
-│                      │                           │
-└──────────────────────┴───────────────────────────┘
+Row
+└── Rack
+    └── Drawer
+        └── Systems
 ```
 
 ---
 
-# 2. Component Architecture
-
-固定的 component hierarchy：
+# 2. Final Component Architecture
 
 ```text
+ComputeSystemsPage
+└── ComputeResourceList
+
 ComputeDrawerPage
-│
-└── DataLoader
-    │
-    ├── ComputeResourceList
-    │
-    └── DrawerDetail
+├── ComputeResourceList
+└── DrawerDetail
 ```
 
-Template：
+### `ComputeResourceList`
 
-```html
-<app-data-loader
-  #dataLoader="dataLoader"
-  [getFn]="getSystems"
->
-  <app-compute-resource-list
-    [tableState]="tableState"
-    (selectionChange)="onSelectionChange($event)"
-  />
+負責所有 Compute resource level 共用的 **Systems List responsibility**：
 
-  <app-drawer-detail
-    [data]="dataLoader.data()"
-  />
-</app-data-loader>
+```text
+Pod
+Pool
+Row
+Rack
+Drawer
+  ↓
+ComputeResourceList
+  ↓
+Systems List
 ```
 
-這個 hierarchy 是設計的一部分：
-
-> `ComputeResourceList` 永遠是 `DataLoader` 的直接 child。
-
-因此 ResourceList 可以透過 Angular DI 取得 parent `DataLoader`。
+System / Appliance level 不使用此 component，因為 System 本身不再包含 Systems List。
 
 ---
 
 # 3. Responsibility
 
-## ComputeDrawerPage
+## ComputeSystemsPage
 
-負責：
+負責 Systems page 的 page/container boundary。
 
-* Drawer resource context
-* Drawer-specific query
-* `getSystems()`
-* `tableState`
-* 組合 Drawer Page
+不再直接負責：
 
-核心責任：
+* API query
+* DataLoader
+* table state
+* DataTable
+* System actions
 
-> **決定要查什麼。**
+這些責任全部移至 `ComputeResourceList`。
 
 ---
 
-## DataLoader
+## ComputeDrawerPage
 
-使用現有 `DataLoaderComponent<T>`。
+負責 Drawer page 的 composition：
 
-負責：
+```text
+ComputeDrawerPage
+├── Systems List
+└── Drawer Detail
+```
 
-* 執行 `getFn`
-* API request lifecycle
-* `data`
-* `isLoading`
-* `error`
-* `refresh()`
-
-核心責任：
-
-> **負責取得與管理 API data。**
+它本身不負責 Systems List 的細節。
 
 ---
 
 ## ComputeResourceList
 
-負責：
+唯一責任：
 
-* System List UI
-* DataTable
-* pagination UI
-* filter UI
-* sort UI
-* reload UI
-* selection UI
-* System List navigation actions
+> **取得並呈現目前 Compute resource 底下的 Systems。**
 
-核心責任：
+包含：
 
-> **負責 System List 怎麼呈現與操作。**
-
-ResourceList **不負責 API request，也不持有 resource-specific query。**
+```text
+getSystems()
+buildQueryParams()
+tableState
+DataLoader
+DataTableV1
+onIpAddressClick()
+onTaskClick()
+selection
+```
 
 ---
 
@@ -125,309 +110,102 @@ ResourceList **不負責 API request，也不持有 resource-specific query。**
 
 負責：
 
+> **取得並呈現 Drawer 本身的資訊。**
+
+例如：
+
 * Drawer Front View
 * Drawer Rear View
-* Drawer Information
-
-核心責任：
-
-> **負責 Drawer 怎麼呈現。**
-
-不負責 API request。
+* chassis information
+* product information
+* manufacturer
+* form factor
+* number of nodes
+* power supply
+* Systems links
 
 ---
 
 # 4. Data Flow
 
-Drawer：
+Drawer Page 會有兩條獨立的 data flow。
+
+### Systems List
 
 ```text
-Drawer Selection
-      │
+Compute Selection
+      ↓
+ComputeResourceList
+      ↓
+buildQueryParams()
+      ↓
+DataLoader
+      ↓
+GET /compute-service/v1/systems
+      ↓
+System Mapper
+      ↓
+ComputeSystemModel
+      ↓
+DataTableV1
+```
+
+### Drawer Detail
+
+```text
+Compute Selection
       ↓
 ComputeDrawerPage
-      │
-      ├── tableState
-      │
-      └── getSystems()
-              │
-              ↓
-          DataLoader
-              │
-              ↓
-       Systems API
-              │
-              ↓
-   ComputeSystemsUiResponse
-          ↙          ↘
-         ↓            ↓
-ComputeResourceList  DrawerDetail
-```
-
-因此同一份 API data 可以同時被：
-
-```text
-ComputeResourceList
+      ↓
 DrawerDetail
-```
-
-使用。
-
----
-
-# 5. DataLoader / ResourceList Relationship
-
-這是本次設計的重要決定。
-
-`ComputeResourceList` 不接：
-
-```html
-[getFn]="getSystems"
-```
-
-因為 `getSystems()` 取得的資料不只是 List 使用，DrawerDetail 也需要。
-
-因此：
-
-```text
+      ↓
 DataLoader
-├── data
-│
-├── ComputeResourceList
-└── DrawerDetail
+      ↓
+GET /compute-service/v1/drawers/{id}
+      ↓
+Drawer Mapper
+      ↓
+ComputeDrawerModel
+      ↓
+Drawer Detail UI
 ```
 
-DataLoader 是兩者共同的 data owner。
+兩條 flow **不要合併**。
+
+因為它們是兩個不同 API、不同 response schema、不同 domain responsibility。
 
 ---
 
-# 6. ResourceList 如何取得 DataLoader
+# 5. Systems API
 
-因為 architecture 保證：
-
-```text
-DataLoader
-└── ComputeResourceList
-```
-
-所以 ResourceList 可以透過 Angular DI 取得 parent `DataLoaderComponent`。
-
-概念：
-
-```ts
-private readonly dataLoader = inject(DataLoaderComponent)
-```
-
-必要時使用 host/parent DI 限制，避免往更上層尋找。
-
-因此 ResourceList 不需要：
-
-```html
-[data]="dataLoader.data()"
-[loading]="dataLoader.isLoading()"
-[error]="..."
-```
-
-這些都可以直接從 parent DataLoader 取得。
-
----
-
-# 7. ComputeResourceList State
-
-`tableState` **不搬進 ResourceList**。
-
-原因是：
+`ComputeResourceList` 繼續使用：
 
 ```text
-tableState
-    ↓
-getSystems()
-    ↓
-buildQueryParams()
-    ↓
-API
-```
-
-它不只是 UI state，而是 **API query state**。
-
-因此由 Page 持有：
-
-```text
-ComputeDrawerPage
-│
-├── tableState
-│
-├── getSystems()
-│
-└── DataLoader
-      └── ComputeResourceList
-```
-
-ResourceList 接收：
-
-```html
-[tableState]="tableState"
-```
-
-用來控制 DataTable。
-
----
-
-# 8. DataTable Event Flow
-
-`DataTableV1` 被 `ComputeResourceList` 包住：
-
-```text
-ComputeResourceList
-└── DataTableV1
-```
-
-DataTable events：
-
-```text
-filterChange
-sortChange
-pageChange
-reload
-selectionChange
-```
-
-不需要全部 Output 回 Page。
-
-ResourceList 直接處理：
-
-```text
-DataTableV1
-    ↓
-ComputeResourceList
-    │
-    ├── tableState.onFilterChange()
-    ├── tableState.onSortChange()
-    ├── tableState.onPageChange()
-    ├── dataLoader.refresh()
-    │
-    └── selectionChange → Output
-```
-
-所以：
-
-```text
-filterChange
-sortChange
-pageChange
-reload
-```
-
-都是 **ResourceList 內部處理的 List 操作**。
-
-只有真正需要 Page 知道的：
-
-```text
-selectionChange
-```
-
-才 Output。
-
----
-
-# 9. Event Flow
-
-例如 Filter：
-
-```text
-DataTableV1
-   │
-   ↓ filterChange
-ComputeResourceList
-   │
-   ↓
-tableState.onFilterChange()
-   │
-   ↓
-signal state changed
-   │
-   ↓
-getSystems() dependency changed
-   │
-   ↓
-DataLoader effect
-   │
-   ↓
-API
-```
-
-Sort / Page 也是相同概念。
-
-Reload：
-
-```text
-DataTableV1
-   │
-   ↓ reload
-ComputeResourceList
-   │
-   ↓
-parent DataLoader.refresh()
-   │
-   ↓
-getSystems()
-   │
-   ↓
-API
-```
-
----
-
-# 10. ResourceList Contract
-
-因此 `ComputeResourceList` 的 public contract 可以非常小：
-
-```text
-ComputeResourceList
-│
-├── Input
-│   └── tableState
-│
-└── Output
-    └── selectionChange
-```
-
-Data 不需要 Input。
-
-因為：
-
-```text
-ComputeResourceList
-        │
-        ↓
-inject parent DataLoader
-        │
-        └── data()
-```
-
-同樣：
-
-```text
-loading
-error
-refresh
-```
-
-也不需要透過 Input 傳入。
-
----
-
-# 11. Drawer API
-
-目前只使用一個 API：
-
-```http
 GET /compute-service/v1/systems
 ```
 
-Drawer query：
+依目前 selection 決定 query parameter。
 
-```http
+```text
+Virtual Pool
+→ unassigned=true
+
+Physical Pool
+→ unassigned=false
+
+Row
+→ row=...
+
+Rack
+→ rack=...
+
+Drawer
+→ drawer=...
+```
+
+Drawer example：
+
+```text
 GET /compute-service/v1/systems
   ?drawer=eq.rack-1:21
   &sort=location
@@ -436,243 +214,443 @@ GET /compute-service/v1/systems
   &perPage=10
 ```
 
-Drawer location：
+因此 `buildQueryParams()` 只需要增加 Drawer case。
 
-```ts
-const drawerLocation = selection.parentName
-  ? `${selection.parentName}:${selection.name}`
-  : selection.name
+---
+
+# 6. Drawer Detail API
+
+Drawer Detail 使用獨立 API：
+
+```text
+GET /compute-service/v1/drawers/{id}
 ```
 
 例如：
 
 ```text
-parentName = rack-1
-name = 21
-
-→ drawer=eq.rack-1:21
+GET /compute-service/v1/drawers/eq.DRW-531100e1-7113-4f77-bd93-ab2cd8841a21
 ```
 
-不新增 Drawer Detail API。
+Response schema：
+
+```text
+Drawer
+├── id
+├── location
+├── chassisPartNumber
+├── chassisSerialNumber
+├── productPartNumber
+├── productSerialNumber
+├── manufacturer
+├── formFactor
+├── numberOfNodes
+├── powerSupply
+└── links[]
+```
+
+`links[]` 已經包含 Systems API resource links。
+
+因此 Drawer Detail **不需要再自行查 Systems API**。
+
+Systems List 仍由 `ComputeResourceList` 負責。
 
 ---
 
-# 12. Query Responsibility
+# 7. Model Design
 
-### System Page
-
-```text
-ComputeSystemsPage
-       │
-       ↓
-buildQueryParams(selection)
-       │
-       ↓
-Systems API
-```
-
-支援：
+Model 位於 Compute domain 層，不放在 individual page 底下。
 
 ```text
-Virtual Pool → unassigned=true
-Physical Pool → unassigned=false
-Row → row=...
-Rack → rack=...
-```
-
-### Drawer Page
-
-```text
-ComputeDrawerPage
-       │
-       ↓
-buildQueryParams(selection)
-       │
-       ↓
-drawer=eq.${parentName}:${name}
-       │
-       ↓
-Systems API
-```
-
-因此兩個 Page 都使用相同的：
-
-```text
-DataLoader
-ComputeResourceList
-System Model
-Mapper
-```
-
-但 query 由各自 Page 決定。
-
----
-
-# 13. Shared Resource List
-
-因為 System Page 與 Drawer Page 都顯示同一種 Compute System：
-
-```text
-same API model
-same UI model
-same mapper
-same columns
-same actions
-same DataTable behavior
-```
-
-抽出：
-
-```text
-compute-resource-list/
-```
-
-而不是 generic：
-
-```text
-resource-list/
+compute/
+└── model/
+    ├── compute-system-model.ts
+    └── compute-drawer-model.ts
 ```
 
 原因：
 
-> 這個 List 是 Compute domain-specific abstraction，不是全系統 generic resource list。
+* `ComputeSystemModel` 是 Compute domain 的 System model
+* `ComputeDrawerModel` 是 Compute domain 的 Drawer model
+* 它們不是某個 Page 專屬資料
+
+### System
+
+```text
+API System Response
+        ↓
+ComputeSystemModel
+```
+
+### Drawer
+
+```text
+API Drawer Response
+        ↓
+ComputeDrawerModel
+```
 
 ---
 
-# 14. Shared Model / Mapper
+# 8. Mapper Design
 
-移至：
+因為 System API 與 Drawer API 的 response schema 不同，所以 Mapper 分開。
 
 ```text
-compute/pages/compute-resource-list/
-├── model/
-│   └── compute-resource-list-model.ts
-│
+compute/
 └── mapper/
-    └── compute-api-to-resource-list.ts
+    ├── compute-system-mapper.ts
+    └── compute-drawer-mapper.ts
 ```
 
-System 與 Drawer 共用。
-
----
-
-# 15. Navigation
-
-以下 System actions 在 System Page 與 Drawer Page 都相同：
+Data flow：
 
 ```text
-IP Address
-Task Execution
+System API Response
+       ↓
+compute-system-mapper
+       ↓
+ComputeSystemModel
 ```
 
-直接由 `ComputeResourceList` 處理。
+```text
+Drawer API Response
+       ↓
+compute-drawer-mapper
+       ↓
+ComputeDrawerModel
+```
 
-不另外建立 navigation abstraction。
+**不 copy System Mapper 給 Drawer。**
+
+因為兩者不是同一個 mapping responsibility。
 
 ---
 
-# 16. File Structure
+# 9. DataLoader
+
+沿用既有 `DataLoaderComponent`。
+
+Drawer Page 會有兩個 DataLoader instance：
+
+```text
+ComputeDrawerPage
+│
+├── DataLoader<Systems>
+│     └── ComputeResourceList
+│
+└── DataLoader<Drawer>
+      └── DrawerDetail
+```
+
+這兩個 loader 的生命週期彼此獨立。
+
+例如：
+
+```text
+Reload Systems
+→ 只 refresh Systems DataLoader
+
+Reload Drawer Detail
+→ 只 refresh Drawer DataLoader
+```
+
+不需要建立新的 DataLoader abstraction。
+
+---
+
+# 10. Resource List State
+
+`ComputeResourceList` 內部擁有：
+
+```text
+tableState
+DataLoader
+DataTableV1
+```
+
+因此：
+
+```text
+ComputeResourceList
+├── tableState
+├── DataLoader
+└── DataTableV1
+```
+
+`tableState` 不再由 Page 持有。
+
+這讓 Resource List 的責任完整封裝：
+
+> query state → API query → data loading → table presentation
+
+---
+
+# 11. Resource Selection
+
+`ComputeResourceList` 透過既有 `ComputeSelectionService` 取得目前 resource selection。
+
+因此：
+
+```text
+ComputeSelectionService
+        ↓
+ComputeResourceList
+        ↓
+buildQueryParams()
+```
+
+Resource List 根據 selection kind 決定 API query。
+
+```text
+selection.kind
+├── virtual-pool
+├── physical-pool
+├── row
+├── rack
+└── drawer
+```
+
+這也是 Drawer 能自然加入 Resource List 的原因。
+
+---
+
+# 12. Component Structure
+
+建議最終目錄：
 
 ```text
 compute/
 ├── api/
-├── doc/
+│
+├── mapper/
+│   ├── compute-system-mapper.ts
+│   └── compute-drawer-mapper.ts
+│
+├── model/
+│   ├── compute-system-model.ts
+│   └── compute-drawer-model.ts
+│
 ├── navigation/
-│
-├── pages/
-│   │
-│   ├── compute-resource-list/
-│   │   ├── compute-resource-list.component.ts
-│   │   ├── compute-resource-list.component.html
-│   │   ├── compute-resource-list.component.scss
-│   │   │
-│   │   ├── model/
-│   │   │   └── compute-resource-list-model.ts
-│   │   │
-│   │   └── mapper/
-│   │       └── compute-api-to-resource-list.ts
-│   │
-│   ├── systems/
-│   │   └── compute-systems-page/
-│   │       ├── compute-systems-page.component.ts
-│   │       ├── compute-systems-page.component.html
-│   │       └── compute-systems-page.component.scss
-│   │
-│   └── drawer/
-│       ├── compute-drawer-page/
-│       │   ├── compute-drawer-page.component.ts
-│       │   ├── compute-drawer-page.component.html
-│       │   └── compute-drawer-page.component.scss
-│       │
-│       └── drawer-detail/
-│           ├── drawer-detail.component.ts
-│           ├── drawer-detail.component.html
-│           └── drawer-detail.component.scss
-│
 ├── routing/
 ├── selection/
-└── tree/
+├── tree/
+│
+└── pages/
+    ├── resource-list/
+    │   └── compute-resource-list/
+    │       ├── compute-resource-list.component.ts
+    │       ├── compute-resource-list.component.html
+    │       └── compute-resource-list.component.scss
+    │
+    ├── systems/
+    │   └── compute-systems-page/
+    │       ├── compute-systems-page.component.ts
+    │       ├── compute-systems-page.component.html
+    │       └── compute-systems-page.component.scss
+    │
+    └── drawer/
+        ├── compute-drawer-page/
+        │   ├── compute-drawer-page.component.ts
+        │   ├── compute-drawer-page.component.html
+        │   └── compute-drawer-page.component.scss
+        │
+        └── drawer-detail/
+            ├── drawer-detail.component.ts
+            ├── drawer-detail.component.html
+            └── drawer-detail.component.scss
 ```
 
 ---
 
-# 17. Final Responsibility Matrix
+# 13. UI Layout
 
-| Component             | Responsibility                           |
-| --------------------- | ---------------------------------------- |
-| `ComputeSystemsPage`  | 決定 System query                          |
-| `ComputeDrawerPage`   | 決定 Drawer query + 組合 Drawer Page         |
-| `DataLoader`          | 執行 `getFn`、管理 data/loading/error/refresh |
-| `ComputeResourceList` | System List UI + List 操作                 |
-| `DrawerDetail`        | Drawer Front/Rear/Information            |
-| `model`               | Shared System List model                 |
-| `mapper`              | API → UI mapping                         |
-| `routing`             | resourceId → canonical route             |
-
----
-
-# 18. Core Design Principle
-
-最後濃縮成：
+Drawer Page：
 
 ```text
-Page
-  → 查什麼
+┌───────────────────────────────────────────────┐
+│               Systems List                    │
+│                                               │
+│  Filter / Sort / Reload / Display             │
+│                                               │
+│  ┌─────────────────────────────────────────┐  │
+│  │             DataTableV1                │  │
+│  │                                         │  │
+│  │             Systems                    │  │
+│  └─────────────────────────────────────────┘  │
+│                                               │
+├───────────────────┬───────────────────────────┤
+│                   │                           │
+│ Drawer Front/Rear │      Drawer Detail       │
+│                   │                           │
+│      1/3          │           2/3             │
+│                   │                           │
+│                   │  ┌────────┬───────────┐  │
+│                   │  │ Title  │ Content   │  │
+│                   │  ├────────┼───────────┤  │
+│                   │  │ Title  │ Content   │  │
+│                   │  └────────┴───────────┘  │
+└───────────────────┴───────────────────────────┘
+```
 
-DataLoader
-  → 怎麼取得資料
+Drawer Detail 右側：
 
-ComputeResourceList
-  → System List 怎麼呈現與操作
-
+```text
 DrawerDetail
-  → Drawer 怎麼呈現
-
-Routing
-  → resource route 怎麼解析
+├── Information
+│   ├── Title
+│   └── Content
+│
+├── Chassis
+│   ├── Title
+│   └── Content
+│
+├── Product
+│   ├── Title
+│   └── Content
+│
+└── ...
 ```
 
-整體：
+---
+
+# 14. Copy / Refactoring Strategy
+
+這次不是直接重寫 Systems Page，而是：
 
 ```text
-                    ComputeDrawerPage
-                    │
-             ┌──────┴──────┐
-             │             │
-        tableState      getSystems()
-             │             │
-             └──────┬──────┘
-                    ↓
-                DataLoader
-                    │
-             ComputeSystemsUiResponse
-                    │
-             ┌──────┴──────┐
-             ↓             ↓
-      ComputeResourceList  DrawerDetail
-             │
-        DataTableV1
+Existing ComputeSystemsPage
+        ↓
+Extract
+        ↓
+ComputeResourceList
+        ↓
+SystemsPage uses ResourceList
+        ↓
+DrawerPage uses ResourceList
 ```
 
-**這版的核心是：`DataLoader` 是資料來源的 owner，`ComputeDrawerPage` 是 query owner，而 `ComputeResourceList` 是 List UI owner。**
-這樣既保留你現有 `DataLoader + getFn` 架構，也不會讓 DrawerDetail 拿不到同一份 API data。
+實作順序建議：
+
+### Step 1 — Extract Resource List
+
+從 `ComputeSystemsPage` 搬移：
+
+```text
+getSystems()
+buildQueryParams()
+tableState
+DataLoader
+DataTable
+onIpAddressClick()
+onTaskClick()
+selection
+```
+
+Systems Page 改成使用：
+
+```html
+<app-compute-resource-list />
+```
+
+先確保既有 Systems Page 行為完全不變。
+
+### Step 2 — Add Drawer query
+
+在 `buildQueryParams()` 增加：
+
+```text
+drawer
+```
+
+case。
+
+### Step 3 — Create Drawer Model / Mapper
+
+建立：
+
+```text
+ComputeDrawerModel
+ComputeDrawerMapper
+```
+
+### Step 4 — Create DrawerDetail
+
+使用 Drawer API：
+
+```text
+/drawers/{id}
+```
+
+### Step 5 — Compose Drawer Page
+
+```text
+ComputeDrawerPage
+├── ComputeResourceList
+└── DrawerDetail
+```
+
+### Step 6 — Tests
+
+每一步完成後先跑相關 tests，再進下一步。
+
+---
+
+# 15. Final Design Decision
+
+最後整體架構可以濃縮成：
+
+```text
+                    ComputeSelectionService
+                              │
+                              ▼
+                     ComputeResourceList
+                              │
+                  ┌───────────┴───────────┐
+                  ▼                       ▼
+             DataLoader              tableState
+                  │
+                  ▼
+             /systems
+                  │
+                  ▼
+          ComputeSystemModel
+                  │
+                  ▼
+             DataTableV1
+
+
+ComputeDrawerPage
+       │
+       ├────────────── ComputeResourceList
+       │
+       └────────────── DrawerDetail
+                           │
+                       DataLoader
+                           │
+                       /drawers/{id}
+                           │
+                           ▼
+                   ComputeDrawerModel
+```
+
+### 核心設計原則
+
+> **`ComputeResourceList` 抽象的是「Systems List responsibility」，而不是「某個 Page」。**
+
+所以它可以被：
+
+```text
+Pool
+Row
+Rack
+Drawer
+```
+
+共同使用，而 System / Appliance level 不使用。
+
+而：
+
+> **Model 依 domain responsibility 共用；Mapper 依 API response schema 分離；Page 依 use case 分離。**
+
+這版我認為已經可以作為正式 Technical Design，後續 implementation 就按照這個 boundary 做，不需要再為了 DRY 做第二輪架構調整。
