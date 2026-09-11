@@ -1,0 +1,18 @@
+.page {
+  background-color: white;
+  padding: 20px;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.location-label {
+  display: flex;
+  align-items: center;
+
+  app-info-tooltip {
+    margin-left: 0.5rem;
+  }
+}

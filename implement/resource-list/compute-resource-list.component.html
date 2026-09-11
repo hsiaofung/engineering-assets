@@ -1,0 +1,176 @@
+<div class="page">
+  @if (selectionService.selected()) {
+    <div class="title">System</div>
+    <app-data-loader #dataLoader="dataLoader" [getFn]="getSystems" [polling]="fetchIntervalMs">
+      <app-data-table-v1
+        #dataTable
+        [selectable]="true"
+        [showFilter]="true"
+        [data]="dataLoader.data()?.items ?? []"
+        [loading]="dataLoader.isLoading()"
+        [error]="hasApiError()"
+        [defaultSort]="tableState.sortState()"
+        (reload)="dataLoader.refresh()"
+        (filterChange)="tableState.onFilterChange($event)"
+        (sortChange)="tableState.onSortChange($event)"
+        (pageChange)="tableState.onPageChange($event)"
+        (selectionChange)="onSelectionChange($event)"
+        columnSizing="fixed"
+        [viewportHeight]="570"
+      >
+        <app-table-column
+          key="ipv4"
+          label="IP Address"
+          [width]="140"
+          sticky="start"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+          [cellType]="'redirect'"
+          [linkHandler]="onIpAddressClick"
+        />
+        <app-table-column
+          key="location"
+          label="Location"
+          [width]="200"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+          tooltip='A "-" indicates the device is available and ready for physical location assignment'
+        />
+        <app-table-column
+          key="nodeName"
+          label="Node Name"
+          [width]="150"
+          [sortable]="true"
+          [filterable]="true"
+          [visible]="false"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="domainName"
+          label="Domain Name"
+          [width]="150"
+          [sortable]="true"
+          [filterable]="true"
+          [visible]="false"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="taskName"
+          label="Task"
+          [width]="150"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+          [cellType]="'redirect'"
+          [linkHandler]="onTaskClick"
+        />
+        <app-table-column
+          key="powerState"
+          label="Power State"
+          [width]="140"
+          [sortable]="true"
+          [filterable]="true"
+          [cellType]="'statusTag'"
+          [resizable]="true"
+          [statusMap]="POWER_STATE_STATUS_MAP"
+        />
+        <app-table-column
+          key="health"
+          label="Health"
+          [width]="120"
+          [sortable]="true"
+          [filterable]="true"
+          [cellType]="'statusTag'"
+          [resizable]="true"
+          [statusMap]="HEALTH_STATUS_MAP"
+        />
+        <app-table-column
+          key="managedState"
+          label="Managed State"
+          [width]="160"
+          [sortable]="true"
+          [filterable]="true"
+          [cellType]="'statusTag'"
+          [resizable]="true"
+          [statusMap]="CONNECTION_STATE_STATUS_MAP"
+        />
+        <app-table-column
+          key="gpuCount"
+          label="GPU Count"
+          [width]="150"
+          [sortable]="true"
+          [filterable]="true"
+          [visible]="false"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="biosVersion"
+          label="BIOS Version"
+          [width]="140"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="bmcVersion"
+          label="BMC Version"
+          [width]="140"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="sku"
+          label="Product SKU"
+          [width]="200"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="productFamily"
+          label="Product Family"
+          [width]="200"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="motherboardType"
+          label="Motherboard Type"
+          [width]="200"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="serialNumber"
+          label="Serial Number"
+          [width]="200"
+          [sortable]="true"
+          [filterable]="true"
+          [resizable]="true"
+        />
+        <app-table-column
+          key="updateTime"
+          label="Update Time"
+          cellType="timestamp"
+          [sortable]="true"
+          [filterable]="true"
+          filterType="dateRange"
+          [width]="180"
+          [resizable]="true"
+        />
+        <app-table-pagination
+          mode="server"
+          [pageSize]="dataLoader.data()?.perPage ?? 10"
+          [totalItems]="dataLoader.data()?.totalCount ?? 0"
+          [currentPage]="dataLoader.data()?.page ?? 1"
+          (pageChange)="tableState.onPageChange($event)"
+        />
+      </app-data-table-v1>
+    </app-data-loader>
+  }
+</div>
