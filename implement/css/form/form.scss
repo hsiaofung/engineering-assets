@@ -1,0 +1,99 @@
+@use 'shared/design-system/style-sheet.scss' as *;
+
+// _form-layout.scss
+.form-row {
+  display: flex;
+  gap: 20px; // 欄位間距，可依需求調整
+  .form-item {
+    flex: 1; // 平均分配寬度
+    min-width: 0; // 避免 overflow
+  }
+  nz-select {
+    width: 100%; // 確保選單寬度填滿父容器
+  }
+  margin-bottom: 20px;
+}
+
+// _form-typography.scss
+.title {
+  @include typography(f-subtitle-1);
+  color: var(--shades-color-1);
+  margin: 20px 0;
+}
+.info-icon {
+  margin-left: 6px;
+  color: #1c7bcf;
+}
+.label {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+input {
+  font-size: 13px;
+}
+.disabled-input,
+.disabled-input:focus,
+.disabled-input:active {
+  background: #f7f8fa;
+  color: #c6c9cd;
+  pointer-events: none;
+}
+
+// _form-validation.scss
+.required {
+  color: #f24f7c;
+  padding-left: 4px;
+}
+.errorShower {
+  position: relative;
+  color: #f24f7c;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.error-border {
+  border: 1px solid #f24f7c;
+  height: 38px; //fix select height to prevent red border shift when error occurs
+}
+
+// _form-utils.scss
+.mt-20 {
+  margin-top: 20px;
+}
+.mr-60 {
+  margin-right: 60px;
+}
+
+// _form-password.scss
+.eye-open {
+  color: #1c7bcf;
+}
+.eye-close {
+  color: #adadad;
+}
+.clickable-icon {
+  cursor: pointer;
+}
+
+// _confirm-detail.css
+.confirm-title {
+  @include typography(f-subtitle-1);
+  font-size: 14px;
+  color: var(--shades-color-1);
+}
+.confirm-label {
+  @include typography(f-text-5);
+  font-size: 13px;
+  color: var(--shades-color-4);
+}
+.confirm-value {
+  @include typography(f-text-5);
+  font-size: 13px;
+  // color: #48465b;
+}
+
+.w-fit {
+  width: fit-content;
+  padding: 0 4px;
+  border-radius: 4px;
+  text-align: center;
+}

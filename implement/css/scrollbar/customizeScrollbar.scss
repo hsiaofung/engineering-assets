@@ -1,0 +1,22 @@
+@mixin customizeScrollbarFor($dom, $scrollbarTrackBackground: #f0f2f5, $scrollbarThumbBackground: #dee2e6) {
+  #{$dom} {
+    scrollbar-color: $scrollbarThumbBackground $scrollbarTrackBackground; // thumb (scroll handle) in #dee2e6 + track in light gray
+    scrollbar-width: thin; /* hin scrollbar（thin / auto / none）*/
+
+    /* Detailed customization for WebKit browsers (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      width: 8px; /* Width of the vertical scrollbar */
+      height: 8px; /* Height of the horizontal scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $scrollbarTrackBackground; /* Track (background) color – light gray */
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $scrollbarThumbBackground;
+      border-radius: 4px;
+    }
+  }
+}
