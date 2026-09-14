@@ -52,6 +52,7 @@
 - 典型的 API implementation 與 OpenAPI contract 不一致（API drift）
 - 先釐清 provider implementation，而不是讓 consumer 默默配合錯誤行為。
 - 確定是有Arch是有machnism，只是沒有落實到。 
+- 依規定是依照Arch API spec。
 
 # 子流程-8 若開發中後端兩個模組不在同一個環境(兩個模組的資料不同步)
 - 因為就算review API 都沒問題。但環境錯了還是不能開發
@@ -74,7 +75,11 @@
 
 # 子流程-11 「被交辦」≠「現在必須開始」。
 - 在review 和開發的過程中被交辦新的任務。
-- 
+- 被交辦新的開發任務不代表馬上開始review。
+
+# 子流程-12 需求、UX設計、API spec 還在討論，後須可能會調整，但FE已經開始依照目前確認的版本進行實作
+- 所以如果是UX的部分是UX的責任: UX必須告知。
+- 如果是API的部分，現在沒有流程，但可是Arch 要負責。
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
