@@ -1,0 +1,45 @@
+@use 'shared/styles/form.scss' as *;
+@use 'shared/styles/wizard-button.scss' as *;
+
+.option-content {
+  display: flex;
+  gap: 250px;
+}
+
+.option-label {
+  color: #1c7bcf;
+  font-weight: 700;
+  font-size: 13px;
+  width: 48px;
+}
+
+.option-title {
+  width: 48px;
+}
+
+.add-task-button {
+  position: absolute;
+  bottom: 20px;
+}
+
+.task-selection-row {
+  display: flex;
+  gap: 20px;
+}
+
+.remove-button {
+  .wizard-button {
+    height: 36px;
+    width: 36px;
+    background-image: url('/assets/icons/shared/ic_delete.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.execution-order-number {
+  font-size: 18px;
+  line-height: 4;
+  font-weight: 700;
+  color: #1c7bcf;
+}

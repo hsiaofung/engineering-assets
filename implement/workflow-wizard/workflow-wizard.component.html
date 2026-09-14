@@ -1,0 +1,64 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Create Workflow"
+  (nzOnCancel)="closeWizardModal()"
+  [nzWidth]="800"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <!-- Wizard Header -->
+    <div class="wizard-header">
+      <app-wizard>
+        @for (step of steps; track step.id; let i = $index) {
+          <app-wizard-item [dsTitle]="step.title" [dsIndex]="i" [currentStatus]="getStatus(i)"></app-wizard-item>
+        }
+      </app-wizard>
+    </div>
+
+    <!-- Wizard Content -->
+    <div class="wizard-content">
+      <div class="step-content">
+        <ng-container
+          *ngComponentOutlet="
+            steps[currentStep()].component;
+            inputs: { form: wizardService.getForm(steps[currentStep()].id) }
+          "
+        >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="wizard-footer">
+      @if (currentStep() === 0) {
+        <button class="wizard-button" nz-button nzType="primary" (click)="closeWizardModal()">Cancel</button>
+        <button
+          class="wizard-button"
+          nz-button
+          nzType="primary"
+          (click)="next()"
+          [disabled]="!currentForm.valid"
+          [ngClass]="{ 'wizard-button-disabled': !currentForm.invalid }"
+        >
+          Next
+        </button>
+      }
+      @if (currentStep() !== 0 && currentStep() !== 3) {
+        <button class="wizard-button" nz-button (click)="prev()">Previous</button>
+        <button
+          class="wizard-button"
+          nz-button
+          nzType="primary"
+          (click)="next()"
+          [disabled]="!currentForm.valid"
+          [ngClass]="{ 'wizard-button-disabled': !currentForm.invalid }"
+        >
+          Next
+        </button>
+      }
+      @if (currentStep() === 3) {
+        <button class="wizard-button" nz-button (click)="prev()">Previous</button>
+        <button class="wizard-button" nz-button nzType="primary" (click)="submit()">Submit</button>
+      }
+    </div>
+  </ng-container>
+</nz-modal>

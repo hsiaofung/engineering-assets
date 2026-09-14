@@ -1,0 +1,20 @@
+@use 'shared/styles/form.scss' as *;
+
+.title {
+  margin-right: 100px;
+}
+
+.schedule-icon {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background-color: #1c7bcf;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  left: -4px;
+}
+
+nz-date-picker {
+  height: 36px;
+  width: calc(100% - 36px);
+}

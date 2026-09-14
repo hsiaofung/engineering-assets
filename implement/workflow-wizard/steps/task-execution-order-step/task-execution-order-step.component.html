@@ -1,0 +1,71 @@
+<div class="title">Select Task</div>
+
+<form [formGroup]="form()">
+  <div formArrayName="tasks">
+    @for (control of tasks.controls; track $index; let i = $index) {
+      <div class="form-row">
+        <div class="execution-order-number">{{ i + 1 }}</div>
+        <div class="form-item">
+          <label [for]="'taskSelect-' + i"> Task <span style="color: red"> *</span> </label>
+
+          <div class="task-selection-row">
+            <nz-select
+              [id]="'taskSelect-' + i"
+              [formControlName]="i"
+              nzPlaceHolder="Select a task"
+              nzShowSearch
+              nzAllowClear
+              [ngClass]="{ 'error-border': isInvalid(i) }"
+            >
+              <!-- Header -->
+              <nz-option nzCustomContent nzDisabled>
+                <div class="option-content option-header">
+                  <div class="option-label">Task Name</div>
+                  <div class="option-label">Task Template</div>
+                </div>
+              </nz-option>
+
+              <!-- Options -->
+              @if (availableTasks$ | async; as availableTasks) {
+                @for (task of availableTasks; track task.id) {
+                  <nz-option [nzValue]="task.id" [nzLabel]="task.name" nzCustomContent>
+                    <div class="option-content">
+                      <div class="option-title">{{ task.name }}</div>
+                      <div class="option-description">
+                        {{ task.jobTemplateId }}
+                      </div>
+                    </div>
+                  </nz-option>
+                }
+              }
+            </nz-select>
+
+            <!-- Remove Button -->
+            @if (tasks.length > 1) {
+              <div class="remove-button">
+                <button
+                  class="wizard-button"
+                  nz-button
+                  nzType="default"
+                  nzDanger
+                  type="button"
+                  (click)="removeTask(i)"
+                ></button>
+              </div>
+            }
+          </div>
+          @if (isInvalid(i)) {
+            <div class="errorShower">
+              {{ getErrorMessage(i) }}
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Add Button -->
+  <div class="add-task-button">
+    <button class="wizard-button" nz-button nzType="dashed" type="button" (click)="addTask()">Add</button>
+  </div>
+</form>
