@@ -28,6 +28,24 @@ statusClass(prefix: string, value: string | null | undefined, knownValues: reado
 {prefix} {prefix}--other-terms
 ```
 
+```ts
+/**
+   * Builds a BEM status class from a raw API value.
+   * Known values become `{prefix} {prefix}--{value}`; anything else uses `--other-terms`.
+   * @param {string} prefix - The base CSS class name, e.g. `system-power`.
+   * @param {string | null | undefined} value - The raw status from the API.
+   * @param {string[]} knownValues - Allowed status values that have dedicated styles.
+   * @returns {string} The CSS class list for the given status.
+   */
+  statusClass(prefix: string, value: string | null | undefined, knownValues: readonly string[]): string {
+    const key = value?.trim().toLowerCase()
+    if (key && knownValues.includes(key)) {
+      return `${prefix} ${prefix}--${key}`
+    }
+    return `${prefix} ${prefix}--other-terms`
+  }
+```
+
 `value` 會先 `trim()` 並轉小寫，所以 API 回 `On` / `ON` 都能對上 `--on`。
 
 ## Usage
