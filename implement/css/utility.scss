@@ -1,6 +1,12 @@
 /* Typography and Colors*/
 
-/* 設定寬度和高度 */
+/* 
+ * ========================================
+ * Sizing 
+ * ======================================== 
+ */
+
+/* Width */
 .w-20{
   width: 20px;
 }
@@ -21,6 +27,7 @@
   width: 100vw;
 }
 
+/* Height */
 .h-25{
   height: 25px;
 }
@@ -33,11 +40,18 @@
   height: 100vh;
 }
 
-/* 設定img正方形的方式 */
+/* 
+* ======================================== 
+* Image 
+* ======================================== 
+*/
+
+/* 設定img正方形 */
 .size-36{
   width: 36px;
   height: 36px;
 }
+
 /* 讓圖片填滿容器*/
 .object-cover {
   object-fit: cover;
@@ -64,17 +78,28 @@
   object-position: center;
 }
 
+/* 
+* ======================================== 
+* Border Radius 
+* ======================================== 
+*/
+
 /*元素變成完全圓角*/
 .rounded-full {
   border-radius: 9999px;
 }
 
 .rounded{
-  border: 4px;
+  border-radius: 4px;
 }
 
+/* 
+* ======================================== 
+* Margin & Padding 
+* ======================================== 
+*/
 
-/* margin and padding */
+/* Padding */
 .p-20{
   padding: 20px;
 }
@@ -99,6 +124,7 @@
   padding-bottom: 4px;
 }
 
+/* Margin */
 .mt-20 {
   margin-top: 20px;
 }
@@ -116,9 +142,16 @@
   margin-top: -12px;
 }
 
+/* Auto margin */
+
+/* 四面都 auto */
+.m-auto{ 
+  margin: auto;
+}
+
 /*左右 margin 設成 auto，常用來讓「有固定寬度」的區塊水平置中。*/
 .mx-auto {
-  margin-left: auto;
+  margin-left: auto;  
   margin-right: auto;
 }
 
@@ -126,11 +159,6 @@
 .my-auto{
   margin-top: auto;
   margin-bottom: auto;
-}
-
-/*四面都 auto*/
-.m-auto{
-  margin: auto;
 }
 
 /*左邊設 auto 就會整個往右推*/
@@ -143,7 +171,13 @@
   margin-right: auto;
 }
 
-/*在子元素之間加入空隙*/
+/* 
+* ======================================== 
+* Child Spacing 
+* ======================================== 
+*/
+
+/*在子元素之間加入水平空隙*/
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   margin-left: 8px; 
 }
@@ -154,31 +188,54 @@
 
 /*在子元素之間加入上下空隙*/
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: 16px; 
+  margin-top: 8px; 
 }
 
 .space-y-16 > :not([hidden]) ~ :not([hidden]) {
   margin-top: 16px; 
 }
 
-/* Layout */
+/* 
+* ======================================== 
+* Layout 
+* ======================================== 
+*/
+
 .block {
   display: block;
 }
 
-/* Flexbox layout */
+/* 
+* ======================================== 
+* Flexbox 
+* ======================================== 
+*/
+
+/* Display */
 .flex {
   display: flex;
 }
 
-/*在水平方向對齊這些項目
+/* Direction */
+/* 讓 flex 子元素改成垂直排列（由上往下）*/
+.flex-col {
+  flex-direction: column;
+}
 
-/*靠父容器的起點（也就是左邊）對齊*/
+/* Wrap */
+/*讓 flex 子元素在空間不夠時自動換行*/
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+/* Main axis alignment */
+/* 在水平方向對齊這些項目 */
+/* 靠父容器的起點（也就是左邊）對齊 */
 .justify-start {
   justify-content: flex-start;
 }
 
-/*靠右對齊*/
+/* 靠右對齊 */
 .justify-end{
   justify-content: flex-end;
 }
@@ -202,20 +259,14 @@
   justify-content: space-around;
 }
 
-/*設定子元素之間的間距*/
-.gap-4{
-  gap: 4px
-}
-
 /*垂直方向的對齊*/
-
 /*讓所有項目只對齊容器頂端*/
 .items-start {
   align-items: flex-start;
 }
 
 /*讓所有項目只對齊容器底部*/
-.items-start {
+.items-end {
   align-items: flex-end;
 }
 
@@ -224,55 +275,53 @@
   align-items: center;
 }
 
-/*讓 flex 子元素在空間不夠時自動換行*/
-.flex-wrap{
-  flex-wrap: wrap;
+/* Gap */
+/* 設定子元素之間的間距 */
+.gap-4{
+  gap: 4px
 }
 
-/*讓 flex 子元素改成垂直排列（由上往下）*/
-.flex-col {
-  flex-direction: column;
-}
-
-/*調整 Flex 項目尺寸*/
-
-/*可以放大也可以縮小，初始寬度看內容*/
+/* Flex sizing */
+/* 調整 Flex 項目尺寸 */
+/* 可以放大也可以縮小，初始寬度看內容 */
 .flex-auto {
   flex: 1 1 auto;
 }
 
-/*可以放大也可以縮小，寬度一樣*/
+/* 可以放大也可以縮小，寬度一樣 */
 .flex-1{
   flex: 1 1 0%;
 }
 
-/*設為 flex-1 的項目的兩倍寬*/
+/* 設為 flex-1 的項目的兩倍寬 */
 .flex-2{
   flex: 2 1 0%;
 }
 
-/*不會縮小也不會變大*/
+/* 不會縮小也不會變大 */
 .flex-none {
   flex: none;
 }
 
-/*把容器拉寬時，會先依這個初始尺寸配置*/
-.basis-60 {
-  flex-basis: 60px
-}
-
+/* Flex basis */
+/* 把容器拉寬時，會先依這個初始尺寸配置 */
 .basis-30 {
   flex-basis: 30px
 }
 
-/*完全不縮小*/
-.shrink-0 {
-  flex-shrink: 0;
+.basis-60 {
+  flex-basis: 60px
 }
 
+/* Grow / Shrink */
 /*這個項目就會把其餘可用空間全部佔走*/
 .grow-1 {
   flex-grow: 1;
+}
+
+/* 完全不縮小 */
+.shrink-0 {
+  flex-shrink: 0;
 }
 
 /* Grid layout */
