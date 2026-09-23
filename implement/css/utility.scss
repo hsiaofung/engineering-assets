@@ -265,6 +265,14 @@
   gap: 4px
 }
 
+.gap-x-4 {
+  column-gap: 4px; 
+}
+
+.gap-y-4 {
+  row-gap: 4px; 
+}
+
 /* Flex sizing */
 /* 調整 Flex 項目尺寸 */
 /* 可以放大也可以縮小，初始寬度看內容 */
@@ -309,4 +317,98 @@
 }
 
 /* Grid layout */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* 這個 grid 容器固定分成 4 欄，每欄平均分配寬度。 */
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* 項目會先佔滿第一列，再流到第二列、第三列，依此類推。 */
+.grid-flow-row{
+  grid-auto-flow: row;
+}
+
+/* 內容先往第一欄往下填，再進第二欄、第三欄 */
+.grid-flow-col{
+  grid-auto-flow: column;
+}
+
+/* 整列與整欄對齊：用 content 和 justify */
+/* 讓「每個格子裡的內容」在水平方向置中 */
+.justify-items-center {
+  justify-items: center;
+}
+
+/* 靠左 */
+.justify-items-start {
+  justify-items: start;
+}
+
+/* 靠右 */
+.justify-items-end {
+  justify-items: end;
+}
+
+/* 拉滿格子寬度（常見預設）*/
+.justify-items-stretch {
+  justify-items: stretch;
+}
+
+/* grid cell 內的垂直對齊，可以直接用 items-center */
+
+/* 整列與整欄對齊：用 content 和 justify */
+.content-start {
+  align-content: flex-start;
+}
+
+/* 多行當成一組後，整組垂直置中 */
+.content-center {
+  align-content: center;
+}
+
+.content-end {
+  align-content: flex-end;
+}
+
+/* grid 格子裡的內容，垂直和水平一起對齊。 */
+.place-items-center {
+  place-items: center;
+}
+
+.place-items-start {
+  place-items: start;
+}
+
+/* 「整組內容」在容器裡水平＋垂直都置中。 */
+.place-content-center {
+  place-content: center;
+}
+
+/* 讓這個格子橫跨 2 欄 */
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+/* 讓這個格子橫跨「整列所有欄」，也就是整行拉滿。 */
+.col-span-full{
+  grid-column: 1 / -1;
+}
+
+/* 讓這個格子縱向跨 2 列。 */
+.row-span-2 {
+  grid-row: span 2 / span 2;
+}
+
+/*讓這個格子縱向跨「所有列」，也就是整欄拉滿。 */
+.row-span-full {
+  grid-row: 1 / -1;
+}
+
 /* Typography and Colors*/
