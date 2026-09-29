@@ -316,6 +316,10 @@
   flex-shrink: 0;
 }
 
+/* ======================================== 
+* Grid
+* ======================================== */
+
 /* Grid layout */
 .grid {
   display: grid;
@@ -412,3 +416,6 @@
 }
 
 /* Typography and Colors*/
+.bg-white {
+  background-color: white;
+}
