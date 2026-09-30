@@ -1,0 +1,16 @@
+<dt class="font-semibold">{{ label() }}</dt>
+<dd>
+  @if (editing()) {
+    @if (options(); as options) {
+      <nz-select [ngModel]="rawValue() ?? ''" [nzDisabled]="!editing()" (ngModelChange)="onSelect($event)">
+        @for (opt of options | keyvalue; track opt.key) {
+          <nz-option [nzValue]="opt.key" [nzLabel]="opt.value" />
+        }
+      </nz-select>
+    } @else {
+      <input nz-input class="detail-item__input" [value]="rawValue() ?? ''" (input)="onInput($event)" />
+    }
+  } @else {
+    <span [class]="viewClass()">{{ display() }}</span>
+  }
+</dd>

@@ -1,0 +1,37 @@
+@use 'shared/styles/utility.scss';
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1.25rem;
+}
+
+:host(.detail-item--stack) {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.25rem 0;
+}
+
+:host(:last-child) {
+  margin-bottom: 0;
+}
+
+:host ::ng-deep .ant-select {
+  width: 100%;
+}
+
+.detail-item__input {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 8px 12px;
+}
+
+.detail-item__tag {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 20px;
+  background-color: #34bfa3;
+  color: #fff;
+}
