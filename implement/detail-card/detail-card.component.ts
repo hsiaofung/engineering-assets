@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core'
+import { ServerErrorMessageComponent } from '@app/shared/design-system/global-component/server-error-message/server-error-message.component'
 
 /**
  *
@@ -8,6 +9,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './detail-card.component.html',
   styleUrl: './detail-card.component.scss',
+  imports: [ServerErrorMessageComponent],
 })
 export class DetailCardComponent {
   readonly title = input.required<string>()
@@ -15,6 +17,7 @@ export class DetailCardComponent {
   readonly saving = input(false)
   readonly model = input<Record<string, string | null>>({})
   readonly valueChange = output<{ key: string; value: string }>()
+  readonly error = input(false)
 
   /**
    * Returns the current field value for the given key.

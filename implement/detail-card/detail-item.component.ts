@@ -1,6 +1,8 @@
 import { KeyValuePipe } from '@angular/common'
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core'
 import { FormsModule } from '@angular/forms'
+import { SCCTimePickerComponent } from '@app/shared/design-system/global-component/picker/date-time-picker/date-time-picker.component'
+import { DateTimePickerValue } from '@app/shared/design-system/global-component/picker/date-time-picker/date-time-picker.types'
 import { NzInputModule } from 'ng-zorro-antd/input'
 import { NzSelectModule } from 'ng-zorro-antd/select'
 import { DetailCardComponent } from './detail-card.component'
@@ -11,7 +13,7 @@ import { DetailCardComponent } from './detail-card.component'
 @Component({
   selector: 'app-detail-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [KeyValuePipe, FormsModule, NzInputModule, NzSelectModule],
+  imports: [KeyValuePipe, FormsModule, NzInputModule, NzSelectModule, SCCTimePickerComponent],
   templateUrl: './detail-item.component.html',
   styleUrl: './detail-item.component.scss',
   host: { class: 'detail-item', '[class.detail-item--stack]': 'editing()' },
@@ -33,6 +35,16 @@ export class DetailItemComponent {
       return ''
     }
     return 'detail-item__tag'
+  })
+
+  readonly editor = input<'text' | 'date'>('text')
+  protected readonly pickerValue = computed((): Date | null => {
+    const raw = this.rawValue()
+    if (!raw) {
+      return null
+    }
+    const parsed = new Date(raw.includes('T') ? raw : raw.replace(/\//g, '-'))
+    return Number.isNaN(parsed.getTime()) ? null : parsed
   })
 
   /**
@@ -67,5 +79,25 @@ export class DetailItemComponent {
    */
   protected onSelect(value: string): void {
     this.card.emitValue(this.key(), value)
+  }
+
+  /**
+   * Forwards a date-time picker value to the parent card as a formatted minute string.
+   * Clears the field when the picker value is empty.
+   * @param {DateTimePickerValue} value - The selected date, date range, or empty picker value.
+   */
+  protected onDateChange(value: DateTimePickerValue): void {
+    const date = value instanceof Date ? value : Array.isArray(value) ? value[0] : null
+    this.card.emitValue(this.key(), date ? this.formatMinute(date) : '')
+  }
+
+  /**
+   * Formats a date as `YYYY/MM/DD HH:mm`.
+   * @param {Date} value - The date to format.
+   * @returns {string} The formatted date and time, truncated to the minute.
+   */
+  private formatMinute(value: Date): string {
+    const pad = (part: number) => String(part).padStart(2, '0')
+    return `${value.getFullYear()}/${pad(value.getMonth() + 1)}/${pad(value.getDate())} ${pad(value.getHours())}:${pad(value.getMinutes())}`
   }
 }

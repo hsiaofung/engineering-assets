@@ -1,6 +1,13 @@
 <article class="resource-detail-card">
   <div class="resource-detail-card__title">{{ title() }}</div>
-  <dl>
-    <ng-content />
-  </dl>
+  <div class="detail-card__body">
+    <dl>
+      <ng-content />
+    </dl>
+    @if (error()) {
+      <div class="detail-card__overlay">
+        <app-server-error-message />
+      </div>
+    }
+  </div>
 </article>

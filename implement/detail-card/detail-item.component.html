@@ -7,6 +7,16 @@
           <nz-option [nzValue]="opt.key" [nzLabel]="opt.value" />
         }
       </nz-select>
+    } @else if (editor() === 'date') {
+      <div class="detail-item__picker">
+        <scc-date-time-picker
+          [scValue]="pickerValue()"
+          scMode="single"
+          scPrecision="minute"
+          (scValueChange)="onDateChange($event)"
+          scIconPosition="right"
+        />
+      </div>
     } @else {
       <input nz-input class="detail-item__input" [value]="rawValue() ?? ''" (input)="onInput($event)" />
     }
