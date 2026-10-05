@@ -1,0 +1,51 @@
+@use 'shared/design-system/style-sheet.scss' as *;
+
+.modal-err {
+  .ant-modal-body {
+    padding: 30px 20px;
+  }
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    .icon {
+      // height: 88px;
+      margin-bottom: 20px;
+      align-self: center;
+      img {
+        width: 48px;
+      }
+    }
+    .title {
+      @include typography(f-header-6);
+      color: var(--shades-color-1);
+      align-self: center;
+      margin-bottom: 12px;
+    }
+    .content {
+      @include typography(f-text-2);
+      color: var(--shades-color-1);
+      margin-bottom: 60px;
+      &.align-center {
+        text-align: center;
+        word-break: break-all;
+      }
+      &.align-left {
+        text-align: left;
+      }
+      &_center {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .ok-btn {
+      align-self: center;
+      .btn {
+        width: 107px;
+        height: 35px;
+        font: 16px/25px Poppins;
+        background-color: var(--primary-color-1);
+        border-color: var(--primary-color-1);
+      }
+    }
+  }
+}

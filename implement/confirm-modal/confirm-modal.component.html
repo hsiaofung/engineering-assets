@@ -1,0 +1,37 @@
+<scc-modal [scSize]="scModalSize()" (scOnCancel)="scOnCancel.emit()" [scVisible]="true">
+  <div class="confirm-modal">
+    <scc-card-title class="confirm-modal__title" [scLabel]="scTitle()"></scc-card-title>
+    <div class="confirm-modal__body">
+      <div class="confirm-modal__content">
+        @if (scMessageConfig().message !== '') {
+          <scc-message [scType]="scMessageConfig().type" [scMessage]="scMessageConfig().message"></scc-message>
+        }
+        <div class="confirm-modal__list">
+          <div class="label">{{ scLabel() }}</div>
+          <!--
+            Scroll only the item list so the reminder/message and footer stay pinned.
+            Height is constrained by the flex chain on .confirm-modal (max-height).
+          -->
+          <div class="confirm-modal__scroll">
+            @for (item of scData(); track item) {
+              <div class="item">{{ item }}</div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="confirm-modal__footer">
+        <scc-button
+          [scLabel]="scButtonConfig().label"
+          [scType]="scButtonConfig().type"
+          scSize="large"
+          [scDisable]="scLoading()"
+          (scClick)="scOnSubmit.emit()"
+        ></scc-button>
+      </div>
+    </div>
+
+    @if (scLoading()) {
+      <app-loading-animation-v1 size="Medium" background="LightGrey" [zIndex]="100"></app-loading-animation-v1>
+    }
+  </div>
+</scc-modal>

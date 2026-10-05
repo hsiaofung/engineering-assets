@@ -1,0 +1,31 @@
+@if (isVisible()) {
+  <nz-modal
+    [nzFooter]="null"
+    [nzVisible]="isVisible()"
+    [nzWidth]="modalWidthValue()"
+    [nzClosable]="false"
+    (nzOnCancel)="closeModal()"
+    [nzMaskClosable]="false"
+    nzClassName="modal-err"
+  >
+    <ng-container *nzModalContent>
+      <div class="modal-body">
+        <div class="icon">
+          <img src="assets/icons/admin/ic_Fail.svg" alt="error" />
+        </div>
+        <div class="title">
+          {{ modalTitle }}
+        </div>
+
+        <div class="content align-center">
+          <span>{{ displayMessage() }}</span>
+        </div>
+        <div class="ok-btn">
+          <button nz-button nzType="primary" class="btn" (click)="closeModal()">
+            {{ okTextLabel() | translate }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </nz-modal>
+}

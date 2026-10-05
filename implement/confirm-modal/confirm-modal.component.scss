@@ -1,0 +1,74 @@
+@use 'shared/design-system/style-sheet.scss' as *;
+@use 'shared/styles/customizeScrollbar.scss' as *;
+@include customizeScrollbarFor('.confirm-modal__scroll');
+
+// Host must be a block flex item so max-height on .confirm-modal can bind.
+:host {
+  display: block;
+}
+
+// Flex height chain (title → body → content → list → scroll):
+// Without min-height: 0 on every intermediate flex child, the list grows with
+// content and overflow-y: auto on .confirm-modal__scroll never activates.
+.confirm-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: min(992px, calc(100vh - 88px));
+  overflow: hidden;
+}
+
+.confirm-modal__title {
+  flex-shrink: 0;
+}
+
+.confirm-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 20px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.confirm-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.confirm-modal__list {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.confirm-modal__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.confirm-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.label {
+  @include typography(f-text-2);
+  color: var(--shades-color-2);
+  flex-shrink: 0;
+}
+
+.item {
+  @include typography(f-text-1);
+  color: var(--primary-color-1);
+}
