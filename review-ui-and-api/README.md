@@ -86,6 +86,17 @@
 - Critical 的部分，可以請Jeffrey 去催一下。
 - 這critical 的部分就需要追一下。
 - 其他的不會影響實作的部分，列問題即可。
+- 如果你被阻擋，就直接跟BE, 主管直截反映你被阻擋了。
+- 例子:  
+
+  ```text
+  Ethan Chiang - TW (SW) Ty Lee - TW (SW)
+  我剛剛在 .227 重新測試 DMI Update API，目前仍然回傳 502 Bad Gateway。
+  這個問題已經阻擋我後續的 Task Service 整合，以及 Notification 顯示和跳轉至 Task 頁面的功能開發與驗證。
+  想請你協助確認一下，上週的 commit 是否已部署到 .227？是否已經修正？
+  詳細的測試結果與截圖已更新在 GitLab Q-023，謝謝。
+  https://gitlab.supermicro.com/scc/Web-Management-Platform/-/work_items/22518#note_2621640
+  ```
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
