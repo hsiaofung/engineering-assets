@@ -81,7 +81,7 @@
 - 所以如果是UX的部分是UX的責任: UX必須告知。
 - 如果是API的部分，現在沒有流程，但可是Arch 要負責。
 
-# 有block 讓你無法實作功能的問題
+# 子流程-13 有block 讓你無法實作功能的問題
 - 如果BE這個功能沒有實作造成你FE某個功能無法實作，就可以列critical。
 - Critical 的部分，可以請Jeffrey 去催一下。
 - 這critical 的部分就需要追一下。
@@ -97,6 +97,10 @@
   詳細的測試結果與截圖已更新在 GitLab Q-023，謝謝。
   https://gitlab.supermicro.com/scc/Web-Management-Platform/-/work_items/22518#note_2621640
   ```
+# 子流程-14 誰負責通知FE可以驗證，在BE修改後。
+- 如果BE這個功能沒有實作造成你FE某個功能無法實作，BE必須修改。
+- 但修改、merge、佈署並非同一個人。
+- 必須在流程中明定誰負責通知FE可以驗證了。
 
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
