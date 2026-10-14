@@ -7,37 +7,33 @@ It does not load data, poll, or apply tree-selection filters.
 ## Responsibilities
 
 ```
-
 table interaction
 → data-table-state sort / page / filter
 → toTableQueryParams HttpParams
 → data-loader getFn http.get(url, { params })
 → data-loader-poll optional refresh
-
 ```
 
-| Module                  | Responsibility                                                          |
-| ----------------------- | ----------------------------------------------------------------------- |
-| `createDataTableState`  | Holds current sort, page, and filters. Default sort is configured here. |
-| `toTableQueryParams`    | Reads that state and builds `HttpParams`.                               |
-| `appendSelectionParams` | Adds tree-selection filters. Use only on the compute inventory list.    |
-| `data-loader` / poll    | Calls `getFn` and exposes data, loading, and error.                     |
+| Module | Responsibility |
+| --- | --- |
+| `createDataTableState` | Holds current sort, page, and filters. Default sort is configured here. |
+| `toTableQueryParams` | Reads that state and builds `HttpParams`. Optional column config maps UI keys to API sort and filter keys. |
+| `appendFilterParams` | Encodes filters. String filters default to `ilike`. |
+| `data-loader` / poll | Calls `getFn` and exposes data, loading, and error. |
 
 ## File location
 
 ```
-
-compute/api/append-filter-params.ts
-compute/api/data-table-params.ts
-compute/api/append-selection-params.ts
+@app/shared/design-system/global-component/data-table-params/append-filter-params.ts
+@app/shared/design-system/global-component/data-table-params/data-table-params.ts
 
 ```
 
 ```ts
-import { toTableQueryParams } from '@app/core-modules-scc4/compute/api/data-table-params'
+import { toTableQueryParams } from '@app/shared/design-system/global-component/data-table-params/data-table-params'
 ```
 
-Keep this helper next to `append-filter-params`. Do not move it into shared `data-table-state`; it depends on compute filter encoding.
+Keep this helper next to `append-filter-params`.  
 
 ## Resource pages (processor, memory, local-storage)
 
@@ -55,8 +51,8 @@ readonly getDrives = (): Observable<ComputeLocalStorageUiModel> => {
   }
 
   return this.http
-    .get<ComputeDrivesApiResponse>(computeApiURL.drives(`eq.${systemId}`), {
-      params: toTableQueryParams(this.tableState),
+    .get<ComputeDrivesApiResponse>(computeApiURL.drives(systemId), {
+      params: toTableQueryParams(this.tableState, driveColumns),
     })
     .pipe(toLocalStorageUiModel())
 }
@@ -64,15 +60,45 @@ readonly getDrives = (): Observable<ComputeLocalStorageUiModel> => {
 
 For processors, change the URL and use `{ sort: { column: 'socket', direction: 'asc' } }`.
 
-## Inventory list (tree selection)
+## Column query overrides
 
-Compose table params first, then selection params:
+Pass a column map when Swagger does not use the default string filter or sort key. Unlisted columns stay `ilike`.
+
+| Setting | Effect |
+| --- | --- |
+| `filterOperator: 'eq'` | Sends `eq.{value}` |
+| `filterOperator: 'raw'` | Sends the value with no operator |
+| `filterOperator: 'ilike'` | Default. Sends `ilike.{value}` |
+| `filterable: false` | Omits that filter from the query |
+| `sortKey` | Renames the sort field only |
+
+| Page | Column | Setting |
+| --- | --- | --- |
+| processor | `core` | `{ filterOperator: 'eq' }` |
+| gpu | `lanes` | `{ filterOperator: 'eq' }` |
+| drives | `source` | `{ filterOperator: 'raw' }` — `RAID`, `HBA`, or `NVME` |
+| drives | `capacity` | `{ filterable: false, sortKey: 'capacityGib' }` |
+| drives | `capableSpeed` | `{ filterable: false }` |
+| memory | `size` | `{ filterable: false }` |
 
 ```ts
-params: appendSelectionParams(selection, toTableQueryParams(this.tableState))
+const driveColumns = {
+  source: { filterOperator: 'raw' as const },
+  capacity: { filterable: false, sortKey: 'capacityGib' },
+  capableSpeed: { filterable: false },
+}
+
+params: toTableQueryParams(this.tableState, driveColumns)
 ```
 
-`appendSelectionParams` owns `virtual-pool`, `physical-pool`, `row`, `rack`, and `drawer`. Do not fold those cases into `toTableQueryParams`.
+Enum filters use a select, not a text input. Columns marked `filterable: false` also set `[filterable]="false"` on the table column.
+
+Sorting Capacity sends `sort=capacityGib`, not `sort=capacity`.
+
+## Inventory list (tree selection)
+
+`toTableQueryParams` only builds sort, page, and filter params.
+`unassigned`, `row`, `rack`, and `drawer` stay on the list page. Do not put them in `toTableQueryParams`.
 
 ## Wiring loader and table
 
@@ -84,10 +110,10 @@ params: appendSelectionParams(selection, toTableQueryParams(this.tableState))
 Example query:
 
 ```
-?sort=controllerId&direction=asc&page=1&perPage=10&health=eq.OK
+?sort=capacityGib&direction=asc&page=1&perPage=10&source=RAID
 ```
 
-Filter key encoding follows `appendFilterParams`.
+Date ranges still become `gte` / `lte`. Other non-string filters are sent with `String(value)`.
 
 ## Do not
 
@@ -95,3 +121,4 @@ Filter key encoding follows `appendFilterParams`.
 - Put `unassigned` / `row` / `rack` / `drawer` in `toTableQueryParams`
 - Place this file under shared `data-table-state`
 - Add `withSort` helpers; default columns belong in `createDataTableState({ sort })`
+- Send `ilike` for enum fields, or `capacity` as the drives sort key
