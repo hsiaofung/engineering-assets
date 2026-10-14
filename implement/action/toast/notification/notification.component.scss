@@ -1,0 +1,125 @@
+$nWidth: 400px;
+$nMinHeight: 80px;
+$nPadding: 10px;
+$imgContainerWidth: 78px;
+$closeIconSize: 24px;
+$baseRadius: 1.65px;
+
+::ng-deep .ant-notification-notice {
+  width: $nWidth;
+  max-width: $nWidth;
+  min-height: $nMinHeight;
+
+  // margin: 0 0 10px 0;
+  padding: 0;
+  border-radius: 0;
+
+  .ant-notification-notice-close {
+    top: $nPadding !important;
+    right: $nPadding !important;
+    color: #ffffff;
+
+    // transition: all 0.2s;
+    width: $closeIconSize;
+    height: $closeIconSize;
+  }
+
+  // .hide-close + .ant-notification-notice-close {
+  //   display: none;
+  // }
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #aee5da;
+
+  // The fill is driven by CSS rather than a timer, and its `animation-duration` is bound from the
+  // toast's own `duration` (#126). A stepped `setInterval` used to advance a signal by 20% per
+  // second, so the bar always took five seconds while every preset that dismisses does so at
+  // 4500ms or 2000ms — the bar could not agree with the toast it belonged to. Declaring no
+  // duration here is deliberate: the binding is the only place it comes from.
+  .progress-bar-thumb {
+    height: 5px;
+    background-color: var(--status-dark-green-1);
+    width: 0;
+    animation-name: progress-bar-fill;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes progress-bar-fill {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+::ng-deep .ant-notification-notice.hide-icon {
+  .ant-notification-notice-close {
+    display: none;
+  }
+}
+
+.ant-notification-notice {
+  &-with-icon {
+    width: $nWidth;
+    min-height: $nMinHeight;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 6px #00000029;
+    opacity: 1;
+
+    .img-container {
+      width: $imgContainerWidth;
+      max-width: $imgContainerWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .toast-icon-background {
+        border-radius: 50%;
+        background-color: #ffffff;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &:hover {
+      .toast-icon-background {
+        box-shadow: 0 0 #{$baseRadius} var(--shades-color-10-50), 0 0 #{$baseRadius * 5} var(--shades-color-10-50), 0 0 #{$baseRadius * 10} var(--shades-color-10-50);
+      }
+    }
+
+    .msg-container {
+      padding: 10px 0;
+
+      .general-msg {
+        margin: 0;
+        color: #ffffff;
+        padding-right: 0;
+        overflow-wrap: break-word;
+        width: $nWidth - ($imgContainerWidth + $closeIconSize + $nPadding);
+      }
+
+      .msg {
+        font: 18px/27px Poppins, sans-serif;
+        margin: 0 0 4.3px;
+      }
+
+      .sub-msg {
+        font: 13px/19.5px Poppins, sans-serif;
+      }
+    }
+  }
+}
+
+.mouse-pointer {
+  cursor: pointer;
+}

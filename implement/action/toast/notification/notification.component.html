@@ -1,0 +1,36 @@
+<ng-template #notification let-notificationData="data">
+  @if (showProgressBar()) {
+    <div class="progress-bar">
+      <div class="progress-bar-thumb" [style]="progressStyle()"></div>
+    </div>
+  }
+
+  <div class="ant-notification-notice-with-icon" [style]="containerStyle()">
+    <div
+      class="img-container"
+      [class.mouse-pointer]="isIconClickable()"
+      (click)="onClick(notificationData)"
+      (keydown.enter)="onClick(notificationData)"
+      (keydown.space)="onClick(notificationData)"
+      [attr.role]="isIconClickable() ? 'button' : null"
+      [attr.tabindex]="isIconClickable() ? 0 : -1"
+    >
+      <div class="toast-icon-background">
+        <img class="ant-notification-image" [src]="notificationData.icon" alt="" />
+      </div>
+    </div>
+
+    <div class="msg-container">
+      <div class="general-msg msg">{{ notificationData.message }}</div>
+      @if (notificationData.subMessage) {
+        <div class="general-msg sub-msg">
+          {{ notificationData.subMessage }}
+        </div>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #iconTpl>
+  <img class="ant-notification-close-icon" src="assets/icons/shared/ic_cross_light.svg" alt="Close notification" />
+</ng-template>

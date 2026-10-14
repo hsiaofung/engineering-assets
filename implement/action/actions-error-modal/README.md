@@ -1,0 +1,1 @@
+1. HTTP 失敗（4xx / 5xx）→ actions-error-modal
