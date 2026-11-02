@@ -113,6 +113,10 @@
 - 更新規範： 將決議記錄在正式的 Design Guide、Spec 或 API contract，供其他模組依循。
 - 確認落實： 後續 API review 依據已確認的原則檢查，避免相同問題重複發生。
 
+# 子流程-16 Task 該如何維護?
+- 和Jeffrey 確認，有一個粽子頭(例如: compute service v4)。
+- FE 根據UX的task 開任務，前端的任務link到UX的任務和粽子頭。
+
 # Review 的產出是「已確認的規格」，不是「未來會有的規格」。
 
 UX                 
