@@ -3,28 +3,28 @@
  * ======================================== */
 
 /* Width */
-.w-20{
+.w-20 {
   width: 20px;
 }
 
-.w-1\/2{
+.w-1\/2 {
   width: 50%;
 }
 
-.w-1\/4{
+.w-1\/4 {
   width: 25%;
 }
 
-.w-full{
+.w-full {
   width: 100%;
 }
 
-.w-screen{
+.w-screen {
   width: 100vw;
 }
 
 /* Height */
-.h-25{
+.h-25 {
   height: 25px;
 }
 
@@ -36,22 +36,22 @@
   height: 100vh;
 }
 
-/* ======================================== 
-* Image 
-* ======================================== */
+/* ========================================
+ * Image
+ * ======================================== */
 
-/* 設定img正方形 */
-.size-36{
+/* Make the img a square */
+.size-36 {
   width: 36px;
   height: 36px;
 }
 
-/* 讓圖片填滿容器*/
+/* Make the image fill the container */
 .object-cover {
   object-fit: cover;
 }
 
-/*圖片要對齊容器的哪一邊*/
+/* Which edge of the container the image should align to */
 .object-top {
   object-position: top;
 }
@@ -72,44 +72,49 @@
   object-position: center;
 }
 
-/* ======================================== 
-* Border Radius 
-* ======================================== */
+/* ========================================
+ * Border Radius
+ * ======================================== */
 
-/*元素變成完全圓角*/
+/* Make the element fully rounded (pill / circle) */
 .rounded-full {
   border-radius: 9999px;
 }
 
-.rounded{
+.rounded {
   border-radius: 4px;
 }
 
-/* ======================================== 
-* Margin & Padding 
-* ======================================== */
+/* ========================================
+ * Margin & Padding
+ * ======================================== */
 
 /* Padding */
-.p-20{
+.p-20 {
   padding: 20px;
 }
 
-.pr-20{
+.pr-20 {
   padding-right: 20px;
 }
 
-.pl-20{
+.pl-20 {
   padding-left: 20px;
 }
 
-/* 兩邊同時加內距*/
-.px-4{
+/* Add padding on both left and right */
+.px-4 {
   padding-left: 4px;
   padding-right: 4px;
 }
 
-/* 上下同時加內距*/
-.py-4{
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Add padding on both top and bottom */
+.py-4 {
   padding-top: 4px;
   padding-bottom: 4px;
 }
@@ -117,6 +122,10 @@
 /* Margin */
 .mt-20 {
   margin-top: 20px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
 }
 
 .mb-20 {
@@ -127,73 +136,77 @@
   margin-right: 60px;
 }
 
-/*前面的 - 代表負值，所以會把元素往上拉 12px*/
-.-mt-12{
+/* The leading - means a negative value, so the element is pulled up by 12px */
+.-mt-12 {
   margin-top: -12px;
 }
 
 /* Auto margin */
 
-/* 四面都 auto */
-.m-auto{ 
+/* Auto on all four sides */
+.m-auto {
   margin: auto;
 }
 
-/*左右 margin 設成 auto，常用來讓「有固定寬度」的區塊水平置中。*/
+/* Set left and right margins to auto; commonly used to horizontally center a block with a fixed width. */
 .mx-auto {
-  margin-left: auto;  
+  margin-left: auto;
   margin-right: auto;
 }
 
-/* 上下自動置中 */
-.my-auto{
+/* Vertically center with auto margins */
+.my-auto {
   margin-top: auto;
   margin-bottom: auto;
 }
 
-/*左邊設 auto 就會整個往右推*/
-.ml-auto{
+/* Setting left to auto pushes the whole element to the right */
+.ml-auto {
   margin-left: auto;
 }
 
-/*右邊設 auto 就會整個往右推*/
-.mr-auto{
+/* Setting right to auto pushes the whole element to the left */
+.mr-auto {
   margin-right: auto;
 }
 
-/* ======================================== 
-* Child Spacing 
-* ======================================== */
+.mx-20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+/* ========================================
+ * Child Spacing
+ * ======================================== */
 
-/*在子元素之間加入水平空隙*/
+/* Add horizontal space between child elements */
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
-  margin-left: 8px; 
+  margin-left: 8px;
 }
 
 .space-x-16 > :not([hidden]) ~ :not([hidden]) {
-  margin-left: 16px; 
+  margin-left: 16px;
 }
 
-/*在子元素之間加入上下空隙*/
+/* Add vertical space between child elements */
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 
 .space-y-16 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: 16px; 
+  margin-top: 16px;
 }
 
-/* ======================================== 
-* Layout 
-* ======================================== */
+/* ========================================
+ * Layout
+ * ======================================== */
 
 .block {
   display: block;
 }
 
-/* ======================================== 
-* Flexbox 
-* ======================================== */
+/* ========================================
+ * Flexbox
+ * ======================================== */
 
 /* Display */
 .flex {
@@ -201,102 +214,107 @@
 }
 
 /* Direction */
-/* 讓 flex 子元素改成垂直排列（由上往下）*/
+/* Arrange flex children vertically (top to bottom) */
 .flex-col {
   flex-direction: column;
 }
 
 /* Wrap */
-/*讓 flex 子元素在空間不夠時自動換行*/
-.flex-wrap{
+/* Let flex children wrap to the next line when there isn’t enough space */
+.flex-wrap {
   flex-wrap: wrap;
 }
 
 /* Main axis alignment */
-/* 在水平方向對齊這些項目 */
-/* 靠父容器的起點（也就是左邊）對齊 */
+/* Align items along the horizontal axis */
+/* Align to the start of the parent container (the left side) */
 .justify-start {
   justify-content: flex-start;
 }
 
-/* 靠右對齊 */
-.justify-end{
+/* Align to the right */
+.justify-end {
   justify-content: flex-end;
 }
 
-/*置中*/
-.justify-center{
+/* Center */
+.justify-center {
   justify-content: center;
 }
-/*在各個項目之間留下最大空隙，兩端則沒有空隙*/
-.justify-between{
+
+/* Put the maximum space between items; no space at the two ends */
+.justify-between {
   justify-content: space-between;
 }
 
-/*讓兩端也有相同的空隙*/
+/* Give the two ends the same amount of space as well */
 .justify-evenly {
   justify-content: space-evenly;
 }
 
-/*兩端的空隙會是項目之間空隙的一半*/
-.justify-around{
+/* Space at the two ends is half the space between items */
+.justify-around {
   justify-content: space-around;
 }
 
-/*垂直方向的對齊*/
-/*讓所有項目只對齊容器頂端*/
+/* Cross-axis (vertical) alignment */
+/* Align all items to the top of the container */
 .items-start {
   align-items: flex-start;
 }
 
-/*讓所有項目只對齊容器底部*/
+/* Align all items to the bottom of the container */
 .items-end {
   align-items: flex-end;
 }
 
-/*垂直置中*/
+/* Vertically center */
 .items-center {
   align-items: center;
 }
 
 /* Gap */
-/* 設定子元素之間的間距 */
+/* Set spacing between child elements */
 .gap-4 {
-  gap: 4px
+  gap: 4px;
+}
+
+.gap-24 {
+  gap: 24px;
 }
 
 .gap-x-4 {
-  column-gap: 4px; 
+  column-gap: 4px;
 }
 
 .gap-y-4 {
-  row-gap: 4px; 
+  row-gap: 4px;
 }
 
 /* Flex sizing */
-/* 調整 Flex 項目尺寸 */
-/* 可以放大也可以縮小，初始寬度看內容 */
+/* Adjust flex item size */
+/* Can grow and shrink; initial width is based on content */
 .flex-auto {
   flex: 1 1 auto;
 }
 
-/* 可以放大也可以縮小，寬度一樣 */
-.flex-1{
+/* Can grow and shrink; items share width equally */
+.flex-1 {
   flex: 1 1 0%;
 }
 
-/* 設為 flex-1 的項目的兩倍寬 */
-.flex-2{
+/* Twice as wide as an item set to flex-1 */
+.flex-2 {
   flex: 2 1 0%;
 }
 
-/* 不會縮小也不會變大 */
+/* Neither grow nor shrink */
 .flex-none {
   flex: none;
 }
 
 /* Flex basis */
-/* 把容器拉寬時，會先依這個初始尺寸配置 */
+/* When the container is stretched, space is allocated based on this initial size first */
 .basis-30 {
   flex-basis: 30px;
 }
@@ -306,19 +324,19 @@
 }
 
 /* Grow / Shrink */
-/*這個項目就會把其餘可用空間全部佔走*/
+/* This item takes all remaining available space */
 .grow-1 {
   flex-grow: 1;
 }
 
-/* 完全不縮小 */
+/* Do not shrink at all */
 .shrink-0 {
   flex-shrink: 0;
 }
 
-/* ======================================== 
-* Grid
-* ======================================== */
+/* ========================================
+ * Grid
+ * ======================================== */
 
 /* Grid layout */
 .grid {
@@ -329,50 +347,54 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* 這個 grid 容器固定分成 4 欄，每欄平均分配寬度。 */
-.grid-cols-4{
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* This grid container is fixed at 4 columns, each sharing width equally. */
+.grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-/* 項目會先佔滿第一列，再流到第二列、第三列，依此類推。 */
-.grid-flow-row{
+/* Items fill the first row first, then flow to the second row, third row, and so on. */
+.grid-flow-row {
   grid-auto-flow: row;
 }
 
-/* 內容先往第一欄往下填，再進第二欄、第三欄 */
-.grid-flow-col{
+/* Content fills down the first column first, then the second column, third column, etc. */
+.grid-flow-col {
   grid-auto-flow: column;
 }
 
-/* 整列與整欄對齊：用 content 和 justify */
-/* 讓「每個格子裡的內容」在水平方向置中 */
+/* Align entire rows and columns: use content and justify */
+/* Center the content of each cell horizontally */
 .justify-items-center {
   justify-items: center;
 }
 
-/* 靠左 */
+/* Align left */
 .justify-items-start {
   justify-items: start;
 }
 
-/* 靠右 */
+/* Align right */
 .justify-items-end {
   justify-items: end;
 }
 
-/* 拉滿格子寬度（常見預設）*/
+/* Stretch to fill the cell width (common default) */
 .justify-items-stretch {
   justify-items: stretch;
 }
 
-/* grid cell 內的垂直對齊，可以直接用 items-center */
+/* Vertical alignment inside a grid cell can use items-center directly */
 
-/* 整列與整欄對齊：用 content 和 justify */
+/* Align entire rows and columns: use content and justify */
 .content-start {
   align-content: flex-start;
 }
 
-/* 多行當成一組後，整組垂直置中 */
+/* Treat multiple rows as a group, then vertically center that group */
 .content-center {
   align-content: center;
 }
@@ -381,7 +403,7 @@
   align-content: flex-end;
 }
 
-/* grid 格子裡的內容，垂直和水平一起對齊。 */
+/* Align content inside grid cells both vertically and horizontally. */
 .place-items-center {
   place-items: center;
 }
@@ -390,32 +412,36 @@
   place-items: start;
 }
 
-/* 「整組內容」在容器裡水平＋垂直都置中。 */
+/* Center the “whole group of content” both horizontally and vertically in the container. */
 .place-content-center {
   place-content: center;
 }
 
-/* 讓這個格子橫跨 2 欄 */
+/* Make this cell span 2 columns */
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
 
-/* 讓這個格子橫跨「整列所有欄」，也就是整行拉滿。 */
-.col-span-full{
+/* Make this cell span “all columns in the row”, i.e. stretch across the full row. */
+.col-span-full {
   grid-column: 1 / -1;
 }
 
-/* 讓這個格子縱向跨 2 列。 */
+/* Make this cell span 2 rows vertically. */
 .row-span-2 {
   grid-row: span 2 / span 2;
 }
 
-/*讓這個格子縱向跨「所有列」，也就是整欄拉滿。 */
+/* Make this cell span “all rows”, i.e. stretch across the full column. */
 .row-span-full {
   grid-row: 1 / -1;
 }
 
-/* Typography and Colors*/
+/* Typography and Colors */
 .bg-white {
   background-color: white;
+}
+
+.font-semibold {
+  font-weight: 600;
 }

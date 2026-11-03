@@ -18,7 +18,7 @@
 ```html
 <div class="form-row">
   <div class="form-item">
-    <input type="text" />
+    <input nz-input type="text" />
   </div>
   <div class="form-item">
     <nz-select></nz-select>
