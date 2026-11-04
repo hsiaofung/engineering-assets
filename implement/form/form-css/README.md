@@ -23,7 +23,11 @@
   <div class="form-item">
     <nz-select></nz-select>
   </div>
+  <div class="form-item">
+    <label nz-checkbox formControlName="verifyCert">Verify SSL Certificate</label>
+  </div>
 </div>
+
 ```
 
 ---
