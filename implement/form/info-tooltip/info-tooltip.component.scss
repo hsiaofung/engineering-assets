@@ -1,0 +1,15 @@
+@use '../../../style-sheet.scss' as *;
+.main {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.icon {
+  color: var(--primary-color-1);
+}
+div {
+  width: 16px;
+}
