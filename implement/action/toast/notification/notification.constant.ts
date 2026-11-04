@@ -55,6 +55,7 @@ export const NOTIFICATION_CONFIG_MAPPING: Record<string, NotificationPresetConfi
     message: 'Send Failed',
     icon: 'failed',
     duration: 0,
+    bgColor: '#1C7BCF',
   },
   /**
    * The trial key is nearly up (#144).
