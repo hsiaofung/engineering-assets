@@ -1,0 +1,17 @@
+@use 'shared/design-system/style-sheet.scss' as *;
+@use 'shared/styles/layout-utils' as *;
+
+// Shared by every scc-warning-modal consumer (session-expired / account-switch, task export
+// error, account lockout policy, add/edit/edit-role/delete/unlock/set-enabled user dialogs, and
+// Forgot Your Password). Title/description colour, centred multi-line layout, and pre-line
+// breaks therefore apply to all of them — not only the login flow.
+
+.title {
+  color: var(--shades-color-1);
+}
+.description {
+  color: var(--shades-color-1);
+  // Honour explicit line breaks in multi-sentence copy (e.g. Forgot Password).
+  white-space: pre-line;
+  text-align: center;
+}

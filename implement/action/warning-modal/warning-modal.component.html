@@ -1,0 +1,15 @@
+<scc-modal [scClosable]="false" [scVisible]="true" scSize="extremely-small">
+  <div class="flex column gap-60 padding-20 items-center">
+    <div class="flex column gap-20 items-center">
+      <svg-icon
+        [src]="scIcon()?.src"
+        [svgStyle]="{ 'width.px': 48, 'height.px': 48, color: scIcon()?.color }"
+      ></svg-icon>
+      <div class="flex column gap-12 items-center">
+        <div class="title f-header-6">{{ scTitle() }}</div>
+        <div class="description f-text-2">{{ scDescription() }}</div>
+      </div>
+    </div>
+    <scc-button scSize="large" [scLabel]="scButtonLabel()" (scClick)="scOnCancel.emit()"></scc-button>
+  </div>
+</scc-modal>
