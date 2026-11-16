@@ -1,8 +1,7 @@
 import { Directive, ElementRef, Renderer2, inject, OnInit } from '@angular/core'
 
 @Directive({
-  selector: '[appRequired]',
-  standalone: true,
+  selector: '[appRequired]',  
 })
 export class RequiredDirective implements OnInit {
   private readonly el = inject(ElementRef)

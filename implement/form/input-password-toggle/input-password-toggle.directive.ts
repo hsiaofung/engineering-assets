@@ -1,11 +1,11 @@
 import { afterNextRender, computed, Directive, ElementRef, inject, Renderer2, signal } from '@angular/core'
+import { eye } from '@supercloud/icons/24'
 
 /**
  *
  */
 @Directive({
   selector: 'input[appPasswordToggle]',
-  standalone: true,
   host: {
     '[type]': 'inputType()',
   },
@@ -51,19 +51,14 @@ export class PasswordToggleDirective {
     this.renderer.setStyle(button, 'display', 'flex')
     this.renderer.setStyle(button, 'align-items', 'center')
     this.renderer.setStyle(button, 'line-height', '1')
+    this.renderer.setStyle(button, 'color', 'var(--shades-color-4)')
+
+    button.innerHTML = eye
 
     this.renderer.listen(button, 'click', () => this.toggle())
-
-    button.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-    <circle cx="12" cy="12" r="3"/>
-  </svg>`
-
-    this.renderer.setStyle(button, 'color', 'var(--shades-color-4)')
     this.renderer.appendChild(wrapper, button)
     this.button = button
 
-    // Reposition after the element has a height.
     const observer = new ResizeObserver(() => {
       if (input.offsetHeight > 0) {
         const top = input.offsetTop + input.offsetHeight / 2

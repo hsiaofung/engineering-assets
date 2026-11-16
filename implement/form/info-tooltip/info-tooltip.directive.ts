@@ -6,8 +6,7 @@ import { InfoTooltipComponent } from '../tooltip/info-tooltip/info-tooltip.compo
  *
  */
 @Directive({
-  selector: '[appInfo]',
-  standalone: true,
+  selector: '[appInfo]',  
 })
 export class InfoTooltipDirective {
   private readonly el = inject(ElementRef)

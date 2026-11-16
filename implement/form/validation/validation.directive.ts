@@ -6,8 +6,7 @@ import { Subscription } from 'rxjs'
  *
  */
 @Directive({
-  selector: '[appValidation]',
-  standalone: true,
+  selector: '[appValidation]',  
 })
 export class ValidationDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef)

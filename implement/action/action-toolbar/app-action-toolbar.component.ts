@@ -12,8 +12,7 @@ import { ActionButtonConfig, ActionMenuItemConfig } from '@app/shared/design-sys
  *
  */
 @Component({
-  selector: 'app-action-toolbar',
-  standalone: true,
+  selector: 'app-action-toolbar',  
   imports: [SCCIconButtonGroupComponent, SCCIconButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
