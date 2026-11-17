@@ -1,43 +1,41 @@
 # ValidationDirective
 
-Displays the first validation error message under a form control.
+Shows an error message and invalid border for a form control.
 
 ## Usage
 
 ```html
 <input
-  nz-input
-  formControlName="imageServerUrl"
-  appValidation
-  [appValidation]="VALIDATION_MESSAGES['imageServerUrl']"
+  formControlName="name"
+  [appValidation]="{ required: 'Name is required', maxlength: 'Too long' }"
 />
 ```
 
-```ts
-const VALIDATION_MESSAGES = {
-  imageServerUrl: {
-    required: 'The field is required.',
-    invalid: 'The format is invalid.',
-  },
-  imagePath: {
-    required: 'The field is required.',
-    invalid: 'The format is invalid.',
-    notStartWithSlash: "Only paths beginning with '/' are allowed.",
-  },
-}
-```
+## Inputs
+
+| Input | Type | Description |
+|-------|------|-------------|
+| `appValidation` | `Record<string, string>` | Map of validator key to error message |
 
 ## Behavior
 
-- Reads the control's errors.
-- Shows the first matching message from the map.
-- Hides when the control is valid or untouched.
-- Message key must match the validator's error key (`required`, `invalid`, `notStartWithSlash`, …).
+- Shows error when the control is invalid and dirty or touched.
+- Error message is the first matching key in `appValidation`.
+- Adds `.app-validation--invalid` class to the input when invalid.
+- Appends `.app-validation__error` element after the input.
 
-## Notes
+## Styles
 
-- This directive only displays messages. It does not validate.
-- Validators live with their domain (`compute/validators/` for image rules).
-- Message maps live with the form that uses them.
+Defined in `validation.directive.scss` and imported in `styles.scss`.
 
+```scss
+.app-validation--invalid {
+  border: 1px solid var(--error-color, #f24f7c);
+  height: var(--input-height, 38px);
+}
 
+.app-validation__error {
+  color: var(--error-color, #f24f7c);
+  font-size: 12px;
+  margin-top: 4px;
+}

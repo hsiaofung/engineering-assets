@@ -1,18 +1,22 @@
-import { Directive, ElementRef, Renderer2, inject, OnInit } from '@angular/core'
+import { Directive, ElementRef, inject, OnInit, Renderer2 } from '@angular/core'
 
+/**
+ *
+ */
 @Directive({
-  selector: '[appRequired]',  
+  selector: '[appRequired]',
 })
 export class RequiredDirective implements OnInit {
   private readonly el = inject(ElementRef)
   private readonly renderer = inject(Renderer2)
 
+  /**
+   *
+   */
   ngOnInit(): void {
     const span = this.renderer.createElement('span')
-    this.renderer.addClass(span, 'required')
+    this.renderer.addClass(span, 'app-required')
     this.renderer.setProperty(span, 'textContent', '*')
-    this.renderer.setStyle(span, 'color', '#f24f7c')
-    this.renderer.setStyle(span, 'padding-left', '4px')
     this.renderer.appendChild(this.el.nativeElement, span)
   }
 }

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs'
  *
  */
 @Directive({
-  selector: '[appValidation]',  
+  selector: '[appValidation]',
 })
 export class ValidationDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef)
@@ -15,7 +15,7 @@ export class ValidationDirective implements OnInit, OnDestroy {
 
   readonly appValidation = input.required<Record<string, string>>()
 
-  private sub?: Subscription
+  private subs = new Subscription()
   private errorEl?: HTMLElement
 
   /**
@@ -25,15 +25,14 @@ export class ValidationDirective implements OnInit, OnDestroy {
     const control = this.ngControl?.control
     if (!control) return
 
-    // status / value change
-    this.sub = control.statusChanges.subscribe(() => this.update())
-    control.valueChanges.subscribe(() => this.update())
+    this.subs.add(control.statusChanges.subscribe(() => this.update()))
+    this.subs.add(control.valueChanges.subscribe(() => this.update()))
 
-    // Update when blur
-    this.renderer.listen(this.el.nativeElement, 'blur', () => {
+    const blurSub = this.renderer.listen(this.el.nativeElement, 'blur', () => {
       control.markAsTouched()
       this.update()
     })
+    this.subs.add({ unsubscribe: blurSub })
 
     this.update()
   }
@@ -42,7 +41,7 @@ export class ValidationDirective implements OnInit, OnDestroy {
    *
    */
   ngOnDestroy(): void {
-    this.sub?.unsubscribe()
+    this.subs.unsubscribe()
     this.errorEl?.remove()
   }
 
@@ -58,20 +57,16 @@ export class ValidationDirective implements OnInit, OnDestroy {
 
     // border
     if (invalid) {
-      this.renderer.setStyle(this.el.nativeElement, 'border', '1px solid #f24f7c')
-      this.renderer.setStyle(this.el.nativeElement, 'height', '38px')
+      this.renderer.addClass(this.el.nativeElement, 'app-validation--invalid')
     } else {
-      this.renderer.removeStyle(this.el.nativeElement, 'border')
-      this.renderer.removeStyle(this.el.nativeElement, 'height')
+      this.renderer.removeClass(this.el.nativeElement, 'app-validation--invalid')
     }
 
     // message
     if (message) {
       if (!this.errorEl) {
         this.errorEl = this.renderer.createElement('div')
-        this.renderer.setStyle(this.errorEl, 'color', '#f24f7c')
-        this.renderer.setStyle(this.errorEl, 'font-size', '12px')
-        this.renderer.setStyle(this.errorEl, 'margin-top', '4px')
+        this.renderer.addClass(this.errorEl, 'app-validation__error')
         this.renderer.appendChild(this.el.nativeElement.parentElement, this.errorEl)
       }
       this.renderer.setProperty(this.errorEl, 'textContent', message)

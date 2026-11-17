@@ -1,8 +1,8 @@
 # Required Directive
 
-在 label 後面加上紅色星號（`*`），表示該欄位為必填。
+Adds a red asterisk `*` after a label to indicate a required field.
 
-## 用法
+## Usage
 
 ```html
 <div class="label" appRequired>URL</div>
@@ -19,8 +19,17 @@ import { RequiredDirective } from '@app/shared/design-system/global-component/re
 export class YourComponent {}
 ```
 
-## 行為
+## Behavior
 
-- `appRequired`（只寫 attribute）→ 顯示紅色 `*`
+- `appRequired` (attribute only) → appends a `*` with class `app-required`
 
-星號顏色與間距已在 directive 內定義，不需要額外寫 SCSS。
+## Styles
+
+Defined in `required.directive.scss` and imported in `styles.scss`.
+
+```scss
+.app-required {
+  color: var(--error-color, #f24f7c);
+  padding-left: 4px;
+}
+```

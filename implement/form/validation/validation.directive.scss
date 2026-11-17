@@ -1,0 +1,10 @@
+.app-validation--invalid {
+  border: 1px solid var(--error-color, #f24f7c);
+  height: var(--input-height, 38px);
+}
+
+.app-validation__error {
+  color: var(--error-color, #f24f7c);
+  font-size: 12px;
+  margin-top: 4px;
+}
