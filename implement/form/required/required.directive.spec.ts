@@ -6,8 +6,7 @@ import { RequiredDirective } from './required.directive'
 /**
  *
  */
-@Component({
-  standalone: true,
+@Component({  
   imports: [RequiredDirective],
   template: `<label appRequired>Name</label>`,
 })

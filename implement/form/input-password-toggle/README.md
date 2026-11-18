@@ -12,6 +12,7 @@ Directive 會：
 - 在 input 右側建立眼睛圖示按鈕
 - 切換 input 的 type（`password` ↔ `text`）
 - 根據目前狀態更新圖示顏色
+- The eye icon is rendered by scc-icon using the constant from @supercloud/icons/24.   
 
 ## 需求
 
@@ -42,3 +43,4 @@ input 的父元素必須允許相對定位。Directive 會自動將父元素設�
 - 此 directive 僅適用於簡單的原生 input。
 - 若需要完整功能（ControlValueAccessor、錯誤樣式、設計系統整合），請使用 `InputPasswordComponent`。
 - 此 directive 不處理表單驗證或 CVA 綁定。
+- Icon size follows the design system (24px). Confirm it looks correct inside a 38px-high input.

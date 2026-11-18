@@ -1,4 +1,15 @@
-import { afterNextRender, computed, Directive, ElementRef, inject, Renderer2, signal } from '@angular/core'
+import {
+  afterNextRender,
+  ComponentRef,
+  computed,
+  Directive,
+  ElementRef,
+  inject,
+  Renderer2,
+  signal,
+  ViewContainerRef,
+} from '@angular/core'
+import { IconComponent } from '@app/shared/design-system/global-component/icon/icon.component' // 依實際路徑調整
 import { eye } from '@supercloud/icons/24'
 
 /**
@@ -13,11 +24,13 @@ import { eye } from '@supercloud/icons/24'
 export class PasswordToggleDirective {
   private readonly el = inject(ElementRef<HTMLInputElement>)
   private readonly renderer = inject(Renderer2)
+  private readonly viewContainerRef = inject(ViewContainerRef)
 
   private readonly show = signal(false)
   protected readonly inputType = computed(() => (this.show() ? 'text' : 'password'))
 
   private button: HTMLButtonElement | null = null
+  private iconRef: ComponentRef<IconComponent> | null = null
 
   /**
    *
@@ -53,7 +66,10 @@ export class PasswordToggleDirective {
     this.renderer.setStyle(button, 'line-height', '1')
     this.renderer.setStyle(button, 'color', 'var(--shades-color-4)')
 
-    button.innerHTML = eye
+    // Draw using scc-icon
+    this.iconRef = this.viewContainerRef.createComponent(IconComponent)
+    this.iconRef.setInput('scIcon', eye)
+    this.renderer.appendChild(button, this.iconRef.location.nativeElement)
 
     this.renderer.listen(button, 'click', () => this.toggle())
     this.renderer.appendChild(wrapper, button)

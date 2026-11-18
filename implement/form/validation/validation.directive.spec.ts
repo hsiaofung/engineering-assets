@@ -7,8 +7,7 @@ import { ValidationDirective } from './validation.directive'
 /**
  *
  */
-@Component({
-  standalone: true,
+@Component({  
   imports: [ReactiveFormsModule, ValidationDirective],
   template: `
     <form [formGroup]="form">
