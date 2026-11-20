@@ -44,3 +44,27 @@ Reviewer 建議：
 [貼上 reviewer 的 comment]
 
 ---
+
+# skill
+這次是開發action
+
+Figma: [貼圖或描述]
+API: [METHOD] [PATH]
+Request body:
+[JSON]
+
+UI Spec:
+- Select Behavior: [如何觸發]
+- Title: [標題]
+- Reminder: [提醒文字]
+- Content: [確認問題]
+- Target: [列表內容，是否可捲動]
+- Button: [按鈕文字]
+- 其他: [單選/多選差異、成功後行為等]
+
+## 用skill的好處:
+- AI會額外載入 skill 裡的固定流程，而不是每次重新判斷。例如: 用哪一個元件? 資料如何傳入? dialog 的開關要寫在哪裡?
+- 會有一致的作法。
+- 會自動套用。
+
+---
